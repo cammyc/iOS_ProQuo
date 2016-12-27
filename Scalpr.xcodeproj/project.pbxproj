@@ -109,26 +109,6 @@
 		D2A7E4351DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42F1DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift */; };
 		D2A7E4361DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E4301DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift */; };
 		D2C6BC1A1D9E25B700BAD163 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20637BB1D9CA58C00EAFF0F /* ImageIO.framework */; };
-		D2CA2CB31DC71EDF00A17EE7 /* aes.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2C971DC71EDF00A17EE7 /* aes.js */; };
-		D2CA2CB71DC71EDF00A17EE7 /* CryptoJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CA2C9D1DC71EDF00A17EE7 /* CryptoJS.swift */; };
-		D2CA2CBA1DC71EDF00A17EE7 /* md5.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA01DC71EDF00A17EE7 /* md5.js */; };
-		D2CA2CBB1DC71EDF00A17EE7 /* mode-cfb.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA11DC71EDF00A17EE7 /* mode-cfb.js */; };
-		D2CA2CBC1DC71EDF00A17EE7 /* mode-ctr.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA21DC71EDF00A17EE7 /* mode-ctr.js */; };
-		D2CA2CBD1DC71EDF00A17EE7 /* mode-ecb.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA31DC71EDF00A17EE7 /* mode-ecb.js */; };
-		D2CA2CBE1DC71EDF00A17EE7 /* mode-ofb.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA41DC71EDF00A17EE7 /* mode-ofb.js */; };
-		D2CA2CBF1DC71EDF00A17EE7 /* pad-ansix923.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA51DC71EDF00A17EE7 /* pad-ansix923.js */; };
-		D2CA2CC01DC71EDF00A17EE7 /* pad-iso10126.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA61DC71EDF00A17EE7 /* pad-iso10126.js */; };
-		D2CA2CC11DC71EDF00A17EE7 /* pad-iso97971.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA71DC71EDF00A17EE7 /* pad-iso97971.js */; };
-		D2CA2CC21DC71EDF00A17EE7 /* pad-nopadding.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA81DC71EDF00A17EE7 /* pad-nopadding.js */; };
-		D2CA2CC31DC71EDF00A17EE7 /* pad-zeropadding.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CA91DC71EDF00A17EE7 /* pad-zeropadding.js */; };
-		D2CA2CC41DC71EDF00A17EE7 /* ripemd160.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAA1DC71EDF00A17EE7 /* ripemd160.js */; };
-		D2CA2CC51DC71EDF00A17EE7 /* sha1.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAB1DC71EDF00A17EE7 /* sha1.js */; };
-		D2CA2CC61DC71EDF00A17EE7 /* sha224.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAC1DC71EDF00A17EE7 /* sha224.js */; };
-		D2CA2CC71DC71EDF00A17EE7 /* sha256.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAD1DC71EDF00A17EE7 /* sha256.js */; };
-		D2CA2CC81DC71EDF00A17EE7 /* sha3.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAE1DC71EDF00A17EE7 /* sha3.js */; };
-		D2CA2CC91DC71EDF00A17EE7 /* sha384.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CAF1DC71EDF00A17EE7 /* sha384.js */; };
-		D2CA2CCA1DC71EDF00A17EE7 /* sha512.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CB01DC71EDF00A17EE7 /* sha512.js */; };
-		D2CA2CCB1DC71EDF00A17EE7 /* tripledes.js in Resources */ = {isa = PBXBuildFile; fileRef = D2CA2CB11DC71EDF00A17EE7 /* tripledes.js */; };
 		D2D0BD141DA9679E00E7A456 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0BD131DA9679E00E7A456 /* CoreDataHelper.swift */; };
 		D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2F4139C1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld */; };
 		D2F413A01DA9BF7A0047A3C6 /* cdAttractionMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F4139F1DA9BF7A0047A3C6 /* cdAttractionMO.swift */; };
@@ -354,26 +334,6 @@
 		D2A7E42E1DA16A0B00D0BFC7 /* KCFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButton.swift; sourceTree = "<group>"; };
 		D2A7E42F1DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButtonDelegate.swift; sourceTree = "<group>"; };
 		D2A7E4301DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButtonItem.swift; sourceTree = "<group>"; };
-		D2CA2C971DC71EDF00A17EE7 /* aes.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = aes.js; sourceTree = "<group>"; };
-		D2CA2C9D1DC71EDF00A17EE7 /* CryptoJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoJS.swift; sourceTree = "<group>"; };
-		D2CA2CA01DC71EDF00A17EE7 /* md5.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = md5.js; sourceTree = "<group>"; };
-		D2CA2CA11DC71EDF00A17EE7 /* mode-cfb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "mode-cfb.js"; sourceTree = "<group>"; };
-		D2CA2CA21DC71EDF00A17EE7 /* mode-ctr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "mode-ctr.js"; sourceTree = "<group>"; };
-		D2CA2CA31DC71EDF00A17EE7 /* mode-ecb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "mode-ecb.js"; sourceTree = "<group>"; };
-		D2CA2CA41DC71EDF00A17EE7 /* mode-ofb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "mode-ofb.js"; sourceTree = "<group>"; };
-		D2CA2CA51DC71EDF00A17EE7 /* pad-ansix923.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "pad-ansix923.js"; sourceTree = "<group>"; };
-		D2CA2CA61DC71EDF00A17EE7 /* pad-iso10126.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "pad-iso10126.js"; sourceTree = "<group>"; };
-		D2CA2CA71DC71EDF00A17EE7 /* pad-iso97971.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "pad-iso97971.js"; sourceTree = "<group>"; };
-		D2CA2CA81DC71EDF00A17EE7 /* pad-nopadding.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "pad-nopadding.js"; sourceTree = "<group>"; };
-		D2CA2CA91DC71EDF00A17EE7 /* pad-zeropadding.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "pad-zeropadding.js"; sourceTree = "<group>"; };
-		D2CA2CAA1DC71EDF00A17EE7 /* ripemd160.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ripemd160.js; sourceTree = "<group>"; };
-		D2CA2CAB1DC71EDF00A17EE7 /* sha1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha1.js; sourceTree = "<group>"; };
-		D2CA2CAC1DC71EDF00A17EE7 /* sha224.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha224.js; sourceTree = "<group>"; };
-		D2CA2CAD1DC71EDF00A17EE7 /* sha256.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha256.js; sourceTree = "<group>"; };
-		D2CA2CAE1DC71EDF00A17EE7 /* sha3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha3.js; sourceTree = "<group>"; };
-		D2CA2CAF1DC71EDF00A17EE7 /* sha384.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha384.js; sourceTree = "<group>"; };
-		D2CA2CB01DC71EDF00A17EE7 /* sha512.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sha512.js; sourceTree = "<group>"; };
-		D2CA2CB11DC71EDF00A17EE7 /* tripledes.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = tripledes.js; sourceTree = "<group>"; };
 		D2D0BD131DA9679E00E7A456 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		D2F4139D1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels.xcdatamodel; sourceTree = "<group>"; };
 		D2F4139F1DA9BF7A0047A3C6 /* cdAttractionMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdAttractionMO.swift; sourceTree = "<group>"; };
@@ -465,7 +425,6 @@
 				D228D5421E084BBF009200E6 /* JSQMessagesViewController */,
 				D20637631D9B324700EAFF0F /* Scalpr-Bridging-Header.h */,
 				D228D5361E0214F2009200E6 /* UI */,
-				D2CA2C961DC71EDF00A17EE7 /* CryptoJS */,
 				D2A7E4161DA169EE00D0BFC7 /* ActionButton */,
 				D20637911D9B96DB00EAFF0F /* Helpers */,
 				D206378E1D9B867200EAFF0F /* Objects */,
@@ -748,33 +707,6 @@
 			name = ActionButton;
 			sourceTree = "<group>";
 		};
-		D2CA2C961DC71EDF00A17EE7 /* CryptoJS */ = {
-			isa = PBXGroup;
-			children = (
-				D2CA2C971DC71EDF00A17EE7 /* aes.js */,
-				D2CA2C9D1DC71EDF00A17EE7 /* CryptoJS.swift */,
-				D2CA2CA01DC71EDF00A17EE7 /* md5.js */,
-				D2CA2CA11DC71EDF00A17EE7 /* mode-cfb.js */,
-				D2CA2CA21DC71EDF00A17EE7 /* mode-ctr.js */,
-				D2CA2CA31DC71EDF00A17EE7 /* mode-ecb.js */,
-				D2CA2CA41DC71EDF00A17EE7 /* mode-ofb.js */,
-				D2CA2CA51DC71EDF00A17EE7 /* pad-ansix923.js */,
-				D2CA2CA61DC71EDF00A17EE7 /* pad-iso10126.js */,
-				D2CA2CA71DC71EDF00A17EE7 /* pad-iso97971.js */,
-				D2CA2CA81DC71EDF00A17EE7 /* pad-nopadding.js */,
-				D2CA2CA91DC71EDF00A17EE7 /* pad-zeropadding.js */,
-				D2CA2CAA1DC71EDF00A17EE7 /* ripemd160.js */,
-				D2CA2CAB1DC71EDF00A17EE7 /* sha1.js */,
-				D2CA2CAC1DC71EDF00A17EE7 /* sha224.js */,
-				D2CA2CAD1DC71EDF00A17EE7 /* sha256.js */,
-				D2CA2CAE1DC71EDF00A17EE7 /* sha3.js */,
-				D2CA2CAF1DC71EDF00A17EE7 /* sha384.js */,
-				D2CA2CB01DC71EDF00A17EE7 /* sha512.js */,
-				D2CA2CB11DC71EDF00A17EE7 /* tripledes.js */,
-			);
-			path = CryptoJS;
-			sourceTree = "<group>";
-		};
 		D8B8B9C338931A626E3DC72E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,36 +809,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E38609A41E12ECDF004E4B3C /* Podfile in Resources */,
-				D2CA2CC11DC71EDF00A17EE7 /* pad-iso97971.js in Resources */,
-				D2CA2CCB1DC71EDF00A17EE7 /* tripledes.js in Resources */,
-				D2CA2CCA1DC71EDF00A17EE7 /* sha512.js in Resources */,
 				D228D5CF1E084BC0009200E6 /* JSQMessagesToolbarContentView.xib in Resources */,
 				D228D5C51E084BC0009200E6 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				D228D5A61E084BBF009200E6 /* JSQMessagesAssets.bundle in Resources */,
 				D228D5D11E084BC0009200E6 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
-				D2CA2CBA1DC71EDF00A17EE7 /* md5.js in Resources */,
 				D206374D1D9B31DB00EAFF0F /* LaunchScreen.storyboard in Resources */,
-				D2CA2CC61DC71EDF00A17EE7 /* sha224.js in Resources */,
-				D2CA2CBD1DC71EDF00A17EE7 /* mode-ecb.js in Resources */,
 				D228D5C71E084BC0009200E6 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				D2F413A21DAB2E1B0047A3C6 /* InfoWindow.xib in Resources */,
-				D2CA2CC21DC71EDF00A17EE7 /* pad-nopadding.js in Resources */,
-				D2CA2CB31DC71EDF00A17EE7 /* aes.js in Resources */,
-				D2CA2CBE1DC71EDF00A17EE7 /* mode-ofb.js in Resources */,
 				D228D5CC1E084BC0009200E6 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
-				D2CA2CC41DC71EDF00A17EE7 /* ripemd160.js in Resources */,
-				D2CA2CC81DC71EDF00A17EE7 /* sha3.js in Resources */,
-				D2CA2CBC1DC71EDF00A17EE7 /* mode-ctr.js in Resources */,
-				D2CA2CC71DC71EDF00A17EE7 /* sha256.js in Resources */,
-				D2CA2CBF1DC71EDF00A17EE7 /* pad-ansix923.js in Resources */,
 				D206374A1D9B31DB00EAFF0F /* Assets.xcassets in Resources */,
-				D2CA2CC01DC71EDF00A17EE7 /* pad-iso10126.js in Resources */,
-				D2CA2CC51DC71EDF00A17EE7 /* sha1.js in Resources */,
 				D20637481D9B31DB00EAFF0F /* Main.storyboard in Resources */,
-				D2CA2CBB1DC71EDF00A17EE7 /* mode-cfb.js in Resources */,
-				D2CA2CC91DC71EDF00A17EE7 /* sha384.js in Resources */,
 				D25D1F1B1D9E06E70085EA89 /* GoogleMaps.bundle in Resources */,
-				D2CA2CC31DC71EDF00A17EE7 /* pad-zeropadding.js in Resources */,
 				D228D5AD1E084BC0009200E6 /* JSQMessagesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1021,7 +934,6 @@
 				D21135331DAC51860064EACF /* MyTicketTableViewCell.swift in Sources */,
 				D228D5A91E084BC0009200E6 /* UIColor+JSQMessages.m in Sources */,
 				D228D5A71E084BBF009200E6 /* NSBundle+JSQMessages.m in Sources */,
-				D2CA2CB71DC71EDF00A17EE7 /* CryptoJS.swift in Sources */,
 				D228D5C61E084BC0009200E6 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				D228D5B91E084BC0009200E6 /* JSQAudioMediaItem.m in Sources */,
 				D228D5CD1E084BC0009200E6 /* JSQMessagesMediaPlaceholderView.m in Sources */,
