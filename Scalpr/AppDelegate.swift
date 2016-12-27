@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GoogleMaps
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("AIzaSyBTdWruMNgtn_OBwVZtPXeTXwhroo2KIyE")
+        
+        IQKeyboardManager.sharedManager().enable = true
+        
+        UINavigationBar.appearance().tintColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
+    
         return true
     }
 
