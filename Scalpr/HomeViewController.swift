@@ -528,9 +528,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let loggedInID = loginHelper.getLoggedInUser().ID
         
         if let cdAttraction = marker.userData as? cdAttractionMO{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM dd, yyyy"
-            infoWindow.date.text = dateFormatter.string(for: cdAttraction.date)
+            infoWindow.date.text = MiscHelper.dateToString(date: cdAttraction.date!, format: "MMM dd, yyyy")
             
             infoWindow.attractionName.text = cdAttraction.name
             infoWindow.venueName.text = cdAttraction.venueName
@@ -551,9 +549,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             infoWindow.image.image = ImageHelper.circleImage(image: infoWindow.image.image!)
             
         }else if let attraction = marker.userData as? Attraction{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM dd, yyyy"
-            infoWindow.date.text = dateFormatter.string(for: attraction.date)
+            infoWindow.date.text = MiscHelper.dateToString(date: attraction.date, format: "MMM dd, yyyy")
             
             infoWindow.attractionName.text = attraction.name
             infoWindow.venueName.text = attraction.venueName

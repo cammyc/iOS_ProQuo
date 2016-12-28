@@ -185,7 +185,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             if timeDiff.minute! > 30{
                 let paragraph = NSMutableParagraphStyle()
                 paragraph.alignment = .center
-                paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
+//                paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
                 let attributes = [NSParagraphStyleAttributeName: paragraph]
                 
                 return NSAttributedString(string: MiscHelper.formatMessageTimeBreakDate(date: message.date), attributes: attributes)
@@ -196,7 +196,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         }else{
             let paragraph = NSMutableParagraphStyle()
             paragraph.alignment = .center
-            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
+//            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
             let attributes = [NSParagraphStyleAttributeName: paragraph]
             
             return NSAttributedString(string: "Conversation created: " + MiscHelper.formatMessageTimeBreakDate(date: self.conversation.creationTimeStamp), attributes: attributes)
@@ -288,8 +288,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             
             if error == nil{
                 if responseObject != "-1" {
-                    self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: Date.init())
-                
+                    let date = Date.init()
+                    self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
+                    //sent message isn't showing timebreak initially if after 30 minutes - only does once convo refreshed
+                    
                     self.finishReceivingMessage()
                 }else{
                     

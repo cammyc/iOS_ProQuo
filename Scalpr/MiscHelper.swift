@@ -51,15 +51,23 @@ class MiscHelper {
         dateFormatter.dateFormat = format
         let UTC = dateFormatter.string(from: date)
         
+        return UTC
+    }
+    
+    static func dateToStringUTCToLocal(date: Date, format: String)-> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let UTC = dateFormatter.string(from: date)
+        
         return utcToLocal(date: UTC, format: format)
     }
     
     static func formatMessageTimeBreakDate(date: Date)-> String{
         let isToday = Calendar.autoupdatingCurrent.isDateInToday(date)
         if isToday {
-            return dateToString(date: date, format: "h:mm a")
+            return dateToStringUTCToLocal(date: date, format: "h:mm a")
         }else{
-            return dateToString(date: date, format: "EEE MMM d").uppercased() + " AT " + dateToString(date: date, format: "h:mm a")
+            return dateToStringUTCToLocal(date: date, format: "EEE MMM d").uppercased() + " AT " + dateToString(date: date, format: "h:mm a")
         }
     }
     
