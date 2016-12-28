@@ -294,16 +294,14 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     
                     self.finishReceivingMessage()
                 }else{
-                    
+                    self.showAlert(title: "Unable to send message", text: "Please check your internet connection and try again.")
                 }
             }else{
-                
+                self.showAlert(title: "Unable to send message", text: "Please check your internet connection and try again.")
             }
             
             return
         }
-        
-
         
         finishSendingMessage() // 5
     }

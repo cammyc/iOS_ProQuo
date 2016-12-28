@@ -67,7 +67,12 @@ class MiscHelper {
         if isToday {
             return dateToStringUTCToLocal(date: date, format: "h:mm a")
         }else{
-            return dateToStringUTCToLocal(date: date, format: "EEE MMM d").uppercased() + " AT " + dateToString(date: date, format: "h:mm a")
+            let isYesterday = Calendar.autoupdatingCurrent.isDateInYesterday(date)
+            if isYesterday{
+                return "Yesterday " + dateToString(date: date, format: "h:mm a")
+            }else{
+                return dateToStringUTCToLocal(date: date, format: "EEE MMM d").uppercased() + " AT " + dateToString(date: date, format: "h:mm a")
+            }
         }
     }
     

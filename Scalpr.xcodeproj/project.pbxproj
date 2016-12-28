@@ -92,6 +92,21 @@
 		E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
 		E3E8AA3A1E134BAE0074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
 		E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA5B1E13EFF50074D6FF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; };
+		E3E8AA641E13EFF50074D6FF /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; };
+		E3E8AA6A1E13F0210074D6FF /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; };
+		E3E8AA6B1E13F0210074D6FF /* FacebookLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA6C1E13F0210074D6FF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; };
+		E3E8AA6D1E13F0210074D6FF /* FacebookCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA6F1E13F23C0074D6FF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; };
+		E3E8AA701E13F2440074D6FF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; };
+		E3E8AA711E13F2440074D6FF /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA741E13F26F0074D6FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; };
+		E3E8AA751E13F26F0074D6FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; };
+		E3E8AA761E13F2760074D6FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; };
+		E3E8AA771E13F2760074D6FF /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA781E13F2760074D6FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; };
+		E3E8AA791E13F2760074D6FF /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,11 +129,16 @@
 				E3E8AA331E1349A70074D6FF /* JSQMessagesViewController.framework in Embed Frameworks */,
 				E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */,
 				E3E8AA211E1301280074D6FF /* Kingfisher.framework in Embed Frameworks */,
+				E3E8AA711E13F2440074D6FF /* Bolts.framework in Embed Frameworks */,
+				E3E8AA791E13F2760074D6FF /* FBSDKLoginKit.framework in Embed Frameworks */,
 				E3E8AA1D1E1301280074D6FF /* CryptoSwift.framework in Embed Frameworks */,
 				E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
 				E3E8AA231E1301280074D6FF /* MBProgressHUD.framework in Embed Frameworks */,
 				E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */,
+				E3E8AA771E13F2760074D6FF /* FBSDKCoreKit.framework in Embed Frameworks */,
 				E3E8AA1F1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
+				E3E8AA6B1E13F0210074D6FF /* FacebookLogin.framework in Embed Frameworks */,
+				E3E8AA6D1E13F0210074D6FF /* FacebookCore.framework in Embed Frameworks */,
 				E3E8AA1B1E1301280074D6FF /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -214,6 +234,24 @@
 		E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
 		E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"; sourceTree = "<group>"; };
 		E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KCFloatingActionButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/KCFloatingActionButton/KCFloatingActionButton.framework"; sourceTree = "<group>"; };
+		E3E8AA3C1E13EF880074D6FF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "Pods/../build/Debug-iphoneos/Bolts/Bolts.framework"; sourceTree = "<group>"; };
+		E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FacebookCore/FacebookCore.framework"; sourceTree = "<group>"; };
+		E3E8AA3E1E13EF880074D6FF /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = "Pods/../build/Debug-iphoneos/FacebookLogin/FacebookLogin.framework"; sourceTree = "<group>"; };
+		E3E8AA3F1E13EF880074D6FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		E3E8AA401E13EF880074D6FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		E3E8AA411E13EF880074D6FF /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
+		E3E8AA421E13EF880074D6FF /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
+		E3E8AA431E13EF880074D6FF /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
+		E3E8AA5C1E13EFF50074D6FF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "Pods/../build/Debug-iphoneos/Bolts/Bolts.framework"; sourceTree = "<group>"; };
+		E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FacebookLogin/FacebookLogin.framework"; sourceTree = "<group>"; };
+		E3E8AA5E1E13EFF50074D6FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		E3E8AA5F1E13EFF50074D6FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		E3E8AA601E13EFF50074D6FF /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
+		E3E8AA611E13EFF50074D6FF /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
+		E3E8AA621E13EFF50074D6FF /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
+		E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Bolts/Bolts.framework"; sourceTree = "<group>"; };
+		E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,12 +259,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3E8AA741E13F26F0074D6FF /* FBSDKCoreKit.framework in Frameworks */,
+				E3E8AA751E13F26F0074D6FF /* FBSDKLoginKit.framework in Frameworks */,
+				E3E8AA6F1E13F23C0074D6FF /* Bolts.framework in Frameworks */,
+				E3E8AA641E13EFF50074D6FF /* FacebookLogin.framework in Frameworks */,
+				E3E8AA5B1E13EFF50074D6FF /* FacebookCore.framework in Frameworks */,
 				E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */,
 				E3E8AA351E1349CB0074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */,
 				E3E8AA311E13499C0074D6FF /* JSQMessagesViewController.framework in Frameworks */,
 				E3E8AA151E1300EA0074D6FF /* Alamofire.framework in Frameworks */,
 				E3E8AA161E1300EA0074D6FF /* CryptoSwift.framework in Frameworks */,
 				E3E8AA171E1300EA0074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */,
+				E3E8AA6C1E13F0210074D6FF /* FacebookCore.framework in Frameworks */,
 				E3E8AA181E1300EA0074D6FF /* Kingfisher.framework in Frameworks */,
 				E3E8AA191E1300EA0074D6FF /* MBProgressHUD.framework in Frameworks */,
 				D25D1F261D9E07820085EA89 /* QuartzCore.framework in Frameworks */,
@@ -240,6 +284,8 @@
 				D25D1F241D9E07750085EA89 /* libz.tbd in Frameworks */,
 				D25D1F231D9E076D0085EA89 /* libc++.tbd in Frameworks */,
 				E3E8AA221E1301280074D6FF /* MBProgressHUD.framework in Frameworks */,
+				E3E8AA781E13F2760074D6FF /* FBSDKLoginKit.framework in Frameworks */,
+				E3E8AA761E13F2760074D6FF /* FBSDKCoreKit.framework in Frameworks */,
 				D25D1F211D9E074E0085EA89 /* GLKit.framework in Frameworks */,
 				E3E8AA201E1301280074D6FF /* Kingfisher.framework in Frameworks */,
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
@@ -250,9 +296,11 @@
 				D25D1F1C1D9E07260085EA89 /* Accelerate.framework in Frameworks */,
 				D25D1F181D9E06BC0085EA89 /* GoogleMaps.framework in Frameworks */,
 				D25D1F151D9E06A70085EA89 /* GoogleMapsBase.framework in Frameworks */,
+				E3E8AA701E13F2440074D6FF /* Bolts.framework in Frameworks */,
 				E3E8AA1E1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */,
 				D25D1F191D9E06BC0085EA89 /* GoogleMapsCore.framework in Frameworks */,
 				59BD1591745EF02933930AF5 /* Pods_Scalpr.framework in Frameworks */,
+				E3E8AA6A1E13F0210074D6FF /* FacebookLogin.framework in Frameworks */,
 				E3E8AA361E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +426,24 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */,
+				E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */,
+				E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */,
+				E3E8AA5C1E13EFF50074D6FF /* Bolts.framework */,
+				E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */,
+				E3E8AA5E1E13EFF50074D6FF /* FBSDKCoreKit.framework */,
+				E3E8AA5F1E13EFF50074D6FF /* FBSDKLoginKit.framework */,
+				E3E8AA601E13EFF50074D6FF /* GoogleToolboxForMac.framework */,
+				E3E8AA611E13EFF50074D6FF /* GTMOAuth2.framework */,
+				E3E8AA621E13EFF50074D6FF /* GTMSessionFetcher.framework */,
+				E3E8AA3C1E13EF880074D6FF /* Bolts.framework */,
+				E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */,
+				E3E8AA3E1E13EF880074D6FF /* FacebookLogin.framework */,
+				E3E8AA3F1E13EF880074D6FF /* FBSDKCoreKit.framework */,
+				E3E8AA401E13EF880074D6FF /* FBSDKLoginKit.framework */,
+				E3E8AA411E13EF880074D6FF /* GoogleToolboxForMac.framework */,
+				E3E8AA421E13EF880074D6FF /* GTMOAuth2.framework */,
+				E3E8AA431E13EF880074D6FF /* GTMSessionFetcher.framework */,
 				E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */,
 				E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */,
 				E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */,
@@ -764,6 +830,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Bolts",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FacebookLogin",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKCoreKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKLoginKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMOAuth2",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMSessionFetcher",
 				);
 				INFOPLIST_FILE = Scalpr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -786,6 +859,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Bolts",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FacebookLogin",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKCoreKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKLoginKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMOAuth2",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMSessionFetcher",
 				);
 				INFOPLIST_FILE = Scalpr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

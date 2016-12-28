@@ -290,12 +290,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        unBlurView()
+        //unBlurView()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         unBlurView()//always call first incase blur wasn't removed
-        setBlurView(parent: searchBar)
+        //setBlurView(parent: searchBar)
     }
     
     
