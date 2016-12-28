@@ -58,12 +58,6 @@
 		D2986EA61DA1709400CF2104 /* MiscHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2986EA51DA1709400CF2104 /* MiscHelper.swift */; };
 		D29D7A4B1DC82AE700F937FF /* FlagHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D7A4A1DC82AE700F937FF /* FlagHelper.swift */; };
 		D2A09D171DAF47E700F4012A /* UpdateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */; };
-		D2A7E4311DA16A0B00D0BFC7 /* KCFABManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42A1DA16A0B00D0BFC7 /* KCFABManager.swift */; };
-		D2A7E4321DA16A0B00D0BFC7 /* KCFABViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42B1DA16A0B00D0BFC7 /* KCFABViewController.swift */; };
-		D2A7E4331DA16A0B00D0BFC7 /* KCFABWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42C1DA16A0B00D0BFC7 /* KCFABWindow.swift */; };
-		D2A7E4341DA16A0B00D0BFC7 /* KCFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42E1DA16A0B00D0BFC7 /* KCFloatingActionButton.swift */; };
-		D2A7E4351DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E42F1DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift */; };
-		D2A7E4361DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7E4301DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift */; };
 		D2C6BC1A1D9E25B700BAD163 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20637BB1D9CA58C00EAFF0F /* ImageIO.framework */; };
 		D2D0BD141DA9679E00E7A456 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0BD131DA9679E00E7A456 /* CoreDataHelper.swift */; };
 		D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2F4139C1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld */; };
@@ -95,6 +89,9 @@
 		E3E8AA351E1349CB0074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; };
 		E3E8AA361E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; };
 		E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
+		E3E8AA3A1E134BAE0074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
+		E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +112,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E3E8AA331E1349A70074D6FF /* JSQMessagesViewController.framework in Embed Frameworks */,
+				E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */,
 				E3E8AA211E1301280074D6FF /* Kingfisher.framework in Embed Frameworks */,
 				E3E8AA1D1E1301280074D6FF /* CryptoSwift.framework in Embed Frameworks */,
 				E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
@@ -199,13 +197,6 @@
 		D2986EA51DA1709400CF2104 /* MiscHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscHelper.swift; sourceTree = "<group>"; };
 		D29D7A4A1DC82AE700F937FF /* FlagHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagHelper.swift; sourceTree = "<group>"; };
 		D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateAccountViewController.swift; sourceTree = "<group>"; };
-		D2A7E42A1DA16A0B00D0BFC7 /* KCFABManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFABManager.swift; sourceTree = "<group>"; };
-		D2A7E42B1DA16A0B00D0BFC7 /* KCFABViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFABViewController.swift; sourceTree = "<group>"; };
-		D2A7E42C1DA16A0B00D0BFC7 /* KCFABWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFABWindow.swift; sourceTree = "<group>"; };
-		D2A7E42D1DA16A0B00D0BFC7 /* KCFloatingActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCFloatingActionButton.h; sourceTree = "<group>"; };
-		D2A7E42E1DA16A0B00D0BFC7 /* KCFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButton.swift; sourceTree = "<group>"; };
-		D2A7E42F1DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButtonDelegate.swift; sourceTree = "<group>"; };
-		D2A7E4301DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCFloatingActionButtonItem.swift; sourceTree = "<group>"; };
 		D2D0BD131DA9679E00E7A456 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		D2F4139D1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels.xcdatamodel; sourceTree = "<group>"; };
 		D2F4139F1DA9BF7A0047A3C6 /* cdAttractionMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdAttractionMO.swift; sourceTree = "<group>"; };
@@ -222,6 +213,7 @@
 		E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/MBProgressHUD/MBProgressHUD.framework"; sourceTree = "<group>"; };
 		E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
 		E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"; sourceTree = "<group>"; };
+		E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KCFloatingActionButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/KCFloatingActionButton/KCFloatingActionButton.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */,
 				E3E8AA351E1349CB0074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */,
 				E3E8AA311E13499C0074D6FF /* JSQMessagesViewController.framework in Frameworks */,
 				E3E8AA151E1300EA0074D6FF /* Alamofire.framework in Frameworks */,
@@ -250,6 +243,7 @@
 				D25D1F211D9E074E0085EA89 /* GLKit.framework in Frameworks */,
 				E3E8AA201E1301280074D6FF /* Kingfisher.framework in Frameworks */,
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
+				E3E8AA3A1E134BAE0074D6FF /* KCFloatingActionButton.framework in Frameworks */,
 				D25D1F1F1D9E073F0085EA89 /* CoreLocation.framework in Frameworks */,
 				D25D1F1E1D9E07390085EA89 /* CoreGraphics.framework in Frameworks */,
 				D25D1F1D1D9E07310085EA89 /* CoreData.framework in Frameworks */,
@@ -303,7 +297,6 @@
 			children = (
 				D20637631D9B324700EAFF0F /* Scalpr-Bridging-Header.h */,
 				D228D5361E0214F2009200E6 /* UI */,
-				D2A7E4161DA169EE00D0BFC7 /* ActionButton */,
 				D20637911D9B96DB00EAFF0F /* Helpers */,
 				D206378E1D9B867200EAFF0F /* Objects */,
 				D20637621D9B321C00EAFF0F /* SWRevealViewController */,
@@ -385,6 +378,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */,
 				E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */,
 				E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */,
 				E3E8AA101E1300EA0074D6FF /* Alamofire.framework */,
@@ -416,20 +410,6 @@
 				D228D5371E02150B009200E6 /* MessagingPaddingLabel.swift */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		D2A7E4161DA169EE00D0BFC7 /* ActionButton */ = {
-			isa = PBXGroup;
-			children = (
-				D2A7E42A1DA16A0B00D0BFC7 /* KCFABManager.swift */,
-				D2A7E42B1DA16A0B00D0BFC7 /* KCFABViewController.swift */,
-				D2A7E42C1DA16A0B00D0BFC7 /* KCFABWindow.swift */,
-				D2A7E42D1DA16A0B00D0BFC7 /* KCFloatingActionButton.h */,
-				D2A7E42E1DA16A0B00D0BFC7 /* KCFloatingActionButton.swift */,
-				D2A7E42F1DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift */,
-				D2A7E4301DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift */,
-			);
-			name = ActionButton;
 			sourceTree = "<group>";
 		};
 		D8B8B9C338931A626E3DC72E /* Pods */ = {
@@ -603,13 +583,10 @@
 			files = (
 				D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */,
 				D20637681D9B39A400EAFF0F /* LoggedInMenuController.swift in Sources */,
-				D2A7E4311DA16A0B00D0BFC7 /* KCFABManager.swift in Sources */,
-				D2A7E4321DA16A0B00D0BFC7 /* KCFABViewController.swift in Sources */,
 				D20ECC981DF7D2A4008B315F /* Message.swift in Sources */,
 				D20ECC941DF7D264008B315F /* ConversationsTableViewController.swift in Sources */,
 				D25E544F1D9F7593003164E8 /* ImageHelper.swift in Sources */,
 				D2F413A01DA9BF7A0047A3C6 /* cdAttractionMO.swift in Sources */,
-				D2A7E4351DA16A0B00D0BFC7 /* KCFloatingActionButtonDelegate.swift in Sources */,
 				D21135351DAD680E0064EACF /* Toast.swift in Sources */,
 				D20637451D9B31DB00EAFF0F /* HomeViewController.swift in Sources */,
 				D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */,
@@ -632,16 +609,13 @@
 				D20637431D9B31DB00EAFF0F /* AppDelegate.swift in Sources */,
 				D228D5311DF91A14009200E6 /* SelectedConversationTableViewController.swift in Sources */,
 				D20637661D9B324700EAFF0F /* SWRevealViewController.m in Sources */,
-				D2A7E4361DA16A0B00D0BFC7 /* KCFloatingActionButtonItem.swift in Sources */,
 				D29D7A4B1DC82AE700F937FF /* FlagHelper.swift in Sources */,
 				D2D0BD141DA9679E00E7A456 /* CoreDataHelper.swift in Sources */,
-				D2A7E4331DA16A0B00D0BFC7 /* KCFABWindow.swift in Sources */,
 				D2F413A41DAB309E0047A3C6 /* CustomInfoWindow.swift in Sources */,
 				D20ECC961DF7D296008B315F /* Conversation.swift in Sources */,
 				D25E543A1D9F658D003164E8 /* BingImageHelper.swift in Sources */,
 				D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */,
 				D211351D1DAC4B4C0064EACF /* MyTicketsTableViewController.swift in Sources */,
-				D2A7E4341DA16A0B00D0BFC7 /* KCFloatingActionButton.swift in Sources */,
 				D24C433B1DA4C16700547332 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

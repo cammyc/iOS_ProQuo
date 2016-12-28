@@ -12,6 +12,7 @@ import Alamofire
 import Kingfisher
 import MBProgressHUD
 import MessageUI
+import KCFloatingActionButton
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
