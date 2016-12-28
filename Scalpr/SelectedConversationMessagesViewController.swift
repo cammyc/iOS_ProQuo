@@ -170,12 +170,63 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             cell.textView?.textColor = UIColor.white
         } else {
             cell.textView?.textColor = UIColor.black
-//            cell.cellTopLabel?.text = MiscHelper.dateToString(date: message.date, format: "H:mm")
-//            cell.cellTopLabel?.isHidden = false
         }
         return cell
     }
+
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
+        let message = messages[indexPath.item]
+        let i = indexPath.item
+        if i > 0 {
+            let lastMessage = messages[indexPath.item - 1]
+            let timeDiff = Calendar.autoupdatingCurrent.dateComponents([.minute], from: lastMessage.date, to: message.date)
+            
+            if timeDiff.minute! > 30{
+                let paragraph = NSMutableParagraphStyle()
+                paragraph.alignment = .center
+                paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
+                let attributes = [NSParagraphStyleAttributeName: paragraph]
+                
+                return NSAttributedString(string: MiscHelper.formatMessageTimeBreakDate(date: message.date), attributes: attributes)
+            }else{
+                return nil
+            }
+
+        }else{
+            let paragraph = NSMutableParagraphStyle()
+            paragraph.alignment = .center
+            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
+            let attributes = [NSParagraphStyleAttributeName: paragraph]
+            
+            return NSAttributedString(string: "Conversation created: " + MiscHelper.formatMessageTimeBreakDate(date: self.conversation.creationTimeStamp), attributes: attributes)
+        }
+    
+    }
+
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
+        let message = messages[indexPath.item]
+        
+        let i = indexPath.item
+        if i > 0 {
+            let lastMessage = messages[indexPath.item - 1]
+            let timeDiff = Calendar.autoupdatingCurrent.dateComponents([.minute], from: lastMessage.date, to: message.date)
+            
+            if timeDiff.minute! > 30{
+                return 20
+            }else{
+                return 0
+            }
+            
+        }else{
+            return 20
+        }
+        
+    }
+    
+//
+//
 //    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
 //        let message = messages[indexPath.item]
 //        if message.senderId != senderId() {
@@ -185,41 +236,24 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
 //        }
 //        //return nil
 //    }
-    
-//    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
-//        let message = messages[indexPath.item]
-//        if message.senderId != senderId() {
-//            let paragraph = NSMutableParagraphStyle()
-//            paragraph.alignment = .left
-//            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
-//            
-//            let attributes = [NSParagraphStyleAttributeName: paragraph]
-//            return NSAttributedString(string: message.senderDisplayName, attributes: attributes)
-//        }
-//        return nil
-//    }
 //
 //    override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellBottomLabelAt indexPath: IndexPath) -> CGFloat {
 //        return CGFloat(20)
 //    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
-        let message = messages[indexPath.item]
-        if message.senderId != senderId {
-            let paragraph = NSMutableParagraphStyle()
-            paragraph.alignment = .left
-            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
-            
-            let attributes = [NSParagraphStyleAttributeName: paragraph]
-            let date = MiscHelper.dateToString(date: message.date, format: "h:mm")
-            return NSAttributedString(string: date, attributes: attributes)
-        }
-        return nil
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(20)
-    }
+//
+//    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
+//        let message = messages[indexPath.item]
+//        if message.senderId != senderId {
+//            let paragraph = NSMutableParagraphStyle()
+//            paragraph.alignment = .left
+//            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
+//
+//            let attributes = [NSParagraphStyleAttributeName: paragraph]
+//            let date = MiscHelper.dateToString(date: message.date, format: "h:mm")
+//            return NSAttributedString(string: date, attributes: attributes)
+//        }
+//        return nil
+//    }
     
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, avatarImageDataForItemAt indexPath: IndexPath?) -> JSQMessageAvatarImageDataSource? {

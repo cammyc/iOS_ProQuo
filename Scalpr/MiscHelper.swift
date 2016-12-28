@@ -49,7 +49,29 @@ class MiscHelper {
     static func dateToString(date: Date, format: String)-> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        return dateFormatter.string(from: date)
+        let UTC = dateFormatter.string(from: date)
+        
+        return utcToLocal(date: UTC, format: format)
+    }
+    
+    static func formatMessageTimeBreakDate(date: Date)-> String{
+        let isToday = Calendar.autoupdatingCurrent.isDateInToday(date)
+        if isToday {
+            return dateToString(date: date, format: "h:mm a")
+        }else{
+            return dateToString(date: date, format: "EEE MMM d").uppercased() + " AT " + dateToString(date: date, format: "h:mm a")
+        }
+    }
+    
+    static func utcToLocal(date: String, format: String)-> String{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!  // original string in GMT
+        let date = formatter.date(from: date)
+        
+        formatter.timeZone = NSTimeZone.local        // go back to user's timezone
+        return formatter.string(from: date!)
     }
     
     static func formatPrice(price: Double)-> String{
