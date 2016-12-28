@@ -8,6 +8,7 @@ pod 'MBProgressHUD', '~> 1.0.0'
 pod 'CryptoSwift'
 pod 'Kingfisher', '~> 3.0'
 pod 'IQKeyboardManagerSwift'
+pod 'JSQMessagesViewController'
 end
 
 

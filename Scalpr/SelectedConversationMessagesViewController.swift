@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import Kingfisher
+import JSQMessagesViewController
 
 class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
@@ -26,6 +27,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     var myName: String = ""
     var yourName: String = ""
     var avatarImage: UIImage? = nil
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,9 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         myUserID = (loginHelper?.getLoggedInUser().ID)!
         myName = (myUserID == conversation.buyerID) ? conversation.buyerName : conversation.sellerName
         yourName = (myUserID == conversation.buyerID) ? conversation.sellerName : conversation.buyerName
+        
+        senderId = String(myUserID)//JSQ defined var
+        senderDisplayName = myName//JSQ defined
         
         self.navigationItem.title = yourName
 
@@ -150,7 +155,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, messageBubbleImageDataForItemAt indexPath: IndexPath) -> JSQMessageBubbleImageDataSource {
         let message = messages[indexPath.item] // 1
-        if message.senderId == senderId() { // 2
+        if message.senderId == senderId { // 2
             return outgoingBubbleImageView
         } else { // 3
             return incomingBubbleImageView
@@ -161,7 +166,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         let message = messages[indexPath.item]
         
-        if message.senderId == senderId() {
+        if message.senderId == senderId {
             cell.textView?.textColor = UIColor.white
         } else {
             cell.textView?.textColor = UIColor.black
@@ -200,7 +205,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
         let message = messages[indexPath.item]
-        if message.senderId != senderId() {
+        if message.senderId != senderId {
             let paragraph = NSMutableParagraphStyle()
             paragraph.alignment = .left
             paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
@@ -216,17 +221,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         return CGFloat(20)
     }
     
-    override func senderId() -> String {
-        return String(myUserID)
-    }
-    
-    override func senderDisplayName() -> String {
-        return myName
-    }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, avatarImageDataForItemAt indexPath: IndexPath?) -> JSQMessageAvatarImageDataSource? {
         let message = messages[(indexPath?.item)!]
-        if message.senderId != senderId() {
+        if message.senderId != senderId {
             return JSQMessagesAvatarImage(avatarImage: avatarImage, highlightedImage: avatarImage, placeholderImage: avatarImage!)
         }
 
@@ -235,12 +233,12 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory.outgoingMessagesBubbleImage(with: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71))
+        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71))
     }
     
     private func setupIncomingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+        return bubbleImageFactory!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     }
 
 
@@ -297,7 +295,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
     private func addMessage(withId id: String, name: String, text: String, timestamp: Date) {
         let message = JSQMessage(senderId: id, senderDisplayName: name, date: timestamp, text: text)
-        messages.append(message)
+        messages.append(message!)
     }
 
 }
