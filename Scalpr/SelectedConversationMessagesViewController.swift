@@ -27,6 +27,9 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     var myName: String = ""
     var yourName: String = ""
     var avatarImage: UIImage? = nil
+    weak var newMessageTimer: Timer?
+    weak var updateLastReadMessageTimer: Timer?
+
     
 
     override func viewDidLoad() {
@@ -84,14 +87,19 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: conversation.attractionImageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil{
                     self.avatarImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
+                }else{
+                    self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
                 }
             })
         }
-
-        
         
         loadMessages()
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        stopNewMessageTimer()
+        stopUpdateLastMessageTimer()
     }
     
     func loadMessages(){
@@ -100,7 +108,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         loadingNotification.label.text = "Loading Messages"
         
         
-        let request = convoHelper.getInitialConversationMessagesRequest(conversationID: conversation.ID) { responseObject, error in
+        let _ = convoHelper.getInitialConversationMessagesRequest(conversationID: conversation.ID) { responseObject, error in
             
             loadingNotification.hide(animated: true)
             
@@ -110,6 +118,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                 if let array = responseObject as? NSArray{
                     let tempMessages = self.convoHelper.parseMessagesFromNSArray(array: array)
                     if(tempMessages.count > 0){
+                        self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: true)
                         self.messagesRaw = tempMessages
                         for i in 0 ..< self.messagesRaw.count{
                             let m = self.messagesRaw[i]
@@ -139,7 +148,86 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             return
         }
         
-        
+    }
+    
+    func updateLastReadMessage(messageID: Int64, startNewMessageTimer: Bool){//startnewmessagetimer
+            self.convoHelper.updateLastReadMessageRequest(messageID: messageID, conversationID: self.conversation.ID, userID: self.myUserID){ responseObject, error in
+                
+                if error == nil{
+                    if responseObject != "0" {
+                        if startNewMessageTimer{
+                            self.startNewMessageTimer()
+                        }
+                    }else{
+                        self.stopNewMessageTimer()
+                        self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
+                    }
+                }else{//if last message not updated keep calling itself until it is updated so no duplicates and stop requesting new messages
+                    self.stopNewMessageTimer()
+                    self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
+                }
+                return
+            }
+    }
+    
+    func startUpdateLastReadMessageTimerIfError(messageID: Int64){
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+            self?.updateLastReadMessage(messageID: messageID, startNewMessageTimer: true)//startNewMessageTimer because this is only called if stopped
+        }
+    }
+    
+    func stopUpdateLastMessageTimer() {
+        self.newMessageTimer?.invalidate()
+    }
+    
+    func startNewMessageTimer() {
+        self.newMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+            self?.getNewMessages()
+        }
+    }
+    
+    func getNewMessages(){
+        let request = convoHelper.getNewConversationMessagesRequest(conversationID: self.conversation.ID, userID: self.myUserID) { responseObject, error in
+            
+            if responseObject != nil {
+                // use responseObject and error here
+                
+                if let array = responseObject as? NSArray{
+                    let tempMessages = self.convoHelper.parseMessagesFromNSArray(array: array)
+                    if(tempMessages.count > 0){
+                        self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: false)//false because timer already started
+                        for i in 0 ..< tempMessages.count{
+                            let m = tempMessages[i]
+                            if m.senderID == self.myUserID{
+                                self.addMessage(withId: String(m.senderID), name: self.myName, text: m.text, timestamp: m.timestamp)
+                            }else{
+                                self.addMessage(withId: String(m.senderID), name: self.yourName, text: m.text, timestamp: m.timestamp)
+                            }
+                        }
+                        //self.collectionView?.reloadItems(at: <#T##[IndexPath]#>)
+                        
+//                        let height1 = self.navigationController?.navigationBar.frame.height
+//                        let height2 = self.inputToolbar.frame.height
+//                        if let h:CGFloat = height1 {
+//                            self.collectionView?.contentInset = UIEdgeInsetsMake(h*1.5, 0, height2, 0)
+//                        }
+                        
+                        self.finishReceivingMessage()
+                        
+                    }
+                }else{
+//                    self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+                }
+            }else{
+//                self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+            }
+            return
+        }
+
+    }
+    
+    func stopNewMessageTimer() {
+        self.newMessageTimer?.invalidate()
     }
     
     // MARK: JSQ Overrides
@@ -288,11 +376,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             
             if error == nil{
                 if responseObject != "-1" {
-                    let date = Date.init()
                     self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
                     //sent message isn't showing timebreak initially if after 30 minutes - only does once convo refreshed
                     
-                    self.finishReceivingMessage()
+                    self.finishSendingMessage()
                 }else{
                     self.showAlert(title: "Unable to send message", text: "Please check your internet connection and try again.")
                 }
@@ -302,8 +389,6 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             
             return
         }
-        
-        finishSendingMessage() // 5
     }
         
 

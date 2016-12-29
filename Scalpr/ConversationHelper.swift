@@ -45,6 +45,22 @@ class ConversationHelper {
         
     }
     
+    func getNewConversationMessagesRequest(conversationID: Int64, userID: Int64, completionHandler: @escaping (AnyObject?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["conversationID": conversationID, "userID": userID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/get_new_conversation_messages.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).responseJSON { response in
+            switch response.result {
+            case .success (let value):
+                completionHandler(value as AnyObject?, nil)
+            case .failure(let error):
+                completionHandler(nil, error as NSError?)
+            }
+        }
+        
+    }
+
+    
     func sendConversationMessageRequest(conversationID: Int64, senderID: Int64, message: String, completionHandler: @escaping (String?, NSError?) -> ()){
         
         let parameters: Parameters = ["conversationID": conversationID, "senderID": senderID, "message": message]
@@ -62,6 +78,25 @@ class ConversationHelper {
             
         }
     }
+    
+    func updateLastReadMessageRequest(messageID: Int64, conversationID: Int64, userID: Int64, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["messageID": messageID, "conversationID": conversationID, "userID": userID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/update_user_last_read_message_for_conversation.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+
 
     
     func parseConversationsFromNSArray(array: NSArray!) -> [Conversation]{
