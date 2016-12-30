@@ -103,6 +103,7 @@ class ConversationHelper {
         var conversations = [Conversation]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd H:m:s"
+        dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!  // original string in GMT/UTC
         
         if array != nil{
             for i in 0 ..< array.count{
@@ -149,6 +150,8 @@ class ConversationHelper {
         var messages = [Message]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd H:m:s"
+        dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!  // original string in GMT/UTC
+
         
         if array != nil{
             for i in 0 ..< array.count{

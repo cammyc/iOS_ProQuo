@@ -376,6 +376,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             
             if error == nil{
                 if responseObject != "-1" {
+                    let date = Date.init()
+                    
                     self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
                     //sent message isn't showing timebreak initially if after 30 minutes - only does once convo refreshed
                     
