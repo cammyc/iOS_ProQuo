@@ -40,7 +40,7 @@ class CoreDataHelper : NSObject {
         }
     }
     
-    func wipeDB(){
+    func wipeAttractionsFromDB(){
         let moc = managedObjectContext
         
         var array = [cdAttractionMO]()
@@ -58,6 +58,66 @@ class CoreDataHelper : NSObject {
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }
+    }
+    
+    func wipeMessagesFromDB(){
+        let moc = managedObjectContext
+        
+        var array = [cdMessageMO]()
+        
+        let messageFetch: NSFetchRequest<cdMessageMO> = NSFetchRequest(entityName: "Message")
+        
+        do {
+            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]//not deleting!!! This is empty
+            
+            for managedObject in array
+            {
+                let managedObjectData:NSManagedObject = managedObject as NSManagedObject
+                managedObjectContext.delete(managedObjectData)
+            }
+        } catch {
+            fatalError("Failed to fetch attractions: \(error)")
+        }
+    }
+    
+    func saveMessage(message: Message){
+        let cdMessage = cdMessageMO(context: managedObjectContext)
+        
+        cdMessage.id = NSInteger(message.ID)
+        cdMessage.conversationID = NSInteger(message.conversationID)
+        cdMessage.senderID = NSInteger(message.senderID)
+        cdMessage.text = message.text
+        cdMessage.timestamp = message.timestamp
+        
+        do {
+            try managedObjectContext.save()
+            //print ("saved " + attraction.name)
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+
+    }
+    
+    func getAllMessagesFromConversation(conversationID: Int64)->NSArray{
+        let moc = managedObjectContext
+        
+        var array = [cdMessageMO]()
+        
+        let messageFetch: NSFetchRequest<cdMessageMO> = NSFetchRequest(entityName: "Message")
+        
+        messageFetch.predicate = NSPredicate(format: "conversationID == %i", conversationID)
+        
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        messageFetch.sortDescriptors = sortDescriptors
+
+        do {
+            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]
+        } catch {
+            fatalError("Failed to fetch attractions: \(error)")
+        }
+        
+        return array as NSArray
     }
     
     

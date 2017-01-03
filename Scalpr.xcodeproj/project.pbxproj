@@ -67,6 +67,7 @@
 		D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB896B1DA178BE005DB173 /* LoginViewController.swift */; };
 		D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
+		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 		E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 580E69E74D1DB898A950A78A /* Pods_Scalpr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3E8AA151E1300EA0074D6FF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; };
 		E3E8AA161E1300EA0074D6FF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */; };
@@ -226,6 +227,7 @@
 		D2FB896B1DA178BE005DB173 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedOutMenuController.swift; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
 		E3E8AA121E1300EA0074D6FF /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				D206378F1D9B948100EAFF0F /* Attraction.swift */,
 				D24C433A1DA4C16700547332 /* User.swift */,
 				D2F4139F1DA9BF7A0047A3C6 /* cdAttractionMO.swift */,
+				E3E69B861E1B471E001908DF /* cdMessageMO.swift */,
 				D20ECC951DF7D296008B315F /* Conversation.swift */,
 				D20ECC971DF7D2A4008B315F /* Message.swift */,
 			);
@@ -682,6 +685,7 @@
 				D25E543A1D9F658D003164E8 /* BingImageHelper.swift in Sources */,
 				D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */,
 				D211351D1DAC4B4C0064EACF /* MyTicketsTableViewController.swift in Sources */,
+				E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */,
 				D24C433B1DA4C16700547332 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

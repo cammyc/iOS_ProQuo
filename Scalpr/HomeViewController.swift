@@ -357,7 +357,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 // use responseObject and error here
                 
                 if let attractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as? NSArray){
-                    self.coreDataHelper.wipeDB()
+                    self.coreDataHelper.wipeAttractionsFromDB()
 
                     for i in 0 ..< attractions.count{
                         
@@ -371,9 +371,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 }
             }else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
-                    self.view.makeToast("Unable to retreive posts. Please try again.", duration: 3.0, position: .bottom)
+                    self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
                 }else{
-                    self.view.makeToast("Unable to retreive posts. Please try again.", duration: 3.0, position: .bottom)
+                    self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
                 }
             }
             
@@ -412,7 +412,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
-                    self.view.makeToast("Unable to retreive posts. Please try again.", duration: 3.0, position: .bottom)
+                    self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
                 }
             }
             
@@ -453,7 +453,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
-                    self.view.makeToast("Unable to retreive posts. Please try again.", duration: 3.0, position: .bottom)
+                    self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
                 }
             }
             

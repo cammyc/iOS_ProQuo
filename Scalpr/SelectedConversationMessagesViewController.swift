@@ -19,6 +19,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
     let convoHelper = ConversationHelper()
     let loginHelper = LoginHelper();
+    let coreDataHelper = CoreDataHelper()
     
     var conversation = Conversation()
     var messagesRaw = [Message]()
@@ -29,7 +30,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     var avatarImage: UIImage? = nil
     weak var newMessageTimer: Timer?
     weak var updateLastReadMessageTimer: Timer?
-
+    var connectingNotification: MBProgressHUD? = nil
     
 
     override func viewDidLoad() {
@@ -38,7 +39,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         // No avatars
         //collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
-        
+                
         
         myUserID = (loginHelper?.getLoggedInUser().ID)!
         myName = (myUserID == conversation.buyerID) ? conversation.buyerName : conversation.sellerName
@@ -48,40 +49,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         senderDisplayName = myName//JSQ defined
         
         self.navigationItem.title = yourName
-
-//        if let h = self.navigationController?.navigationBar.frame.height{
-//            let w = self.navigationController?.navigationBar.frame.width
-//            let myView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: w!, height: h))
-////            let title: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 300 - (h + 10), height: h))
-////            title.text = self.yourName
-////            title.textColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
-////            //title.font = UIFont.boldSystemFont(ofSize: 20.0)
-////            title.backgroundColor = UIColor.clear
-////            myView.addSubview(title)
-//            
-//            if Foundation.URL(string: conversation.attractionImageURL) != nil{
-//                KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: conversation.attractionImageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-//                    if image != nil{
-//                        
-//                        let tempH = h*0.9
-//                        
-//                        let myImageView: UIImageView = UIImageView(image: ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: tempH, height: tempH))))
-//                        self.navigationController?.navigationBar.backIndicatorImage = image
-//                        myImageView.frame = CGRect(x: w! - tempH, y: 0, width: tempH, height: tempH)
-//                        myImageView.layer.masksToBounds = true
-//                        myImageView.layer.borderColor = UIColor.lightGray.cgColor
-//                        myImageView.layer.borderWidth = 0.1
-//                        myView.backgroundColor = UIColor.clear
-//                        myView.addSubview(myImageView)
-//                    }
-//                    
-//                    self.navigationItem.titleView = myView
-//                })
-//            }else{
-//                self.navigationItem.titleView = myView
-//            }
-//
-//        }
+//        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        activityIndicator.startAnimating()
+//        self.view.addSubview(activityIndicator)
         
         if Foundation.URL(string: conversation.attractionImageURL) != nil{
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: conversation.attractionImageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
@@ -93,7 +64,37 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             })
         }
         
-        loadMessages()
+        let dbMessages = coreDataHelper.getAllMessagesFromConversation(conversationID: conversation.ID) as! [cdMessageMO]
+        
+        if dbMessages.count > 0 {
+            for i in 0 ..< dbMessages.count{
+                let m = dbMessages[i]
+                if (m.senderID as NSNumber).int64Value == self.myUserID{
+                    self.addMessage(withId: String(m.senderID), name: self.myName, text: m.text!, timestamp: m.timestamp!)
+                }else{
+                    self.addMessage(withId: String(m.senderID), name: self.yourName, text: m.text!, timestamp: m.timestamp!)
+                }
+            }
+            self.collectionView?.reloadData()
+            
+//            let height1 = self.navigationController?.navigationBar.frame.height
+//            let height2 = self.inputToolbar.frame.height
+//            if let h:CGFloat = height1 {
+//                self.collectionView?.contentInset = UIEdgeInsetsMake(h*1.5, 0, height2, 0)
+//            }
+            //above isn't needed here for some reason...
+            
+            self.finishReceivingMessage()
+            
+            startNewMessageTimer()//after loading db messages load new messages
+            //any messages in db should be read in server db so new messages will not repeat
+            //need to implement session tokens on each device because right now using the app on multiple devices at the same time will be a disaster
+            //multiple missed messages and your own message will only appear on device it's sent on
+            
+        }else{
+            loadInitialMessages()
+        }
+        
 
     }
     
@@ -102,7 +103,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         stopUpdateLastMessageTimer()
     }
     
-    func loadMessages(){
+    func loadInitialMessages(){
         let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading Messages"
@@ -122,6 +123,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         self.messagesRaw = tempMessages
                         for i in 0 ..< self.messagesRaw.count{
                             let m = self.messagesRaw[i]
+                            self.coreDataHelper.saveMessage(message: m)
+
                             if m.senderID == self.myUserID{
                                 self.addMessage(withId: String(m.senderID), name: self.myName, text: m.text, timestamp: m.timestamp)
                             }else{
@@ -140,6 +143,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         
                     }
                 }else{
+                    //give option to try again
                     self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
                 }
             }else{
@@ -190,6 +194,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         let request = convoHelper.getNewConversationMessagesRequest(conversationID: self.conversation.ID, userID: self.myUserID) { responseObject, error in
             
             if responseObject != nil {
+                self.hideConnectingNotification()
                 // use responseObject and error here
                 
                 if let array = responseObject as? NSArray{
@@ -198,6 +203,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: false)//false because timer already started
                         for i in 0 ..< tempMessages.count{
                             let m = tempMessages[i]
+                            self.coreDataHelper.saveMessage(message: m)
+
                             if m.senderID == self.myUserID{
                                 self.addMessage(withId: String(m.senderID), name: self.myName, text: m.text, timestamp: m.timestamp)
                             }else{
@@ -216,14 +223,30 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         
                     }
                 }else{
-//                    self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+                    self.showConnectingNotification()
                 }
             }else{
-//                self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+                self.showConnectingNotification()
             }
             return
         }
 
+    }
+    
+    func showConnectingNotification(){
+        if self.connectingNotification == nil {
+            self.connectingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.connectingNotification?.mode = MBProgressHUDMode.indeterminate
+            self.connectingNotification?.label.text = "Connecting..."
+        }else{
+            self.connectingNotification?.show(animated: true)
+        }
+    }
+    
+    func hideConnectingNotification(){
+        if self.connectingNotification != nil {
+            self.connectingNotification?.hide(animated: true)
+        }
     }
     
     func stopNewMessageTimer() {

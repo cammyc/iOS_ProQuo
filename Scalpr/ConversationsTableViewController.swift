@@ -53,18 +53,22 @@ class ConversationsTableViewController: UITableViewController {
                         self.tableView.reloadData()
 
                     }else{
-                        self.showAlert(title: "No Conversation", text: "You don't have any active conversations")
+                        self.showAlert(title: "No Conversations", text: "You don't have any active conversations")
                     }
                 }else{
-                    self.showAlert(title: "Unable to load conversations", text: "We were unable to retrieve your conversations. Please check your internet connection and try again.")
+                    self.retryAlert()
                 }
             }else{
-                self.showAlert(title: "Unable to load conversations", text: "We were unable to retrieve your conversations. Please check your internet connection and try again.")
+                self.retryAlert()
             }
             return
         }
 
     
+    }
+    
+    func loadConversationsSilent(){
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -193,6 +197,21 @@ class ConversationsTableViewController: UITableViewController {
         
         self.present(refreshAlert,animated: true,completion: nil)
     }
+    
+    func retryAlert(){
+        let refreshAlert = UIAlertController(title: "Unable to load conversations", message: "Would you like to retry?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { (action: UIAlertAction!) in
+            self.loadConversations()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            self.navigationController?.dismiss(animated: true)
+        }))
+        
+        self.present(refreshAlert,animated: true,completion: nil)
+    }
+
 
 
 }

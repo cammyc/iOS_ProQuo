@@ -211,6 +211,9 @@ class LoginHelper{
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
         
+        let coreDataHelper = CoreDataHelper()
+        coreDataHelper.wipeMessagesFromDB()
+        
         //  Save to disk
         return preferences.synchronize()
     }
