@@ -201,6 +201,9 @@ class LoginHelper{
     }
     
     func logout()-> Bool{
+        let coreDataHelper: CoreDataHelper = CoreDataHelper()
+        coreDataHelper.wipeMessagesFromDB()
+        
         let user:User = User()
         let preferences = UserDefaults.standard
         
@@ -210,9 +213,6 @@ class LoginHelper{
         preferences.set(user.email, forKey: "email")
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
-        
-        let coreDataHelper = CoreDataHelper()
-        coreDataHelper.wipeMessagesFromDB()
         
         //  Save to disk
         return preferences.synchronize()

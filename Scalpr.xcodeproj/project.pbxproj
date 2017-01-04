@@ -66,6 +66,9 @@
 		D2F413A41DAB309E0047A3C6 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F413A31DAB309E0047A3C6 /* CustomInfoWindow.swift */; };
 		D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB896B1DA178BE005DB173 /* LoginViewController.swift */; };
 		D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */; };
+		E3422F661E1C66470000E1D2 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
+		E3422F671E1C664E0000E1D2 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
+		E3422F681E1C664E0000E1D2 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 		E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 580E69E74D1DB898A950A78A /* Pods_Scalpr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -136,6 +139,7 @@
 				E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
 				E3E8AA231E1301280074D6FF /* MBProgressHUD.framework in Embed Frameworks */,
 				E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */,
+				E3422F681E1C664E0000E1D2 /* Whisper.framework in Embed Frameworks */,
 				E3E8AA771E13F2760074D6FF /* FBSDKCoreKit.framework in Embed Frameworks */,
 				E3E8AA1F1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
 				E3E8AA6B1E13F0210074D6FF /* FacebookLogin.framework in Embed Frameworks */,
@@ -226,6 +230,7 @@
 		D2F413A51DAB40CD0047A3C6 /* CoreDataModels2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels2.xcdatamodel; sourceTree = "<group>"; };
 		D2FB896B1DA178BE005DB173 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedOutMenuController.swift; sourceTree = "<group>"; };
+		E3422F651E1C66470000E1D2 /* Whisper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Whisper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Whisper/Whisper.framework"; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
@@ -261,6 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3422F661E1C66470000E1D2 /* Whisper.framework in Frameworks */,
 				E3E8AA741E13F26F0074D6FF /* FBSDKCoreKit.framework in Frameworks */,
 				E3E8AA751E13F26F0074D6FF /* FBSDKLoginKit.framework in Frameworks */,
 				E3E8AA6F1E13F23C0074D6FF /* Bolts.framework in Frameworks */,
@@ -299,6 +305,7 @@
 				D25D1F181D9E06BC0085EA89 /* GoogleMaps.framework in Frameworks */,
 				D25D1F151D9E06A70085EA89 /* GoogleMapsBase.framework in Frameworks */,
 				E3E8AA701E13F2440074D6FF /* Bolts.framework in Frameworks */,
+				E3422F671E1C664E0000E1D2 /* Whisper.framework in Frameworks */,
 				E3E8AA1E1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */,
 				D25D1F191D9E06BC0085EA89 /* GoogleMapsCore.framework in Frameworks */,
 				59BD1591745EF02933930AF5 /* Pods_Scalpr.framework in Frameworks */,
@@ -429,6 +436,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3422F651E1C66470000E1D2 /* Whisper.framework */,
 				E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */,
 				E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */,
 				E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */,

@@ -66,10 +66,9 @@ class CoreDataHelper : NSObject {
         var array = [cdMessageMO]()
         
         let messageFetch: NSFetchRequest<cdMessageMO> = NSFetchRequest(entityName: "Message")
-        
+
         do {
-            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]//not deleting!!! This is empty
-            
+            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]//this isnt fucking working!
             for managedObject in array
             {
                 let managedObjectData:NSManagedObject = managedObject as NSManagedObject

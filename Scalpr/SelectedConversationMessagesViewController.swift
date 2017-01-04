@@ -10,6 +10,8 @@ import UIKit
 import MBProgressHUD
 import Kingfisher
 import JSQMessagesViewController
+import Whisper
+
 
 class SelectedConversationMessagesViewController: JSQMessagesViewController {
     
@@ -30,7 +32,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     var avatarImage: UIImage? = nil
     weak var newMessageTimer: Timer?
     weak var updateLastReadMessageTimer: Timer?
-    var connectingNotification: MBProgressHUD? = nil
+    var isWhisperShowing = false
     
 
     override func viewDidLoad() {
@@ -47,6 +49,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         
         senderId = String(myUserID)//JSQ defined var
         senderDisplayName = myName//JSQ defined
+        
         
         self.navigationItem.title = yourName
 //        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
@@ -101,6 +104,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     override func viewDidDisappear(_ animated: Bool) {
         stopNewMessageTimer()
         stopUpdateLastMessageTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        hideConnectingNotification()
     }
     
     func loadInitialMessages(){
@@ -234,18 +241,21 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     
     func showConnectingNotification(){
-        if self.connectingNotification == nil {
-            self.connectingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-            self.connectingNotification?.mode = MBProgressHUDMode.indeterminate
-            self.connectingNotification?.label.text = "Connecting..."
-        }else{
-            self.connectingNotification?.show(animated: true)
+        if isWhisperShowing == false{
+            var connectingWhisper = Whisper.Message(title: "Reconnecting...", backgroundColor: UIColor.red)
+            connectingWhisper.images = [UIImage(named: "no_connection")!]
+            if navigationController != nil{
+                Whisper.show(whisper: connectingWhisper, to: navigationController!, action: .present)
+                isWhisperShowing = true
+            }
         }
     }
     
     func hideConnectingNotification(){
-        if self.connectingNotification != nil {
-            self.connectingNotification?.hide(animated: true)
+        // Hide a message
+        if navigationController != nil{
+            Whisper.hide(whisperFrom: navigationController!)
+            isWhisperShowing = false
         }
     }
     
@@ -402,6 +412,13 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     let date = Date.init()
                     
                     self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
+                    let m = Message()
+                    m.ID = Int64(responseObject!)!
+                    m.senderID = self.myUserID
+                    m.conversationID = self.conversation.ID
+                    m.text = text
+                    m.timestamp = date
+                    self.coreDataHelper.saveMessage(message: m)
                     //sent message isn't showing timebreak initially if after 30 minutes - only does once convo refreshed
                     
                     self.finishSendingMessage()
