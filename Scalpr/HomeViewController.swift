@@ -234,6 +234,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             let preferences = UserDefaults.standard
             preferences.set(true, forKey: "acceptedTerms")
             preferences.synchronize()
+            if CLLocationManager.authorizationStatus() == .denied{
+                self.enableLocInSettings()
+            }
         }))
         
         
@@ -682,13 +685,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             locationManager.requestLocation()
         }
         
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
-            // Ask for Authorisation from the User.
-            //self.locationManager.requestAlwaysAuthorization()
-            
+        if CLLocationManager.authorizationStatus() == .denied{
+            enableLocInSettings()
+        }else if CLLocationManager.authorizationStatus() != .authorizedWhenInUse{
             self.locationManager.requestWhenInUseAuthorization()
+
         }
-        
         
     }
     
@@ -704,6 +706,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 self.view.makeToast("Retrieving Your Location...", duration: 2.0, position: .bottom)
             }
         }
+    }
+    
+    func enableLocInSettings(){
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            }
+        }
+        
+        let refreshAlert = UIAlertController(title: "Location required", message: "Your location is required to use this app. Please enable location services in the app settings.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(openAction)
+        present(refreshAlert, animated: true, completion: nil)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

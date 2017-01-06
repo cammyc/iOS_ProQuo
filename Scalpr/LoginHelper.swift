@@ -201,8 +201,6 @@ class LoginHelper{
     }
     
     func logout()-> Bool{
-        let coreDataHelper: CoreDataHelper = CoreDataHelper()
-        coreDataHelper.wipeMessagesFromDB()
         
         let user:User = User()
         let preferences = UserDefaults.standard

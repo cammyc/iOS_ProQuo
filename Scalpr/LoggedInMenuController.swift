@@ -20,6 +20,8 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
     @IBOutlet weak var fullNameLabel: UILabel!
     
     let loginHelper: LoginHelper = LoginHelper()!
+    
+    let coreDataHelper: CoreDataHelper = CoreDataHelper()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +114,8 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
         let refreshAlert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+            
+            self.coreDataHelper.wipeMessagesFromDB()
             self.loginHelper.logout()
             
             let loggedOutMenuController: LoggedOutMenuController = self.storyboard?.instantiateViewController(withIdentifier: "LoggedOutMenuController") as! LoggedOutMenuController
@@ -125,6 +129,7 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
         present(refreshAlert, animated: true, completion: nil)
 
     }
+
     
     func searchTickets(){
         FlagHelper.focusSearch = true

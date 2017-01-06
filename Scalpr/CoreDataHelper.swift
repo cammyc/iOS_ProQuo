@@ -55,6 +55,7 @@ class CoreDataHelper : NSObject {
                 let managedObjectData:NSManagedObject = managedObject as NSManagedObject
                 managedObjectContext.delete(managedObjectData)
             }
+            try managedObjectContext.save()
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }
@@ -68,12 +69,13 @@ class CoreDataHelper : NSObject {
         let messageFetch: NSFetchRequest<cdMessageMO> = NSFetchRequest(entityName: "Message")
 
         do {
-            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]//this isnt fucking working!
+            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]
             for managedObject in array
             {
                 let managedObjectData:NSManagedObject = managedObject as NSManagedObject
                 managedObjectContext.delete(managedObjectData)
             }
+            try managedObjectContext.save()
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }
