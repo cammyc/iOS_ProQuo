@@ -12,7 +12,15 @@ import CryptoSwift
 
 class ConversationHelper {
     
+    var timer:Timer? = nil
+    
     init(){
+    }
+    
+    func cancelAllRequests(){
+        Alamofire.SessionManager.default.session.getAllTasks { tasks in
+            tasks.forEach { $0.cancel() }
+        }
     }
     
     func getUserConversationsRequest(userID: Int64, completionHandler: @escaping (AnyObject?, NSError?) -> ()){
@@ -96,7 +104,79 @@ class ConversationHelper {
             
         }
     }
+    
+    func updateIOSDeviceToken(userID: Int64, deviceToken: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["userID": userID, "deviceToken": deviceToken]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/update_IOSDeviceToken.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
 
+
+    func backgroundCheckForNewMessageRequest(userID: Int64, completionHandler: @escaping (String?, NSError?) -> ()?){
+        
+        let preferences = UserDefaults.standard
+        let deviceToken = preferences.object(forKey: "deviceNotificationToken") as? String
+        if deviceToken != nil{
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String{
+                let parameters: Parameters = ["userID": userID, "appType": 2, "appVersion": Double(version)!, "deviceToken": deviceToken!]
+                
+                Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/ios_check_new_conversation_messages.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+                    
+                    let x = response.error as NSError?
+                    if x == nil{
+                        let data = response.data
+                        let utf8Text = String(data: data!, encoding: .utf8)
+                        completionHandler(utf8Text, nil)
+                    }else{
+                        completionHandler(nil, response.error as NSError?)
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    func deleteConversation
+    
+//    func startBackgroundMessageCheckTimer(){
+//        if timer == nil {
+//            timer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) {
+//                timer in
+//                
+//                DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+//                    let convoHelper = ConversationHelper()
+//                    
+//                    convoHelper.backgroundCheckForNewMessageRequest(userID: (LoginHelper()?.getLoggedInUser().ID)!){
+//                        responseObject, error in
+//                        return
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//
+//    }
+//    
+//    func stopBackgroundMessageCheckTimer(){
+//        if timer != nil{
+//            timer?.invalidate()
+//            timer = nil
+//        }
+//    }
 
     
     func parseConversationsFromNSArray(array: NSArray!) -> [Conversation]{

@@ -184,7 +184,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if validateSignIn(){
             loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
             loadingNotification?.mode = MBProgressHUDMode.indeterminate
-            loadingNotification?.labelText = "Logging In"
+            loadingNotification?.label.text = "Logging In"
             
             self.loginHelper.LoginRequest(emailPhone: tfEmailPhoneLogin.text!, password: tfPasswordLogin.text!){ responseObject, error in
                 
@@ -209,10 +209,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         if let x = Int64(responseObject!){
                             let user:User = User()
                             user.ID = x
-                            self.loginHelper.saveLoggedInUser(user: user)
+                            let _ = self.loginHelper.saveLoggedInUser(user: user)
                         }else{
                             let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
-                            self.loginHelper.saveLoggedInUser(user: user as! User)
+                            let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
                         }
                         
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
@@ -238,7 +238,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if validateCreateAccount() {
             loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
             loadingNotification?.mode = MBProgressHUDMode.indeterminate
-            loadingNotification?.labelText = "Creating Account"
+            loadingNotification?.label.text = "Creating Account"
             
             self.loginHelper.createAccountRequest(firstName: tfFirstNameCC.text!, lastName: tfLastNameCC.text!, emailPhone: tfEmailPhoneCC.text!, password: tfPasswordCC.text!){ responseObject, error in
                 
@@ -274,7 +274,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                         user.password = self.tfPasswordCC.text!
                         
-                        self.loginHelper.saveLoggedInUser(user: user)
+                        let _ = self.loginHelper.saveLoggedInUser(user: user)
                         
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                     }
@@ -305,18 +305,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             break
         case tfEmailPhoneCC:
             tfConfirmEmailPhoneCC.becomeFirstResponder()
-            validateCreateAccount()
+            let _ = validateCreateAccount()
             break
         case tfConfirmEmailPhoneCC:
             tfPasswordCC.becomeFirstResponder()
-            validateCreateAccount()
+            let _ = validateCreateAccount()
             break
         case tfPasswordCC:
             tfPasswordConfirmCC.becomeFirstResponder()
-            validateCreateAccount()
+            let _ = validateCreateAccount()
             break
         case tfPasswordConfirmCC:
-            validateCreateAccount()
+            let _ = validateCreateAccount()
             break
         default:
             break
@@ -330,8 +330,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        validateSignIn()
-        validateCreateAccount()
+        let _ = validateSignIn()
+        let _ = validateCreateAccount()
     }
     
 

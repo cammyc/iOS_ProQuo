@@ -101,14 +101,12 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
 
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         stopNewMessageTimer()
         stopUpdateLastMessageTimer()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
         hideConnectingNotification()
     }
+
     
     func loadInitialMessages(){
         let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -166,15 +164,18 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                 
                 if error == nil{
                     if responseObject != "0" {
+                        self.stopUpdateLastMessageTimer()//this will stop the timer started from startUpdateLastReadMessageIfError
                         if startNewMessageTimer{
-                            self.startNewMessageTimer()
+                            self.startNewMessageTimer()//this will start the normal newMessage timer
                         }
                     }else{
                         self.stopNewMessageTimer()
+                        self.stopUpdateLastMessageTimer()
                         self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
                     }
                 }else{//if last message not updated keep calling itself until it is updated so no duplicates and stop requesting new messages
                     self.stopNewMessageTimer()
+                    self.stopUpdateLastMessageTimer()
                     self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
                 }
                 return
@@ -182,13 +183,16 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     
     func startUpdateLastReadMessageTimerIfError(messageID: Int64){
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+        self.updateLastReadMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
             self?.updateLastReadMessage(messageID: messageID, startNewMessageTimer: true)//startNewMessageTimer because this is only called if stopped
         }
     }
     
     func stopUpdateLastMessageTimer() {
-        self.newMessageTimer?.invalidate()
+        if updateLastReadMessageTimer != nil {
+            self.updateLastReadMessageTimer?.invalidate()
+            self.convoHelper.cancelAllRequests()
+        }
     }
     
     func startNewMessageTimer() {
@@ -198,7 +202,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     
     func getNewMessages(){
-        let request = convoHelper.getNewConversationMessagesRequest(conversationID: self.conversation.ID, userID: self.myUserID) { responseObject, error in
+        _ = convoHelper.getNewConversationMessagesRequest(conversationID: self.conversation.ID, userID: self.myUserID) { responseObject, error in
             
             if responseObject != nil {
                 self.hideConnectingNotification()
@@ -207,7 +211,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                 if let array = responseObject as? NSArray{
                     let tempMessages = self.convoHelper.parseMessagesFromNSArray(array: array)
                     if(tempMessages.count > 0){
-                        self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: false)//false because timer already started
+                        self.stopNewMessageTimer()//stop new messages while updating last read message
+                        self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: true)//new message timer is started once last read message is updated
                         for i in 0 ..< tempMessages.count{
                             let m = tempMessages[i]
                             self.coreDataHelper.saveMessage(message: m)
@@ -260,7 +265,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     
     func stopNewMessageTimer() {
-        self.newMessageTimer?.invalidate()
+        if newMessageTimer != nil {
+            self.newMessageTimer?.invalidate()
+            self.convoHelper.cancelAllRequests()
+        }
     }
     
     // MARK: JSQ Overrides
@@ -405,7 +413,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
         
         //sendlogic here
+        stopUpdateLastMessageTimer()//stop getting new messages once sent is pressed
         convoHelper.sendConversationMessageRequest(conversationID: conversation.ID, senderID: myUserID, message: text){ responseObject, error in
+            
+            self.startNewMessageTimer()//start message timer again
             
             if error == nil{
                 if responseObject != "-1" {

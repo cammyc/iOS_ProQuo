@@ -116,7 +116,7 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             
             self.coreDataHelper.wipeMessagesFromDB()
-            self.loginHelper.logout()
+            let _ = self.loginHelper.logout()
             
             let loggedOutMenuController: LoggedOutMenuController = self.storyboard?.instantiateViewController(withIdentifier: "LoggedOutMenuController") as! LoggedOutMenuController
             self.revealViewController().setRear(loggedOutMenuController, animated: false)

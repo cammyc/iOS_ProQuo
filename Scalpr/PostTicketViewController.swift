@@ -280,7 +280,6 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         }else{
             return true
         }
-        return true
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

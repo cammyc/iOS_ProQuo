@@ -44,9 +44,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
     var blurView: UIVisualEffectView? = nil
     
+//    let myNotification = Notification.Name(rawValue:"MyNotification")
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view did load")
+        //print("view did load")
         mapView.delegate = self
         mapView.settings.consumesGesturesInView = false
         
@@ -117,8 +120,35 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabGoToMyLocation.paddingY = fabGoToMyLocation.frame.height + 25
         self.view.addSubview(fabGoToMyLocation)
 
-        
+//        let nc = NotificationCenter.default
+//        nc.addObserver(forName:myNotification, object:nil, queue:nil, using:catchNotification)
+//        
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        let nc = NotificationCenter.default
+//        nc.post(name:myNotification,
+//                object: nil,
+//                userInfo:["message":"Hello there!", "date":Date()])
+//    }
+//    
+//    func catchNotification(notification:Notification) -> Void {
+//        print("Catch notification")
+//        
+//        guard let userInfo = notification.userInfo,
+//            let message  = userInfo["message"] as? String,
+//            let date     = userInfo["date"]    as? Date else {
+//                print("No userInfo found in notification")
+//                return
+//        }
+//        
+//        let alert = UIAlertController(title: "Notification!",
+//                                      message:"\(message) received at \(date)",
+//            preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     
     func revealControllerPanGestureBegan(_ revealController: SWRevealViewController!) {
@@ -265,7 +295,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 for i in 0 ..< attractions.count{
                     
                     let attraction = attractions[i]
-                    self.showMarker(attraction: attraction)
+                    let _ = self.showMarker(attraction: attraction)
                 }
                 searchActive = true
             }
@@ -284,7 +314,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             for i in 0 ..< attractions.count{
                 
                 let attraction = attractions[i]
-                self.showMarker(attraction: attraction)
+                let _ = self.showMarker(attraction: attraction)
             }
             
             searchActive = false
@@ -368,7 +398,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                         self.coreDataHelper.saveAttraction(attraction: attraction)
                         
-                        self.showMarker(attraction: attraction)
+                        let _ = self.showMarker(attraction: attraction)
                         
                     }
                 }
@@ -409,7 +439,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                         self.coreDataHelper.saveAttraction(attraction: attraction)
                         
-                        self.showMarker(attraction: attraction)
+                        let _ = self.showMarker(attraction: attraction)
                         
                     }
                 }
@@ -445,7 +475,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                         let attraction = attractions[i]
                         self.coreDataHelper.saveAttraction(attraction: attraction)
-                        self.showMarker(attraction: attraction)
+                        _ = self.showMarker(attraction: attraction)
                     }
                     
                     if attractions.count > 0{
@@ -728,13 +758,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if let location = locations.first {
             
             if userLocation == nil{
-                locationHelper.updateLastLocation(location: location)
+                let _ = locationHelper.updateLastLocation(location: location)
                 refreshMapAndGetNewTickets(location: location, withAnimation: false, center: firstLocationUpdate)//center if first time called, if not leave map
                 firstLocationUpdate = false
             }else{
                 let distance = location.distance(from: userLocation!)
                 if distance >= 10 {
-                    locationHelper.updateLastLocation(location: location)
+                    let _ = locationHelper.updateLastLocation(location: location)
                     refreshMapAndGetNewTickets(location: location, withAnimation: true, center: firstLocationUpdate)
                     firstLocationUpdate = false
                 }
@@ -795,7 +825,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             if newAttraction != nil{
                 let marker = showMarker(attraction: self.newAttraction!)
                 mapView.selectedMarker = marker
-                let location = CLLocation(latitude: (self.newAttraction?.lat)!, longitude: (self.newAttraction?.lon)!)
+                _ = CLLocation(latitude: (self.newAttraction?.lat)!, longitude: (self.newAttraction?.lon)!)
                 centerInfoWindow(mapView: self.mapView, marker: marker)
             }
         }

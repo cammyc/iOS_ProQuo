@@ -43,19 +43,11 @@ class CoreDataHelper : NSObject {
     func wipeAttractionsFromDB(){
         let moc = managedObjectContext
         
-        var array = [cdAttractionMO]()
-        
-        let attractionFetch: NSFetchRequest<cdAttractionMO> = NSFetchRequest(entityName: "Attraction")
+        let attractionFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Attraction")
+        let delete = NSBatchDeleteRequest(fetchRequest: attractionFetch)
         
         do {
-            array = try moc.fetch(attractionFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdAttractionMO]
-            
-            for managedObject in array
-            {
-                let managedObjectData:NSManagedObject = managedObject as NSManagedObject
-                managedObjectContext.delete(managedObjectData)
-            }
-            try managedObjectContext.save()
+            try moc.execute(delete)
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }
@@ -64,18 +56,11 @@ class CoreDataHelper : NSObject {
     func wipeMessagesFromDB(){
         let moc = managedObjectContext
         
-        var array = [cdMessageMO]()
-        
-        let messageFetch: NSFetchRequest<cdMessageMO> = NSFetchRequest(entityName: "Message")
+        let messageFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
+        let delete = NSBatchDeleteRequest(fetchRequest: messageFetch)
 
         do {
-            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]
-            for managedObject in array
-            {
-                let managedObjectData:NSManagedObject = managedObject as NSManagedObject
-                managedObjectContext.delete(managedObjectData)
-            }
-            try managedObjectContext.save()
+            try moc.execute(delete)
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }
@@ -113,7 +98,7 @@ class CoreDataHelper : NSObject {
         messageFetch.sortDescriptors = sortDescriptors
 
         do {
-            array = try moc.fetch(messageFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdMessageMO]
+            array = try moc.fetch(messageFetch)
         } catch {
             fatalError("Failed to fetch attractions: \(error)")
         }

@@ -128,7 +128,7 @@ class MiscHelper {
     
     func getMinimumAppVersion(completionHandler: @escaping (Double?, NSError?) -> ()){
         
-        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/minimum_app_version_ios.php", method: .post).response { response in
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/minimum_app_version_ios.php", method: .post, parameters: [:], headers: MiscHelper.getSecurityHeader()).response { response in
             
             let x = response.error as NSError?
             if x == nil{

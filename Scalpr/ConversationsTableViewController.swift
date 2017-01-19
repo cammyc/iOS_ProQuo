@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import Whisper
 
 
 class ConversationsTableViewController: UITableViewController {
@@ -18,6 +19,8 @@ class ConversationsTableViewController: UITableViewController {
     let loginHelper = LoginHelper()
     var userID: Int64 = 0
     var selectedConvo = Conversation()
+    var isWhisperShowing = false
+    var refreshConversationsTimer: Timer? = nil
 
 
     override func viewDidLoad() {
@@ -28,9 +31,34 @@ class ConversationsTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem?.title = "Delete"
+        
         loadConversations()
+    }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        if editing{
+            navigationItem.leftBarButtonItem?.title = "Done"
+            self.stopUpdateConvosTimer()
+        }else{
+            navigationItem.leftBarButtonItem?.title = "Delete"
+            self.startUpdateConvosTimer()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if conversations.count > 0{
+            conversations.removeAll()
+            loadConversations()
+        }
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        hideConnectingNotification()
+        stopUpdateConvosTimer()
     }
     
     func loadConversations(){
@@ -39,7 +67,7 @@ class ConversationsTableViewController: UITableViewController {
         loadingNotification.label.text = "Loading Conversations"
 
         
-        let request = convoHelper.getUserConversationsRequest(userID: userID) { responseObject, error in
+        let _ = convoHelper.getUserConversationsRequest(userID: userID) { responseObject, error in
             
             loadingNotification.hide(animated: true)
             
@@ -51,6 +79,8 @@ class ConversationsTableViewController: UITableViewController {
                     if(tempConversations.count > 0){
                         self.conversations = tempConversations
                         self.tableView.reloadData()
+                        
+                        self.startUpdateConvosTimer()
 
                     }else{
                         self.showAlert(title: "No Conversations", text: "You don't have any active conversations")
@@ -64,11 +94,73 @@ class ConversationsTableViewController: UITableViewController {
             return
         }
 
-    
     }
     
-    func loadConversationsSilent(){
+    func refreshConversations(){
+        conversations.removeAll()
         
+        let _ = convoHelper.getUserConversationsRequest(userID: userID) { responseObject, error in
+            
+            if responseObject != nil {
+                // use responseObject and error here
+                
+                if let array = responseObject as? NSArray{
+                    self.hideConnectingNotification()
+                    let tempConversations = self.convoHelper.parseConversationsFromNSArray(array: array)
+                    if(tempConversations.count > 0){
+                        self.conversations = tempConversations
+                        self.tableView.reloadData()
+                        
+                    }else{
+                        self.showAlert(title: "No Conversations", text: "You don't have any active conversations")
+                    }
+                }else{
+                    self.showConnectingNotification()
+                }
+            }else{
+                self.showConnectingNotification()
+            }
+            return
+        }
+    }
+
+    
+    func showConnectingNotification(){
+        if isWhisperShowing == false{
+            var connectingWhisper = Whisper.Message(title: "Reconnecting...", backgroundColor: UIColor.red)
+            connectingWhisper.images = [UIImage(named: "no_connection")!]
+            if navigationController != nil{
+                Whisper.show(whisper: connectingWhisper, to: navigationController!, action: .present)
+                isWhisperShowing = true
+            }
+        }
+    }
+    
+    func hideConnectingNotification(){
+        // Hide a message
+        if navigationController != nil{
+            Whisper.hide(whisperFrom: navigationController!)
+            isWhisperShowing = false
+        }
+    }
+    
+    func startUpdateConvosTimer(){
+        if self.refreshConversationsTimer != nil{
+            if (self.refreshConversationsTimer?.isValid)!{
+                self.refreshConversationsTimer?.invalidate()
+            }
+        }
+        self.refreshConversationsTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] _ in
+            self?.refreshConversations()
+        }
+        
+    }
+    
+    func stopUpdateConvosTimer(){
+        if self.refreshConversationsTimer != nil{
+            self.refreshConversationsTimer?.invalidate()
+            self.convoHelper.cancelAllRequests()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,9 +210,24 @@ class ConversationsTableViewController: UITableViewController {
         
         cell.labelLastMessage.text = conversation.lastMessage.text
         
+        if conversation.isLastMessageRead {
+            cell.labelYourName.font = UIFont.systemFont(ofSize: 18)
+            cell.labelLastMessage.font = UIFont.systemFont(ofSize: 15)
+            cell.labelLastMessageTimestamp.font = UIFont.systemFont(ofSize: 12)
+        }else{
+            cell.labelYourName.font = UIFont.boldSystemFont(ofSize: 18)
+            cell.labelLastMessage.font = UIFont.boldSystemFont(ofSize: 15)
+            cell.labelLastMessageTimestamp.font = UIFont.boldSystemFont(ofSize: 12)
+        }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        cell.labelLastMessageTimestamp.text = dateFormatter.string(for: conversation.creationTimeStamp)
+        
+        if conversation.lastMessage.ID == 0 {
+            cell.labelLastMessageTimestamp.text = dateFormatter.string(for: conversation.creationTimeStamp)
+        }else{
+            cell.labelLastMessageTimestamp.text = dateFormatter.string(for: conversation.lastMessage.timestamp)
+        }
         
         return cell
     }
@@ -139,17 +246,45 @@ class ConversationsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            self.currentIndexPath = indexPath
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Deleting Post"
+            
+            attractionHelper.deleteAttraction(attraction: self.items[(currentIndexPath?.section)!][(currentIndexPath?.row)!]){ responseObject, error in
+                
+                loadingNotification.hide(animated: false)
+                
+                
+                if responseObject != nil {
+                    let response = Int(responseObject!)
+                    
+                    if response == 1{
+                        
+                        self.items[(self.currentIndexPath?.section)!].remove(at: (self.currentIndexPath?.row)!)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        
+                        let successNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        successNotification.mode = MBProgressHUDMode.text
+                        successNotification.label.text = "Successfully Deleted Post"
+                        successNotification.hide(animated: true, afterDelay: 2)
+                        CoreDataHelper.attractionChanged = true
+                    }else{
+                        self.view.makeToast("Unable to delete post. Please try again.", duration: 2.0, position: .bottom)
+                    }
+                }else if error != nil{
+                    self.view.makeToast("Unable to delete post. Please try again.", duration: 2.0, position: .bottom)
+                }
+                return
+            }
+        }
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.

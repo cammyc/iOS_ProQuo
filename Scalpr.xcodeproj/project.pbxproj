@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59BD1591745EF02933930AF5 /* Pods_Scalpr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 580E69E74D1DB898A950A78A /* Pods_Scalpr.framework */; };
 		D20637431D9B31DB00EAFF0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20637421D9B31DB00EAFF0F /* AppDelegate.swift */; };
 		D20637451D9B31DB00EAFF0F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20637441D9B31DB00EAFF0F /* HomeViewController.swift */; };
 		D20637481D9B31DB00EAFF0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20637461D9B31DB00EAFF0F /* Main.storyboard */; };
@@ -66,51 +65,39 @@
 		D2F413A41DAB309E0047A3C6 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F413A31DAB309E0047A3C6 /* CustomInfoWindow.swift */; };
 		D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB896B1DA178BE005DB173 /* LoginViewController.swift */; };
 		D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */; };
-		E3422F661E1C66470000E1D2 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
-		E3422F671E1C664E0000E1D2 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
-		E3422F681E1C664E0000E1D2 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E31E6ABB1E2A0E3700AA070E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7991E2332EB001932C0 /* Bolts.framework */; };
+		E31E6ABD1E2A0E4200AA070E /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7991E2332EB001932C0 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E78F1E232BDE001932C0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E78E1E232BDE001932C0 /* UserNotifications.framework */; };
+		E330E7901E2330A9001932C0 /* Pods_Scalpr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 580E69E74D1DB898A950A78A /* Pods_Scalpr.framework */; };
+		E330E7961E233227001932C0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7951E233227001932C0 /* Alamofire.framework */; };
+		E330E7981E233230001932C0 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7951E233227001932C0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7A31E233387001932C0 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A21E233387001932C0 /* CryptoSwift.framework */; };
+		E330E7A51E23338C001932C0 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A21E233387001932C0 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7A81E2333C2001932C0 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A61E2333C1001932C0 /* FBSDKCoreKit.framework */; };
+		E330E7A91E2333C2001932C0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A71E2333C1001932C0 /* FBSDKLoginKit.framework */; };
+		E330E7AB1E2333CB001932C0 /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A61E2333C1001932C0 /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7AD1E2333CB001932C0 /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7A71E2333C1001932C0 /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7B51E233419001932C0 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7B41E233419001932C0 /* FacebookCore.framework */; };
+		E330E7B71E23341E001932C0 /* FacebookCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7B41E233419001932C0 /* FacebookCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7B91E23343A001932C0 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7B81E23343A001932C0 /* FacebookLogin.framework */; };
+		E330E7BB1E233440001932C0 /* FacebookLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7B81E23343A001932C0 /* FacebookLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7BD1E233468001932C0 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7BC1E233468001932C0 /* IQKeyboardManagerSwift.framework */; };
+		E330E7BF1E23346D001932C0 /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7BC1E233468001932C0 /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7C21E233493001932C0 /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C01E233493001932C0 /* JSQMessagesViewController.framework */; };
+		E330E7C31E233493001932C0 /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C11E233493001932C0 /* JSQSystemSoundPlayer.framework */; };
+		E330E7C51E23349E001932C0 /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C01E233493001932C0 /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7C71E23349E001932C0 /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C11E233493001932C0 /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7C91E2334C3001932C0 /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C81E2334C3001932C0 /* KCFloatingActionButton.framework */; };
+		E330E7CB1E2334C9001932C0 /* KCFloatingActionButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7C81E2334C3001932C0 /* KCFloatingActionButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7CD1E2334E4001932C0 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7CC1E2334E4001932C0 /* Kingfisher.framework */; };
+		E330E7CF1E2334EC001932C0 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7CC1E2334E4001932C0 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7D11E23350A001932C0 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7D01E23350A001932C0 /* MBProgressHUD.framework */; };
+		E330E7D31E233510001932C0 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7D01E23350A001932C0 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E330E7D51E23352E001932C0 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7D41E23352E001932C0 /* Whisper.framework */; };
+		E330E7D71E233536001932C0 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E330E7D41E23352E001932C0 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 		E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 580E69E74D1DB898A950A78A /* Pods_Scalpr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA151E1300EA0074D6FF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; };
-		E3E8AA161E1300EA0074D6FF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */; };
-		E3E8AA171E1300EA0074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA121E1300EA0074D6FF /* IQKeyboardManagerSwift.framework */; };
-		E3E8AA181E1300EA0074D6FF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA131E1300EA0074D6FF /* Kingfisher.framework */; };
-		E3E8AA191E1300EA0074D6FF /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; };
-		E3E8AA1A1E1301280074D6FF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; };
-		E3E8AA1B1E1301280074D6FF /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA1C1E1301280074D6FF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */; };
-		E3E8AA1D1E1301280074D6FF /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA1E1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA121E1300EA0074D6FF /* IQKeyboardManagerSwift.framework */; };
-		E3E8AA1F1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA121E1300EA0074D6FF /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA201E1301280074D6FF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA131E1300EA0074D6FF /* Kingfisher.framework */; };
-		E3E8AA211E1301280074D6FF /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA131E1300EA0074D6FF /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA221E1301280074D6FF /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; };
-		E3E8AA231E1301280074D6FF /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA311E13499C0074D6FF /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */; };
-		E3E8AA321E1349A70074D6FF /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */; };
-		E3E8AA331E1349A70074D6FF /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA301E13499B0074D6FF /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA351E1349CB0074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; };
-		E3E8AA361E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; };
-		E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA341E1349CB0074D6FF /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
-		E3E8AA3A1E134BAE0074D6FF /* KCFloatingActionButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; };
-		E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA381E134BA90074D6FF /* KCFloatingActionButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA5B1E13EFF50074D6FF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; };
-		E3E8AA641E13EFF50074D6FF /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; };
-		E3E8AA6A1E13F0210074D6FF /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; };
-		E3E8AA6B1E13F0210074D6FF /* FacebookLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA5D1E13EFF50074D6FF /* FacebookLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA6C1E13F0210074D6FF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; };
-		E3E8AA6D1E13F0210074D6FF /* FacebookCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA3D1E13EF880074D6FF /* FacebookCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA6F1E13F23C0074D6FF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; };
-		E3E8AA701E13F2440074D6FF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; };
-		E3E8AA711E13F2440074D6FF /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA741E13F26F0074D6FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; };
-		E3E8AA751E13F26F0074D6FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; };
-		E3E8AA761E13F2760074D6FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; };
-		E3E8AA771E13F2760074D6FF /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3E8AA781E13F2760074D6FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; };
-		E3E8AA791E13F2760074D6FF /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,21 +117,21 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E3E8AA331E1349A70074D6FF /* JSQMessagesViewController.framework in Embed Frameworks */,
-				E3E8AA3B1E134BAE0074D6FF /* KCFloatingActionButton.framework in Embed Frameworks */,
-				E3E8AA211E1301280074D6FF /* Kingfisher.framework in Embed Frameworks */,
-				E3E8AA711E13F2440074D6FF /* Bolts.framework in Embed Frameworks */,
-				E3E8AA791E13F2760074D6FF /* FBSDKLoginKit.framework in Embed Frameworks */,
-				E3E8AA1D1E1301280074D6FF /* CryptoSwift.framework in Embed Frameworks */,
-				E3E8AA371E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
-				E3E8AA231E1301280074D6FF /* MBProgressHUD.framework in Embed Frameworks */,
+				E31E6ABD1E2A0E4200AA070E /* Bolts.framework in Embed Frameworks */,
+				E330E7C51E23349E001932C0 /* JSQMessagesViewController.framework in Embed Frameworks */,
+				E330E7BF1E23346D001932C0 /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
+				E330E7C71E23349E001932C0 /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
+				E330E7B71E23341E001932C0 /* FacebookCore.framework in Embed Frameworks */,
+				E330E7BB1E233440001932C0 /* FacebookLogin.framework in Embed Frameworks */,
+				E330E7CB1E2334C9001932C0 /* KCFloatingActionButton.framework in Embed Frameworks */,
 				E3E8AA0F1E12F9460074D6FF /* Pods_Scalpr.framework in Embed Frameworks */,
-				E3422F681E1C664E0000E1D2 /* Whisper.framework in Embed Frameworks */,
-				E3E8AA771E13F2760074D6FF /* FBSDKCoreKit.framework in Embed Frameworks */,
-				E3E8AA1F1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
-				E3E8AA6B1E13F0210074D6FF /* FacebookLogin.framework in Embed Frameworks */,
-				E3E8AA6D1E13F0210074D6FF /* FacebookCore.framework in Embed Frameworks */,
-				E3E8AA1B1E1301280074D6FF /* Alamofire.framework in Embed Frameworks */,
+				E330E7D31E233510001932C0 /* MBProgressHUD.framework in Embed Frameworks */,
+				E330E7AB1E2333CB001932C0 /* FBSDKCoreKit.framework in Embed Frameworks */,
+				E330E7D71E233536001932C0 /* Whisper.framework in Embed Frameworks */,
+				E330E7CF1E2334EC001932C0 /* Kingfisher.framework in Embed Frameworks */,
+				E330E7981E233230001932C0 /* Alamofire.framework in Embed Frameworks */,
+				E330E7AD1E2333CB001932C0 /* FBSDKLoginKit.framework in Embed Frameworks */,
+				E330E7A51E23338C001932C0 /* CryptoSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +217,25 @@
 		D2F413A51DAB40CD0047A3C6 /* CoreDataModels2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels2.xcdatamodel; sourceTree = "<group>"; };
 		D2FB896B1DA178BE005DB173 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedOutMenuController.swift; sourceTree = "<group>"; };
+		E330E78D1E232ACE001932C0 /* Scalpr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scalpr.entitlements; sourceTree = "<group>"; };
+		E330E78E1E232BDE001932C0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		E330E7951E233227001932C0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		E330E7991E2332EB001932C0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/Bolts/Bolts.framework"; sourceTree = "<group>"; };
+		E330E7A21E233387001932C0 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
+		E330E7A61E2333C1001932C0 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		E330E7A71E2333C1001932C0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		E330E7B41E233419001932C0 /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/FacebookCore/FacebookCore.framework"; sourceTree = "<group>"; };
+		E330E7B81E23343A001932C0 /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/FacebookLogin/FacebookLogin.framework"; sourceTree = "<group>"; };
+		E330E7BC1E233468001932C0 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"; sourceTree = "<group>"; };
+		E330E7C01E233493001932C0 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
+		E330E7C11E233493001932C0 /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"; sourceTree = "<group>"; };
+		E330E7C81E2334C3001932C0 /* KCFloatingActionButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KCFloatingActionButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/KCFloatingActionButton/KCFloatingActionButton.framework"; sourceTree = "<group>"; };
+		E330E7CC1E2334E4001932C0 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
+		E330E7D01E23350A001932C0 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/MBProgressHUD/MBProgressHUD.framework"; sourceTree = "<group>"; };
+		E330E7D41E23352E001932C0 /* Whisper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Whisper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/Whisper/Whisper.framework"; sourceTree = "<group>"; };
+		E330E7D81E234382001932C0 /* APNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APNS.framework; path = "Pods/../build/Debug-iphoneos/APNS/APNS.framework"; sourceTree = "<group>"; };
+		E330E7D91E234382001932C0 /* ProtocolBuffers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProtocolBuffers.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ProtocolBuffers-Swift/ProtocolBuffers.framework"; sourceTree = "<group>"; };
+		E330E7E51E234458001932C0 /* APNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APNS.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/APNS/APNS.framework"; sourceTree = "<group>"; };
 		E3422F651E1C66470000E1D2 /* Whisper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Whisper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Whisper/Whisper.framework"; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
@@ -266,51 +272,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3422F661E1C66470000E1D2 /* Whisper.framework in Frameworks */,
-				E3E8AA741E13F26F0074D6FF /* FBSDKCoreKit.framework in Frameworks */,
-				E3E8AA751E13F26F0074D6FF /* FBSDKLoginKit.framework in Frameworks */,
-				E3E8AA6F1E13F23C0074D6FF /* Bolts.framework in Frameworks */,
-				E3E8AA641E13EFF50074D6FF /* FacebookLogin.framework in Frameworks */,
-				E3E8AA5B1E13EFF50074D6FF /* FacebookCore.framework in Frameworks */,
-				E3E8AA391E134BA90074D6FF /* KCFloatingActionButton.framework in Frameworks */,
-				E3E8AA351E1349CB0074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */,
-				E3E8AA311E13499C0074D6FF /* JSQMessagesViewController.framework in Frameworks */,
-				E3E8AA151E1300EA0074D6FF /* Alamofire.framework in Frameworks */,
-				E3E8AA161E1300EA0074D6FF /* CryptoSwift.framework in Frameworks */,
-				E3E8AA171E1300EA0074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */,
-				E3E8AA6C1E13F0210074D6FF /* FacebookCore.framework in Frameworks */,
-				E3E8AA181E1300EA0074D6FF /* Kingfisher.framework in Frameworks */,
-				E3E8AA191E1300EA0074D6FF /* MBProgressHUD.framework in Frameworks */,
+				E31E6ABB1E2A0E3700AA070E /* Bolts.framework in Frameworks */,
+				E330E7D51E23352E001932C0 /* Whisper.framework in Frameworks */,
+				E330E7D11E23350A001932C0 /* MBProgressHUD.framework in Frameworks */,
+				E330E7CD1E2334E4001932C0 /* Kingfisher.framework in Frameworks */,
+				E330E7C91E2334C3001932C0 /* KCFloatingActionButton.framework in Frameworks */,
+				E330E7C21E233493001932C0 /* JSQMessagesViewController.framework in Frameworks */,
+				E330E7C31E233493001932C0 /* JSQSystemSoundPlayer.framework in Frameworks */,
+				E330E7BD1E233468001932C0 /* IQKeyboardManagerSwift.framework in Frameworks */,
+				E330E7B91E23343A001932C0 /* FacebookLogin.framework in Frameworks */,
+				E330E7B51E233419001932C0 /* FacebookCore.framework in Frameworks */,
+				E330E7A81E2333C2001932C0 /* FBSDKCoreKit.framework in Frameworks */,
+				E330E7A91E2333C2001932C0 /* FBSDKLoginKit.framework in Frameworks */,
+				E330E7A31E233387001932C0 /* CryptoSwift.framework in Frameworks */,
+				E330E7961E233227001932C0 /* Alamofire.framework in Frameworks */,
+				E330E78F1E232BDE001932C0 /* UserNotifications.framework in Frameworks */,
 				D25D1F261D9E07820085EA89 /* QuartzCore.framework in Frameworks */,
 				D2C6BC1A1D9E25B700BAD163 /* ImageIO.framework in Frameworks */,
-				E3E8AA321E1349A70074D6FF /* JSQMessagesViewController.framework in Frameworks */,
-				E3E8AA1C1E1301280074D6FF /* CryptoSwift.framework in Frameworks */,
-				E3E8AA1A1E1301280074D6FF /* Alamofire.framework in Frameworks */,
+				E330E7901E2330A9001932C0 /* Pods_Scalpr.framework in Frameworks */,
 				D25D1F281D9E07980085EA89 /* UIKit.framework in Frameworks */,
 				D25D1F271D9E07910085EA89 /* SystemConfiguration.framework in Frameworks */,
 				D25D1F251D9E077B0085EA89 /* OpenGLES.framework in Frameworks */,
 				D25D1F241D9E07750085EA89 /* libz.tbd in Frameworks */,
 				D25D1F231D9E076D0085EA89 /* libc++.tbd in Frameworks */,
-				E3E8AA221E1301280074D6FF /* MBProgressHUD.framework in Frameworks */,
-				E3E8AA781E13F2760074D6FF /* FBSDKLoginKit.framework in Frameworks */,
-				E3E8AA761E13F2760074D6FF /* FBSDKCoreKit.framework in Frameworks */,
 				D25D1F211D9E074E0085EA89 /* GLKit.framework in Frameworks */,
-				E3E8AA201E1301280074D6FF /* Kingfisher.framework in Frameworks */,
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
-				E3E8AA3A1E134BAE0074D6FF /* KCFloatingActionButton.framework in Frameworks */,
 				D25D1F1F1D9E073F0085EA89 /* CoreLocation.framework in Frameworks */,
 				D25D1F1E1D9E07390085EA89 /* CoreGraphics.framework in Frameworks */,
 				D25D1F1D1D9E07310085EA89 /* CoreData.framework in Frameworks */,
 				D25D1F1C1D9E07260085EA89 /* Accelerate.framework in Frameworks */,
 				D25D1F181D9E06BC0085EA89 /* GoogleMaps.framework in Frameworks */,
 				D25D1F151D9E06A70085EA89 /* GoogleMapsBase.framework in Frameworks */,
-				E3E8AA701E13F2440074D6FF /* Bolts.framework in Frameworks */,
-				E3422F671E1C664E0000E1D2 /* Whisper.framework in Frameworks */,
-				E3E8AA1E1E1301280074D6FF /* IQKeyboardManagerSwift.framework in Frameworks */,
 				D25D1F191D9E06BC0085EA89 /* GoogleMapsCore.framework in Frameworks */,
-				59BD1591745EF02933930AF5 /* Pods_Scalpr.framework in Frameworks */,
-				E3E8AA6A1E13F0210074D6FF /* FacebookLogin.framework in Frameworks */,
-				E3E8AA361E1349D00074D6FF /* JSQSystemSoundPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,14 +345,15 @@
 		D20637411D9B31DB00EAFF0F /* Scalpr */ = {
 			isa = PBXGroup;
 			children = (
+				E330E78D1E232ACE001932C0 /* Scalpr.entitlements */,
 				D20637631D9B324700EAFF0F /* Scalpr-Bridging-Header.h */,
+				D20637421D9B31DB00EAFF0F /* AppDelegate.swift */,
 				D228D5361E0214F2009200E6 /* UI */,
 				D20637911D9B96DB00EAFF0F /* Helpers */,
 				D206378E1D9B867200EAFF0F /* Objects */,
 				D20637621D9B321C00EAFF0F /* SWRevealViewController */,
 				D20637441D9B31DB00EAFF0F /* HomeViewController.swift */,
 				D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */,
-				D20637421D9B31DB00EAFF0F /* AppDelegate.swift */,
 				D20ECC931DF7D264008B315F /* ConversationsTableViewController.swift */,
 				D20ECC9B1DF88E4E008B315F /* ConversationTableViewCell.swift */,
 				D228D5301DF91A14009200E6 /* SelectedConversationTableViewController.swift */,
@@ -436,6 +430,24 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E330E7E51E234458001932C0 /* APNS.framework */,
+				E330E7D81E234382001932C0 /* APNS.framework */,
+				E330E7D91E234382001932C0 /* ProtocolBuffers.framework */,
+				E330E7D41E23352E001932C0 /* Whisper.framework */,
+				E330E7D01E23350A001932C0 /* MBProgressHUD.framework */,
+				E330E7CC1E2334E4001932C0 /* Kingfisher.framework */,
+				E330E7C81E2334C3001932C0 /* KCFloatingActionButton.framework */,
+				E330E7C01E233493001932C0 /* JSQMessagesViewController.framework */,
+				E330E7C11E233493001932C0 /* JSQSystemSoundPlayer.framework */,
+				E330E7BC1E233468001932C0 /* IQKeyboardManagerSwift.framework */,
+				E330E7B81E23343A001932C0 /* FacebookLogin.framework */,
+				E330E7B41E233419001932C0 /* FacebookCore.framework */,
+				E330E7A61E2333C1001932C0 /* FBSDKCoreKit.framework */,
+				E330E7A71E2333C1001932C0 /* FBSDKLoginKit.framework */,
+				E330E7A21E233387001932C0 /* CryptoSwift.framework */,
+				E330E7991E2332EB001932C0 /* Bolts.framework */,
+				E330E7951E233227001932C0 /* Alamofire.framework */,
+				E330E78E1E232BDE001932C0 /* UserNotifications.framework */,
 				E3422F651E1C66470000E1D2 /* Whisper.framework */,
 				E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */,
 				E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */,
@@ -548,7 +560,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = ProQuo;
 				TargetAttributes = {
 					D206373E1D9B31DB00EAFF0F = {
@@ -556,6 +568,14 @@
 						DevelopmentTeam = F5PZ23FU2E;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					D20637521D9B31DC00EAFF0F = {
 						CreatedOnToolsVersion = 8.0;
@@ -754,6 +774,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -805,6 +826,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -835,8 +857,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9701D5D65D51385BA487943E /* Pods-Scalpr.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Scalpr/Scalpr.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = F5PZ23FU2E;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -849,6 +873,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMOAuth2",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMSessionFetcher",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/APNS",
 				);
 				INFOPLIST_FILE = Scalpr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -864,8 +889,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9207EAD337F52BB30887FF67 /* Pods-Scalpr.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Scalpr/Scalpr.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = F5PZ23FU2E;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -878,6 +905,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMOAuth2",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GTMSessionFetcher",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/APNS",
 				);
 				INFOPLIST_FILE = Scalpr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

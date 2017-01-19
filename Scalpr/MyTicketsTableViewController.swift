@@ -34,10 +34,9 @@ class MyTicketsTableViewController: UITableViewController{
         super.viewDidLoad()
 
         loadData()
-        
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
-        navigationItem.leftBarButtonItem?.title = "Delete"
+
+        navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem?.title = "Delete"
 
     }
     
@@ -50,7 +49,7 @@ class MyTicketsTableViewController: UITableViewController{
         loadingNotification.label.text = "Loading Your Tickets"
         
         
-        let request = attractionHelper.getUserAttractions(userID: (loginHelper?.getLoggedInUser().ID)!){ responseObject, error in
+        _ = attractionHelper.getUserAttractions(userID: (loginHelper?.getLoggedInUser().ID)!){ responseObject, error in
             
             if responseObject != nil {
                 self.userAttractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as! NSArray!)!

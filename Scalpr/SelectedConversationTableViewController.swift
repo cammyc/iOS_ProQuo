@@ -35,7 +35,7 @@ class SelectedConversationTableViewController: UITableViewController {
         loadingNotification.label.text = "Loading Messages"
         
         
-        let request = convoHelper.getInitialConversationMessagesRequest(conversationID: conversation.ID) { responseObject, error in
+        let _ = convoHelper.getInitialConversationMessagesRequest(conversationID: conversation.ID) { responseObject, error in
             
             loadingNotification.hide(animated: true)
             

@@ -240,7 +240,7 @@ class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
                         loginResponseNotification.hide(animated: true, afterDelay: 2)
                         
                         
-                        self.loginHelper.saveLoggedInUser(user: user)
+                        let _ = self.loginHelper.saveLoggedInUser(user: user)
                     }else if response == -1{
                         let loginResponseNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
                         loginResponseNotification.mode = MBProgressHUDMode.customView
@@ -296,7 +296,7 @@ class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
                         loginResponseNotification.hide(animated: true, afterDelay: 2)
                         
                         
-                        self.loginHelper.saveLoggedInUser(user: user)
+                        let _ = self.loginHelper.saveLoggedInUser(user: user)
                     }
                     
                 }else if error != nil {
