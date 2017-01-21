@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import IQKeyboardManagerSwift
 import FacebookCore
+import FBSDKCoreKit
 import UserNotifications
 import Whisper
 import Kingfisher
@@ -54,7 +55,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
         }
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            open: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation)
     }
     
     // Called when APNs has assigned the device a unique token
@@ -64,22 +75,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let user = LoginHelper()?.getLoggedInUser();
         
-        if user?.ID != -1 {
             let preferences = UserDefaults.standard
             
-            let token = preferences.object(forKey: "deviceNotificationToken") as? String
-            if token == nil{
-                convoHelper.updateIOSDeviceToken(userID: (user?.ID)!, deviceToken: deviceTokenString){ responseObject, error in
-                    if responseObject == "1"{
-                        preferences.set(deviceTokenString, forKey: "deviceNotificationToken")
-                        
-                        preferences.synchronize()
-                    }else{
-                        print(responseObject!)
-                    }
-                    return
+            preferences.set(deviceTokenString, forKey: "deviceNotificationToken")
+            
+            preferences.synchronize()
+        
+        if user?.ID != 0 {
+            
+            convoHelper.updateIOSDeviceToken(userID: (user?.ID)!, deviceToken: deviceTokenString){ responseObject, error in
+                if responseObject == "1"{
+                }else{
+                    print(responseObject!)
                 }
+                return
             }
+            
         }
         
         // Print it to console

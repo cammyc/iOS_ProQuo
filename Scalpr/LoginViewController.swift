@@ -9,8 +9,10 @@
 import UIKit
 import MBProgressHUD
 import FacebookLogin
+import FacebookCore
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate{
     
     // MARK: Text Field Initialization
     @IBOutlet weak var tfEmailPhoneLogin: UITextField!
@@ -25,6 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: Button Initialization
     @IBOutlet weak var bSignIn: UIButton!
     @IBOutlet weak var bCreateAccount: UIButton!
+    @IBOutlet weak var facebookView: UIView!
     
     // MARK: Misc Initialization
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -39,6 +42,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+        facebookInitialization()
+        
         initializeTextFields()
 
         bSignIn.isEnabled = false
@@ -49,10 +54,49 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
     }
     
+
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         self.view.endEditing(true)
     }
+    
+    func facebookInitialization(){
+        let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
+
+        loginButton.frame.size.width = facebookView.frame.width
+        facebookView.addSubview(loginButton)
+        
+        if let accessToken = AccessToken.current {
+            print("logged in")
+        }
+        
+        loginButton.delegate = self
+    }
+    
+    // Facebook Delegate Methods
+    
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        print("logged out")
+
+    }
+    
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        
+        switch result {
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                
+                break;
+            case .cancelled:
+                
+                break;
+            case .failed(let error):
+                print(error)
+                break;
+            
+        
+        }
+    }
+    
     func initializeTextFields(){
         tfEmailPhoneLogin.delegate = self
         tfPasswordLogin.delegate = self
@@ -210,8 +254,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             let user:User = User()
                             user.ID = x
                             let _ = self.loginHelper.saveLoggedInUser(user: user)
+                            self.loginSuccessfullTasks(userID: x)
+
                         }else{
                             let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
+                            self.loginSuccessfullTasks(userID: (user as! User).ID)
                             let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
                         }
                         
@@ -276,6 +323,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                         let _ = self.loginHelper.saveLoggedInUser(user: user)
                         
+                        self.loginSuccessfullTasks(userID: user.ID)
+
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                     }
                     
@@ -334,6 +383,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let _ = validateCreateAccount()
     }
     
+    func loginSuccessfullTasks(userID: Int64){
+        let preferences = UserDefaults.standard
+        
+        let deviceToken = preferences.string(forKey: "deviceNotificationToken")
+        
+        if deviceToken != nil{
+            ConversationHelper().updateIOSDeviceToken(userID: userID, deviceToken: deviceToken!){ responseObject, error in
+                if responseObject == "1"{
+                }else{
+                    //print(responseObject!)
+                }
+                return
+            }
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

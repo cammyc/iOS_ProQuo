@@ -211,6 +211,7 @@ class LoginHelper{
         preferences.set(user.email, forKey: "email")
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
+       // preferences.set(nil, forKey: "deviceNotificationToken") no need to do this because it never changes...
         
         //  Save to disk
         return preferences.synchronize()

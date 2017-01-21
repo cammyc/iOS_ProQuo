@@ -13,6 +13,7 @@ import Kingfisher
 import MBProgressHUD
 import MessageUI
 import KCFloatingActionButton
+import Whisper
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -641,60 +642,98 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     func contactSeller(attraction: Attraction){
         
-        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingNotification.mode = MBProgressHUDMode.indeterminate
-        loadingNotification.label.text = "Retrieving seller info"
-        
-        
-        loginHelper.getAccountDetails(userID: attraction.creatorID){ responseObject, error in
+        let alert = UIAlertController(
+            title: "Contact Seller",
+            message: "Would you like to contact the seller?",
+            preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { (test) -> Void in
             
-            if responseObject != nil {
+            let convoHelper = ConversationHelper()
+
+            let notification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            notification.mode = MBProgressHUDMode.indeterminate
+            notification.label.text = "Creating Conversation"
+            
+            convoHelper.createConversation(attractionID: attraction.ID, buyerID: self.loginHelper.getLoggedInUser().ID, attractionName: attraction.name){ responseObject, error in
                 
-                if responseObject == "0" {
-                    self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
-                }else{
-                    if let u = self.loginHelper.getUserDetailsFromJson(json: responseObject!) as? User{
-                        if u.email != "" && u.phoneNumber == ""{
-                            self.sendEmail(recipientEmail: u.email, attraction: attraction)
-                        }else if u.phoneNumber != "" && u.email == ""{
-                            self.sendText(recipientPhone: u.phoneNumber, attraction: attraction)
-                        }else{
-                            let alert = UIAlertController(
-                                title: "Text or Email",
-                                message: "Would you like to contact the seller through Email or Text?",
-                                preferredStyle: .alert)
-                            
-                            alert.addAction(UIAlertAction(title: "Text", style: UIAlertActionStyle.default, handler: { (test) -> Void in
-                                alert.dismiss(animated: true)
-                                self.sendText(recipientPhone: u.phoneNumber, attraction: attraction)
-                            }))
-                            
-                            alert.addAction(UIAlertAction(title: "Email", style: UIAlertActionStyle.default, handler: { (test) -> Void in
-                                alert.dismiss(animated: true)
-                                self.sendEmail(recipientEmail: u.email, attraction: attraction)
-                            }))
-                            
-                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (test) -> Void in
-                                alert.dismiss(animated: true)
-                            }))
-
-                            
-                            self.present(alert,animated: true,completion: nil)
-                            
-
-                        }
+                notification.hide(animated: true)
+                
+                if responseObject != nil {
+                    if responseObject != "-1" {
+                        self.performSegue(withIdentifier: "segue_create_convo", sender: nil)
                     }else{
-                        self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
+                        self.showWhisper(message: "Unable to create conversation. Check network connection.", color: UIColor.red)
                     }
+                }else{
+                    self.showWhisper(message: "Unable to create conversation. Check network connection.", color: UIColor.red)
                 }
                 
-            }else if error != nil{
-                self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
+                return
             }
-            
-            loadingNotification.hide(animated: true)
-            return
-        }
+
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (test) -> Void in
+            alert.dismiss(animated: true)
+        }))
+
+        
+        self.present(alert,animated: true,completion: nil)
+
+        
+        
+        
+        
+//        loginHelper.getAccountDetails(userID: attraction.creatorID){ responseObject, error in
+//            
+//            if responseObject != nil {
+//                
+//                if responseObject == "0" {
+//                    self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
+//                }else{
+//                    if let u = self.loginHelper.getUserDetailsFromJson(json: responseObject!) as? User{
+////                        if u.email != "" && u.phoneNumber == ""{
+////                            self.sendEmail(recipientEmail: u.email, attraction: attraction)
+////                        }else if u.phoneNumber != "" && u.email == ""{
+////                            self.sendText(recipientPhone: u.phoneNumber, attraction: attraction)
+////                        }else{
+////                            let alert = UIAlertController(
+////                                title: "Text or Email",
+////                                message: "Would you like to contact the seller through Email or Text?",
+////                                preferredStyle: .alert)
+////                            
+////                            alert.addAction(UIAlertAction(title: "Text", style: UIAlertActionStyle.default, handler: { (test) -> Void in
+////                                alert.dismiss(animated: true)
+////                                self.sendText(recipientPhone: u.phoneNumber, attraction: attraction)
+////                            }))
+////                            
+////                            alert.addAction(UIAlertAction(title: "Email", style: UIAlertActionStyle.default, handler: { (test) -> Void in
+////                                alert.dismiss(animated: true)
+////                                self.sendEmail(recipientEmail: u.email, attraction: attraction)
+////                            }))
+////                            
+////                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (test) -> Void in
+////                                alert.dismiss(animated: true)
+////                            }))
+////
+////                            
+////                            self.present(alert,animated: true,completion: nil)
+////                            
+//
+////                        }
+//                    }else{
+//                        self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
+//                    }
+//                }
+//                
+//            }else if error != nil{
+//                self.showNotification(text: "Unable to retrieve seller info. Please try again.", delay: 2)
+//            }
+//            
+//            loadingNotification.hide(animated: true)
+//            return
+//        }
         
         
     }
@@ -902,6 +941,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         Notification.label.text = text
         Notification.show(animated: true)
         Notification.hide(animated: true, afterDelay: TimeInterval(delay))
+    }
+    
+    func showWhisper(message: String, color: UIColor){
+        if self.navigationController != nil{
+            let connectingWhisper = Whisper.Message(title: message, backgroundColor: color)
+            Whisper.show(whisper: connectingWhisper, to: self.navigationController!, action: .show)
+        }
     }
     
     func sendEmail(recipientEmail: String, attraction: Attraction) {

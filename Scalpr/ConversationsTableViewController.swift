@@ -40,10 +40,10 @@ class ConversationsTableViewController: UITableViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: true)
         if editing{
-            navigationItem.leftBarButtonItem?.title = "Done"
+            navigationItem.rightBarButtonItem?.title = "Done"
             self.stopUpdateConvosTimer()
         }else{
-            navigationItem.leftBarButtonItem?.title = "Delete"
+            navigationItem.rightBarButtonItem?.title = "Delete"
             self.startUpdateConvosTimer()
         }
     }
@@ -184,9 +184,14 @@ class ConversationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath) as! ConversationTableViewCell
 
-        let convo = self.conversations[indexPath.row]
+        if indexPath.row < conversations.count{
+            let convo = self.conversations[indexPath.row]
+            
+            return updateCell(conversation: convo, cell: cell)
+        }else{
+            return cell
+        }
         
-        return updateCell(conversation: convo, cell: cell)
     }
     
     func updateCell(conversation: Conversation, cell: ConversationTableViewCell)->ConversationTableViewCell{
@@ -208,7 +213,12 @@ class ConversationsTableViewController: UITableViewController {
             cell.labelYourName.text = conversation.buyerName
         }
         
-        cell.labelLastMessage.text = conversation.lastMessage.text
+        if conversation.lastMessage.text != ""{
+            cell.labelLastMessage.text = conversation.lastMessage.text
+        }else{
+            cell.labelLastMessage.text = "Send a message!"
+            conversation.isLastMessageRead = false
+        }
         
         if conversation.isLastMessageRead {
             cell.labelYourName.font = UIFont.systemFont(ofSize: 18)
@@ -233,8 +243,10 @@ class ConversationsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedConvo = conversations[indexPath.row]
-        self.performSegue(withIdentifier: "selected_conversation_segue", sender: nil)
+        if indexPath.row < conversations.count{
+            selectedConvo = conversations[indexPath.row]
+            self.performSegue(withIdentifier: "selected_conversation_segue", sender: nil)
+        }
     }
     
 
@@ -249,14 +261,14 @@ class ConversationsTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.currentIndexPath = indexPath
-            // Delete the row from the data source
             
             let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Deleting Post"
+            loadingNotification.label.text = "Leaving Conversation"
             
-            attractionHelper.deleteAttraction(attraction: self.items[(currentIndexPath?.section)!][(currentIndexPath?.row)!]){ responseObject, error in
+            let convo = conversations[indexPath.row]
+            
+            convoHelper.userLeaveConversation(conversationID: convo.ID, userID: self.userID){ responseObject, error in
                 
                 loadingNotification.hide(animated: false)
                 
@@ -265,23 +277,27 @@ class ConversationsTableViewController: UITableViewController {
                     let response = Int(responseObject!)
                     
                     if response == 1{
-                        
-                        self.items[(self.currentIndexPath?.section)!].remove(at: (self.currentIndexPath?.row)!)
+                        self.conversations.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .fade)
                         
-                        let successNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        successNotification.mode = MBProgressHUDMode.text
-                        successNotification.label.text = "Successfully Deleted Post"
-                        successNotification.hide(animated: true, afterDelay: 2)
-                        CoreDataHelper.attractionChanged = true
+                        self.showWhisper(message: "Left Conversation", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71))
+                        
+                        CoreDataHelper().wipeConversationFromDB(convoID: convo.ID)
                     }else{
-                        self.view.makeToast("Unable to delete post. Please try again.", duration: 2.0, position: .bottom)
+                        self.showWhisper(message: "Unable to leave conversation. Please try again", color: UIColor.red)
                     }
                 }else if error != nil{
-                    self.view.makeToast("Unable to delete post. Please try again.", duration: 2.0, position: .bottom)
+                    self.showWhisper(message: "Unable to leave conversation. Please try again", color: UIColor.red)
                 }
                 return
             }
+        }
+    }
+    
+    func showWhisper(message: String, color: UIColor){
+        if self.navigationController != nil{
+            let connectingWhisper = Whisper.Message(title: message, backgroundColor: color)
+            Whisper.show(whisper: connectingWhisper, to: self.navigationController!, action: .show)
         }
     }
 

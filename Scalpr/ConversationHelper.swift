@@ -122,6 +122,24 @@ class ConversationHelper {
             
         }
     }
+    
+    func removeIOSDeviceToken(deviceToken: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["deviceToken": deviceToken]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/remove_iosDeviceToken.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
 
 
     func backgroundCheckForNewMessageRequest(userID: Int64, completionHandler: @escaping (String?, NSError?) -> ()?){
@@ -149,7 +167,41 @@ class ConversationHelper {
         
     }
     
-    func deleteConversation
+    func userLeaveConversation(conversationID: Int64, userID: Int64, completionHandler: @escaping (String?, NSError?) -> ()){
+        let parameters: Parameters = ["conversationID": conversationID, "userID": userID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/user_leave_conversation.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+    
+    //$attractionID, $buyerID, $attractionName
+    func createConversation(attractionID: Int64, buyerID: Int64, attractionName: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        let parameters: Parameters = ["attractionID": attractionID, "buyerID": buyerID, "attractionName": attractionName]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/create_conversation.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+
     
 //    func startBackgroundMessageCheckTimer(){
 //        if timer == nil {

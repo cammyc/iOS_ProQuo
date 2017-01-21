@@ -33,6 +33,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     weak var newMessageTimer: Timer?
     weak var updateLastReadMessageTimer: Timer?
     var isWhisperShowing = false
+    var taskWasCanceled = false;
     
 
     override func viewDidLoad() {
@@ -89,7 +90,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
             
             self.finishReceivingMessage()
             
-            startNewMessageTimer()//after loading db messages load new messages
+            getNewMessages() //will start timer and has no delay
             //any messages in db should be read in server db so new messages will not repeat
             //need to implement session tokens on each device because right now using the app on multiple devices at the same time will be a disaster
             //multiple missed messages and your own message will only appear on device it's sent on
@@ -192,12 +193,19 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         if updateLastReadMessageTimer != nil {
             self.updateLastReadMessageTimer?.invalidate()
             self.convoHelper.cancelAllRequests()
+            taskWasCanceled = true;
         }
     }
     
     func startNewMessageTimer() {
         self.newMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             self?.getNewMessages()
+        }
+    }
+    
+    func initialStartNewMessageTimer(){
+        if newMessageTimer == nil{
+            startNewMessageTimer()
         }
     }
     
@@ -233,6 +241,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         
                         self.finishReceivingMessage()
                         
+                    }else{
+                        self.initialStartNewMessageTimer()
                     }
                 }else{
                     self.showConnectingNotification()
@@ -246,13 +256,17 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     
     func showConnectingNotification(){
-        if isWhisperShowing == false{
-            var connectingWhisper = Whisper.Message(title: "Reconnecting...", backgroundColor: UIColor.red)
-            connectingWhisper.images = [UIImage(named: "no_connection")!]
-            if navigationController != nil{
-                Whisper.show(whisper: connectingWhisper, to: navigationController!, action: .present)
-                isWhisperShowing = true
+        if !taskWasCanceled{
+            if isWhisperShowing == false{
+                var connectingWhisper = Whisper.Message(title: "Reconnecting...", backgroundColor: UIColor.red)
+                connectingWhisper.images = [UIImage(named: "no_connection")!]
+                if navigationController != nil{
+                    Whisper.show(whisper: connectingWhisper, to: navigationController!, action: .present)
+                    isWhisperShowing = true
+                }
             }
+        }else{
+            taskWasCanceled = false
         }
     }
     
@@ -268,6 +282,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         if newMessageTimer != nil {
             self.newMessageTimer?.invalidate()
             self.convoHelper.cancelAllRequests()
+            taskWasCanceled = true
         }
     }
     
@@ -413,7 +428,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
         
         //sendlogic here
-        stopUpdateLastMessageTimer()//stop getting new messages once sent is pressed
+        stopNewMessageTimer()
         convoHelper.sendConversationMessageRequest(conversationID: conversation.ID, senderID: myUserID, message: text){ responseObject, error in
             
             self.startNewMessageTimer()//start message timer again
@@ -434,10 +449,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     
                     self.finishSendingMessage()
                 }else{
-                    self.showAlert(title: "Unable to send message", text: "Please check your internet connection and try again.")
+                    self.showWhisper(message: "Unable to send message, check network connection.", color: UIColor.red)
                 }
             }else{
-                self.showAlert(title: "Unable to send message", text: "Please check your internet connection and try again.")
+                self.showWhisper(message: "Unable to send message, check network connection.", color: UIColor.red)
             }
             
             return
@@ -463,6 +478,13 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         }))
         
         self.present(refreshAlert,animated: true,completion: nil)
+    }
+    
+    func showWhisper(message: String, color: UIColor){
+        if self.navigationController != nil{
+            let connectingWhisper = Whisper.Message(title: message, backgroundColor: color)
+            Whisper.show(whisper: connectingWhisper, to: self.navigationController!, action: .show)
+        }
     }
     
     private func addMessage(withId id: String, name: String, text: String, timestamp: Date) {

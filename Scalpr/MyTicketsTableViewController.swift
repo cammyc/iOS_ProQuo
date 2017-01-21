@@ -99,9 +99,9 @@ class MyTicketsTableViewController: UITableViewController{
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: true)
         if editing{
-            navigationItem.leftBarButtonItem?.title = "Done"
+            navigationItem.rightBarButtonItem?.title = "Done"
         }else{
-            navigationItem.leftBarButtonItem?.title = "Delete"
+            navigationItem.rightBarButtonItem?.title = "Delete"
         }
     }
 

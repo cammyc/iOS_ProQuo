@@ -8,6 +8,8 @@
 
 import UIKit
 import MessageUI
+import Whisper
+import MBProgressHUD
 
 class LoggedInMenuController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var bLogOut: UITableViewCell!
@@ -115,16 +117,58 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             
-            self.coreDataHelper.wipeMessagesFromDB()
-            let _ = self.loginHelper.logout()
+            let preferences = UserDefaults.standard
             
-            let loggedOutMenuController: LoggedOutMenuController = self.storyboard?.instantiateViewController(withIdentifier: "LoggedOutMenuController") as! LoggedOutMenuController
-            self.revealViewController().setRear(loggedOutMenuController, animated: false)
+            let deviceToken = preferences.string(forKey: "deviceNotificationToken")
+            
+            if deviceToken != nil{
+                let convoHelper = ConversationHelper()
+                
+                let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                loadingNotification.mode = MBProgressHUDMode.indeterminate
+                loadingNotification.label.text = "Logging Out"
+                
+                let _ = convoHelper.removeIOSDeviceToken(deviceToken: deviceToken!){ responseObject, error in
+                    loadingNotification.hide(animated: true)
+                    
+                    if error == nil{
+                        if responseObject == "1" {
+                            self.logoutLogic();
+                        }else{
+                            self.logoutError()
+                        }
+                    }else{
+                        self.logoutError()
+                    }
+                    return
+                }
+            
+            }else{
+                self.logoutLogic();
+            }
+            
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
         
         }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+
+    }
+    
+    func logoutLogic(){
+        self.coreDataHelper.wipeMessagesFromDB()
+        let _ = self.loginHelper.logout()
+        
+        let loggedOutMenuController: LoggedOutMenuController = self.storyboard?.instantiateViewController(withIdentifier: "LoggedOutMenuController") as! LoggedOutMenuController
+        self.revealViewController().setRear(loggedOutMenuController, animated: false)
+    }
+    
+    func logoutError(){
+        let refreshAlert = UIAlertController(title: "Logout Error", message: "Unable to logout without a network connection.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
         present(refreshAlert, animated: true, completion: nil)
 

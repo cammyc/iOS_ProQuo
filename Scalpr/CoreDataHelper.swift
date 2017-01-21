@@ -66,6 +66,19 @@ class CoreDataHelper : NSObject {
         }
     }
     
+    func wipeConversationFromDB(convoID: Int64){
+        let moc = managedObjectContext
+        
+        let messageFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
+        messageFetch.predicate = NSPredicate(format: "conversationID == %i", convoID)
+        
+        do {
+            try moc.execute(messageFetch)
+        } catch {
+            fatalError("Failed to fetch attractions: \(error)")
+        }
+    }
+    
     func saveMessage(message: Message){
         let cdMessage = cdMessageMO(context: managedObjectContext)
         
