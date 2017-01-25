@@ -75,11 +75,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                    sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
     func application(application: UIApplication,
-                     openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var options: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject,
+                                            UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation!]
         return GIDSignIn.sharedInstance().handle(url as URL!,
-                                                    sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String,
-                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation.rawValue])
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -91,26 +99,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let givenName = user.profile.givenName
             let familyName = user.profile.familyName
             let email = user.profile.email
+            
+            print(fullName! + " - " + email!)
             // ...
         } else {
             print("\(error.localizedDescription)")
         }
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
     }
-
     
-    func application(application: UIApplication,
-                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        var options: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject,
-                                            UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation!]
-        return GIDSignIn.sharedInstance().handle(url as URL!,
-                                                    sourceApplication: sourceApplication,
-                                                    annotation: annotation)
-    }
     
     // Called when APNs has assigned the device a unique token
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
