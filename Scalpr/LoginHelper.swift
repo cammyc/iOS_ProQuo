@@ -8,6 +8,9 @@
 
 import Foundation
 import Alamofire
+import FBSDKLoginKit
+import FacebookCore
+import FacebookLogin
 
 
 class LoginHelper{
@@ -46,6 +49,23 @@ class LoginHelper{
         let parameters: Parameters = ["firstname": firstName, "lastname": lastName, "emailPhone": emailPhone, "password": password, "currentDate": date]
         
         Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/create_account.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+    
+    func facebookCreateAccountLoginRequest(firstName: String, lastName: String, email: String, facebookID: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["firstName": firstName, "lastName": lastName, "email": email, "facebookID": facebookID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/facebook_create_account_and_login.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
             let x = response.error as NSError?
             if x == nil{
                 let data = response.data
@@ -212,6 +232,8 @@ class LoginHelper{
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
        // preferences.set(nil, forKey: "deviceNotificationToken") no need to do this because it never changes...
+        
+        FBSDKLoginManager().logOut()
         
         //  Save to disk
         return preferences.synchronize()

@@ -74,7 +74,7 @@ class MyTicketsTableViewController: UITableViewController{
                     
                     self.tableView.reloadData()
                 }else{
-                    self.view.makeToast("You don't have any active tickets...", duration: 3.0, position: .center)
+                    self.showAlertMaybeClose(title: "No Active Tickets", text: "You don't have any active tickets.")
                 }
             }else if error != nil {
                 self.showErrorAlert()
@@ -301,6 +301,19 @@ class MyTicketsTableViewController: UITableViewController{
         }
     }
     
+    func showAlertMaybeClose(title: String, text: String){
+        let refreshAlert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (action: UIAlertAction!) in
+            self.loadData()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok, Leave", style: .cancel, handler: { (action: UIAlertAction!) in
+            self.navigationController?.dismiss(animated: true)
+        }))
+        
+        self.present(refreshAlert,animated: true,completion: nil)
+    }
 
     /*
     // Override to support rearranging the table view.

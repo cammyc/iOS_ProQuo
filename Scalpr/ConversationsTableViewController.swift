@@ -50,11 +50,10 @@ class ConversationsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if conversations.count > 0{
-            conversations.removeAll()
-            loadConversations()
+            refreshConversations()
+            self.startUpdateConvosTimer()
         }
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         hideConnectingNotification()
@@ -62,6 +61,7 @@ class ConversationsTableViewController: UITableViewController {
     }
     
     func loadConversations(){
+        conversations.removeAll()
         let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading Conversations"
@@ -83,7 +83,7 @@ class ConversationsTableViewController: UITableViewController {
                         self.startUpdateConvosTimer()
 
                     }else{
-                        self.showAlert(title: "No Conversations", text: "You don't have any active conversations")
+                        self.showAlertMaybeClose(title: "No Conversations", text: "You don't have any active conversations")
                     }
                 }else{
                     self.retryAlert()
@@ -97,7 +97,6 @@ class ConversationsTableViewController: UITableViewController {
     }
     
     func refreshConversations(){
-        conversations.removeAll()
         
         let _ = convoHelper.getUserConversationsRequest(userID: userID) { responseObject, error in
             
@@ -105,6 +104,7 @@ class ConversationsTableViewController: UITableViewController {
                 // use responseObject and error here
                 
                 if let array = responseObject as? NSArray{
+                    self.conversations.removeAll()//only remove if successful
                     self.hideConnectingNotification()
                     let tempConversations = self.convoHelper.parseConversationsFromNSArray(array: array)
                     if(tempConversations.count > 0){
@@ -112,12 +112,15 @@ class ConversationsTableViewController: UITableViewController {
                         self.tableView.reloadData()
                         
                     }else{
-                        self.showAlert(title: "No Conversations", text: "You don't have any active conversations")
+                        self.tableView.reloadData()
+                        self.showAlertMaybeClose(title: "No Conversations", text: "You no longer have any active conversations")
                     }
                 }else{
+                    //self.tableView.reloadData()
                     self.showConnectingNotification()
                 }
             }else{
+                //self.tableView.reloadData()
                 self.showConnectingNotification()
             }
             return
@@ -339,10 +342,24 @@ class ConversationsTableViewController: UITableViewController {
     }
     
     
-    func showAlert(title: String, text: String){
+//    func showAlert(title: String, text: String){
+//        let refreshAlert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action: UIAlertAction!) in
+//            //self.navigationController?.dismiss(animated: true)
+//        }))
+//        
+//        self.present(refreshAlert,animated: true,completion: nil)
+//    }
+    
+    func showAlertMaybeClose(title: String, text: String){
         let refreshAlert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (action: UIAlertAction!) in
+            self.loadConversations()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok, Leave", style: .cancel, handler: { (action: UIAlertAction!) in
             self.navigationController?.dismiss(animated: true)
         }))
         
@@ -356,8 +373,8 @@ class ConversationsTableViewController: UITableViewController {
             self.loadConversations()
         }))
         
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-            self.navigationController?.dismiss(animated: true)
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+//            self.navigationController?.dismiss(animated: true)
         }))
         
         self.present(refreshAlert,animated: true,completion: nil)

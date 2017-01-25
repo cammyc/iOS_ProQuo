@@ -13,6 +13,9 @@ pod 'KCFloatingActionButton', '~> 2.1.0'
 pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'Whisper'
+pod 'Google/SignIn'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
 end
 
 

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import CryptoSwift
+import Whisper
 
 class MiscHelper {
     
@@ -161,5 +162,13 @@ class MiscHelper {
         }
 
     }
+    
+    static func showWhisper(message: String, color: UIColor, navController: UINavigationController?){
+        if navController != nil{
+            let connectingWhisper = Whisper.Message(title: message, backgroundColor: color)
+            Whisper.show(whisper: connectingWhisper, to: navController!, action: .show)
+        }
+    }
+
     
 }

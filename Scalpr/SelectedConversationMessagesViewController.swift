@@ -150,10 +150,10 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     }
                 }else{
                     //give option to try again
-                    self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+                    self.showAlertAndTryAgain(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
                 }
             }else{
-                self.showAlert(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
+                self.showAlertAndTryAgain(title: "Unable to load messages", text: "We were unable to retrieve your messages. Please check your internet connection and try again.")
             }
             return
         }
@@ -470,10 +470,14 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     }
     */
     
-    func showAlert(title: String, text: String){
+    func showAlertAndTryAgain(title: String, text: String){
         let refreshAlert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { (action: UIAlertAction!) in
+            self.loadInitialMessages()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
             self.navigationController?.dismiss(animated: true)
         }))
         

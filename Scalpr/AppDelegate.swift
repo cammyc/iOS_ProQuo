@@ -18,7 +18,7 @@ import Kingfisher
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     let convoHelper = ConversationHelper()
@@ -57,6 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        GIDSignIn.sharedInstance().delegate = self
+        
         return true
     }
     
@@ -66,6 +72,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             open: url,
             sourceApplication: sourceApplication,
             annotation: annotation)
+    }
+    
+    
+    func application(application: UIApplication,
+                     openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL!,
+                                                    sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String,
+                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation.rawValue])
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            let userId = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
+
+    
+    func application(application: UIApplication,
+                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var options: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject,
+                                            UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation!]
+        return GIDSignIn.sharedInstance().handle(url as URL!,
+                                                    sourceApplication: sourceApplication,
+                                                    annotation: annotation)
     }
     
     // Called when APNs has assigned the device a unique token
@@ -104,32 +148,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Print notification payload data
         print("Push notification received: \(data)")
         
-        let push = data as NSDictionary
+        if application.applicationState == .inactive || application.applicationState == .background {
+//            // Access the storyboard and fetch an instance of the view controller
+//            let viewController = self.window!.rootViewController as? SWRevealViewController
+//            viewController?.rearViewController.performSegue(withIdentifier: "segue_my_convos", sender: nil)
+//
+        }else{
         
-        do {
-            if let data = push["data"] as? String{
-                
-                let customData = try? JSONSerialization.jsonObject(with: data.data(using: .utf8)!, options: []) as! [String: Any]
-                
-                KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (customData?["imageURL"]) as! String)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                    if image != nil{
-                        let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
-                        let announcement = Announcement(title: customData!["yourName"] as! String, subtitle: customData?["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
-                        
-                        Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
-                        
-                    }else{
-                        let announcement = Announcement(title: customData?["yourName"] as! String, subtitle: customData?["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
-                        
-                        Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
-                    }
-                })
+            let push = data as NSDictionary
+            
+            do {
+                if let data = push["data"] as? String{
+                    
+                    let customData = try? JSONSerialization.jsonObject(with: data.data(using: .utf8)!, options: []) as! [String: Any]
+                    
+                    KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (customData?["imageURL"]) as! String)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                        if image != nil{
+                            let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
+                            let announcement = Announcement(title: customData!["yourName"] as! String, subtitle: customData?["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
+                            
+                            Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
+                            
+                        }else{
+                            let announcement = Announcement(title: customData?["yourName"] as! String, subtitle: customData?["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
+                            
+                            Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
+                        }
+                    })
+                }
+            } catch {
+                print("Error deserializing JSON: \(error)")
             }
-        } catch {
-            print("Error deserializing JSON: \(error)")
         }
         
     }
+    
+
     
     // Called when APNs failed to register the device for push notifications
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
