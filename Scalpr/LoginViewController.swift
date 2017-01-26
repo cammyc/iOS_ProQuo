@@ -12,7 +12,7 @@ import FacebookLogin
 import FacebookCore
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
     // MARK: Text Field Initialization
     @IBOutlet weak var tfEmailPhoneLogin: UITextField!
@@ -35,8 +35,11 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     var googleNotification: MBProgressHUD? = nil
 
     let loginHelper:LoginHelper = LoginHelper()!
-    let googleFBUser = User()
+    let facebookUser = User()
+    let googleUser = User()
     var fbUserID: String? = nil
+    var googleUserID: String? = nil
+    var googleDisplayPicURL: String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,31 +73,77 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     
     func googleInitialization(){
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
     }
     
-    // Implement these methods only if the GIDSignInUIDelegate is not a subclass of
-    // UIViewController.
-    
-    // Stop the UIActivityIndicatorView animation that was started when the user
-    // pressed the Sign In button
-    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
-        //myActivityIndicator.stopAnimating()
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            
+            self.googleUserID = user.userID!
+            self.googleUser.firstName = user.profile.givenName!
+            self.googleUser.lastName = user.profile.familyName!
+            self.googleUser.email = user.profile.email!
+            self.googleDisplayPicURL = user.profile.imageURL(withDimension: 200).absoluteString
+            
+            
+            let notification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            notification.mode = MBProgressHUDMode.indeterminate
+            notification.label.text = "Logging in with Google"
+            
+            
+            loginHelper.googleCreateAccountLoginRequest(firstName: googleUser.firstName, lastName: googleUser.lastName, email: googleUser.email, displayPicURL: googleDisplayPicURL!, googleID: googleUserID!){ responseObject, error in
+                
+                notification.hide(animated: true)
+                
+                if let response = Int64(responseObject!){
+                    switch response{
+                    case 0:
+                        MiscHelper.showWhisper(message: "Network error. Please try again.", color: UIColor.red, navController: self.navigationController)
+                        break
+                    case -1:
+                        MiscHelper.showWhisper(message: "Network error. Please try again.", color: UIColor.red, navController: self.navigationController)
+                        break
+                    case -2:
+                        self.showAlert(title: "Email Taken", text: "There is already an account that uses your Google email address. Please change the email on that account then try again. If you did not create the account using your email please contact us.")
+                        break
+                    default:
+                        if response > 0 {
+                            MiscHelper.showWhisper(message: "Google login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
+                            
+                            self.googleUser.ID = response
+                            self.loginSuccessfullTasks(userID: self.googleUser.ID)
+                            let _ = self.loginHelper.saveLoggedInUser(user: self.googleUser)
+                            
+                            self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
+                        }
+                        //not sure what happens here
+                        break
+                    }
+                }else{
+                    //user logged in parse date
+                    MiscHelper.showWhisper(message: "Google login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
+                    
+                    let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
+                    self.loginSuccessfullTasks(userID: (user as! User).ID)
+                    let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
+                    
+                    self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
+                }
+
+                
+                return
+            }
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
+        
     }
     
-    // Present a view that prompts the user to sign in with Google
-    func signIn(signIn: GIDSignIn!,
-                presentViewController viewController: UIViewController!) {
-        //self.presentViewController(viewController, animated: true, completion: nil)
-    }
-    
-    // Dismiss the "Sign in with Google" view
-    func signIn(signIn: GIDSignIn!,
-                dismissViewController viewController: UIViewController!) {
-        //self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func didTapSignOut(sender: AnyObject) {
-        GIDSignIn.sharedInstance().signOut()
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
     
     // MARK: Facebook
@@ -151,11 +200,11 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                 let fbDetails = result as! NSDictionary
 
                 self.fbUserID = fbDetails["id"] as? String
-                self.googleFBUser.firstName = fbDetails["first_name"] as! String
-                self.googleFBUser.lastName = fbDetails["last_name"] as! String
+                self.facebookUser.firstName = fbDetails["first_name"] as! String
+                self.facebookUser.lastName = fbDetails["last_name"] as! String
 
                 if let userEmail = fbDetails["email"] as? String{
-                    self.googleFBUser.email = userEmail
+                    self.facebookUser.email = userEmail
                 }
                 
                 self.faceBookLoginRequest()
@@ -169,7 +218,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         notification.mode = MBProgressHUDMode.indeterminate
         notification.label.text = "Logging in with Facebook"
         
-        let _ = loginHelper.facebookCreateAccountLoginRequest(firstName: googleFBUser.firstName, lastName: googleFBUser.lastName, email: googleFBUser.email, facebookID: self.fbUserID!){ responseObject, error in
+        let _ = loginHelper.facebookCreateAccountLoginRequest(firstName: facebookUser.firstName, lastName: facebookUser.lastName, email: facebookUser.email, facebookID: self.fbUserID!){ responseObject, error in
             
             notification.hide(animated: true)
             
@@ -182,7 +231,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                     MiscHelper.showWhisper(message: "Network error. Please try again.", color: UIColor.red, navController: self.navigationController)
                     break
                 case -2:
-                    self.showAlert(title: "Email Taken", text: "There is already an account that uses your facebook email address. Please change the email on that account then try again. If you did not create the account using your email please contact us.")
+                    self.showAlert(title: "Email Taken", text: "There is already an account that uses your Facebook email address. Please change the email on that account then try again. If you did not create the account using your email please contact us.")
                     break
                 case -3:
                     self.requestFacebookEmail()
@@ -191,9 +240,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                     if response > 0 {
                         MiscHelper.showWhisper(message: "Facebook login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
                         
-                        self.googleFBUser.ID = response
-                        self.loginSuccessfullTasks(userID: self.googleFBUser.ID)
-                        let _ = self.loginHelper.saveLoggedInUser(user: self.googleFBUser)
+                        self.facebookUser.ID = response
+                        self.loginSuccessfullTasks(userID: self.facebookUser.ID)
+                        let _ = self.loginHelper.saveLoggedInUser(user: self.facebookUser)
                         
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                     }
@@ -225,7 +274,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         
         let saveAction = UIAlertAction(title:"Ok", style: .default, handler: { (action) -> Void in
             let textField = alert.textFields![0] // Force unwrapping because we know it exists.
-            self.googleFBUser.email = (textField.text)!
+            self.facebookUser.email = (textField.text)!
             
             self.faceBookLoginRequest()
         })

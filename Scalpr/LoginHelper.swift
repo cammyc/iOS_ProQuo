@@ -78,6 +78,23 @@ class LoginHelper{
         }
     }
     
+    func googleCreateAccountLoginRequest(firstName: String, lastName: String, email: String, displayPicURL: String, googleID: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["firstName": firstName, "lastName": lastName, "email": email, "displayPicURL": displayPicURL, "googleID": googleID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/google_create_account_and_login.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+    
     func updateUserContactInfo(user: User, completionHandler: @escaping (String?, NSError?) -> ()){
         
         
@@ -234,6 +251,7 @@ class LoginHelper{
        // preferences.set(nil, forKey: "deviceNotificationToken") no need to do this because it never changes...
         
         FBSDKLoginManager().logOut()
+        GIDSignIn.sharedInstance().signOut()
         
         //  Save to disk
         return preferences.synchronize()
