@@ -116,7 +116,7 @@
                                     </textView>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="buw-gM-dtb">
                                         <rect key="frame" x="0.0" y="281" width="307" height="75"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="307" id="MaZ-tl-pH8"/>
                                         </constraints>
@@ -175,6 +175,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
                                     </textField>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="27I-36-8u3">
+                                        <rect key="frame" x="143" y="308" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -191,6 +194,7 @@
                                     <constraint firstItem="9mM-zL-fde" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="F1f-ZK-RRP"/>
                                     <constraint firstAttribute="trailing" secondItem="Pl0-Z0-3ei" secondAttribute="trailing" constant="8" id="FPQ-aV-F2a"/>
                                     <constraint firstItem="asY-vm-yoe" firstAttribute="top" secondItem="BcW-sF-OdP" secondAttribute="bottom" constant="8" id="Gm5-cd-aOX"/>
+                                    <constraint firstItem="MmN-0M-7uQ" firstAttribute="top" secondItem="27I-36-8u3" secondAttribute="bottom" constant="36" id="Hyg-UF-gHd"/>
                                     <constraint firstItem="asY-vm-yoe" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="Iu6-Sl-7K7"/>
                                     <constraint firstAttribute="bottom" secondItem="K7b-Yw-kcb" secondAttribute="bottom" constant="8" id="J0f-8m-dVL"/>
                                     <constraint firstAttribute="trailing" secondItem="MmN-0M-7uQ" secondAttribute="trailing" constant="8" id="JMv-Ab-VHM"/>
@@ -204,6 +208,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Iel-Fi-itl" secondAttribute="trailing" id="TeU-nY-CZf"/>
                                     <constraint firstItem="BcW-sF-OdP" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="Uf3-gW-V8x"/>
                                     <constraint firstItem="Pl0-Z0-3ei" firstAttribute="leading" secondItem="kXA-g6-Eku" secondAttribute="trailing" constant="5" id="UvB-d7-3ch"/>
+                                    <constraint firstItem="27I-36-8u3" firstAttribute="top" secondItem="asY-vm-yoe" secondAttribute="bottom" constant="35" id="WMV-je-6fd"/>
                                     <constraint firstItem="MmN-0M-7uQ" firstAttribute="top" secondItem="bFv-P8-FW5" secondAttribute="bottom" constant="8" id="ZQt-CI-xVF"/>
                                     <constraint firstItem="buw-gM-dtb" firstAttribute="centerX" secondItem="sWl-CR-Pwp" secondAttribute="centerX" id="bOU-4F-6wV"/>
                                     <constraint firstAttribute="trailing" secondItem="9mM-zL-fde" secondAttribute="trailing" constant="8" id="eUy-Jc-Dsw"/>
@@ -218,6 +223,7 @@
                                     <constraint firstItem="buw-gM-dtb" firstAttribute="centerX" secondItem="asY-vm-yoe" secondAttribute="centerX" id="shB-qX-XX1"/>
                                     <constraint firstItem="kXA-g6-Eku" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="spy-SJ-hlP"/>
                                     <constraint firstItem="K7b-Yw-kcb" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="t13-FV-Lse"/>
+                                    <constraint firstItem="27I-36-8u3" firstAttribute="centerX" secondItem="IAI-HU-C5n" secondAttribute="centerX" id="uMf-3Q-Hlv"/>
                                     <constraint firstItem="buw-gM-dtb" firstAttribute="trailing" secondItem="Iel-Fi-itl" secondAttribute="trailing" id="vr7-aM-BBS"/>
                                     <constraint firstItem="MmN-0M-7uQ" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="w1E-no-dkv"/>
                                     <constraint firstItem="Pl0-Z0-3ei" firstAttribute="leading" secondItem="kXA-g6-Eku" secondAttribute="trailing" constant="5" id="xFg-aN-nSE"/>
@@ -239,6 +245,8 @@
                         <outlet property="bSetPostLocation" destination="I1R-ff-fRQ" id="poO-Bc-8G7"/>
                         <outlet property="collectionView" destination="buw-gM-dtb" id="Nzx-e7-gi7"/>
                         <outlet property="dialogView" destination="IAI-HU-C5n" id="w6l-Yy-BR6"/>
+                        <outlet property="headerLabel" destination="Iel-Fi-itl" id="6tf-cp-7Ks"/>
+                        <outlet property="imageLoadingIndicator" destination="27I-36-8u3" id="U3c-Wx-Mgv"/>
                         <outlet property="ivSelectedImage" destination="bFv-P8-FW5" id="M8d-g6-fT3"/>
                         <outlet property="tfAttractionName" destination="sWl-CR-Pwp" id="rJN-w8-Kfc"/>
                         <outlet property="tfDate" destination="BcW-sF-OdP" id="y9X-Dm-nGR"/>
@@ -270,7 +278,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-Ps-znz" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omr-Pf-MB5">
@@ -679,7 +687,7 @@
         <scene sceneID="AyY-4q-wo4">
             <objects>
                 <navigationController id="mdD-ht-Sxm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qdA-Ux-eq0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qdA-Ux-eq0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -826,7 +834,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmS-5g-ChN" id="c9U-Nc-af2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U41-HH-sVa">
@@ -896,7 +904,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bHome" destination="VKg-tf-xhS" id="I9y-wE-75Z"/>
-                        <segue destination="IFT-y0-lAl" kind="presentation" identifier="segueEditAttraction" modalPresentationStyle="overFullScreen" id="fsl-I9-VPh"/>
+                        <segue destination="IFT-y0-lAl" kind="presentation" identifier="segueEditAttraction" modalPresentationStyle="overCurrentContext" id="fsl-I9-VPh"/>
                         <segue destination="9Qh-vH-6Ye" kind="show" identifier="seagueEditAttractionLocation" id="tvo-6I-1vm"/>
                     </connections>
                 </tableViewController>
@@ -1172,7 +1180,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Paq-07-Hdp" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eQw-9p-o36">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eQw-9p-o36">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1318,7 +1326,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HfK-4O-UAd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2o-EW-llB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2o-EW-llB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1346,10 +1354,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="G4W-z1-ANm"/>
         <segue reference="Xeh-yV-ss6"/>
-        <segue reference="Coi-VA-9zw"/>
         <segue reference="WjW-LE-aHX"/>
         <segue reference="tPf-uy-COu"/>
-        <segue reference="tvo-6I-1vm"/>
+        <segue reference="fsl-I9-VPh"/>
+        <segue reference="jsM-2S-dSi"/>
         <segue reference="cVP-Y2-a6N"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -579,8 +579,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             
             let url = URL(string: cdAttraction.imageURL!)
 
-            infoWindow.image.kf.setImage(with: url)
-            infoWindow.image.image = ImageHelper.circleImage(image: infoWindow.image.image!)
+            infoWindow.image.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                    if image != nil {
+                        infoWindow.image.image = ImageHelper.circleImage(image: image!)
+                    }
+                }
+            )
+
+        
             
         }else if let attraction = marker.userData as? Attraction{
             infoWindow.date.text = MiscHelper.dateToString(date: attraction.date, format: "MMM dd, yyyy")
@@ -601,10 +607,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             
             let url = URL(string: attraction.imageURL)
             
-            infoWindow.image.kf.setImage(with: url)
-            if infoWindow.image.image != nil{
-                infoWindow.image.image = ImageHelper.circleImage(image: infoWindow.image.image!)
-            }
+            infoWindow.image.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                    if image != nil {
+                        infoWindow.image.image = ImageHelper.circleImage(image: image!)
+                    }
+                }
+            )
+
             //above only works because kingfisher is used for the marker icon so the image is cached already. If I ever stop using kingfisher I will have to cache manually
 
         }

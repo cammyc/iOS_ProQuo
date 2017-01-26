@@ -76,6 +76,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         GIDSignIn.sharedInstance().delegate = self
     }
     
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {
             // Perform any operations on signed in user here.
@@ -136,7 +137,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
             }
             // ...
         } else {
-            print("\(error.localizedDescription)")
+            MiscHelper.showWhisper(message: "Unable to login with Google.", color: UIColor.red, navController: self.navigationController)
         }
         
     }
@@ -171,14 +172,14 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         
         switch result {
-            case .success(let _, let _, let _):
+            case .success(_, _, _):
                 returnUserData()
                 break;
             case .cancelled:
-                
+                MiscHelper.showWhisper(message: "Facebook login canceled.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x3b5998), navController: self.navigationController)
                 break;
-            case .failed(let error):
-                print(error)
+            case .failed(_):
+                MiscHelper.showWhisper(message: "Unable to login with Facebook.", color: UIColor.red, navController: self.navigationController)
                 break;
             
         
@@ -231,6 +232,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                     MiscHelper.showWhisper(message: "Network error. Please try again.", color: UIColor.red, navController: self.navigationController)
                     break
                 case -2:
+                    FBSDKLoginManager().logOut()
                     self.showAlert(title: "Email Taken", text: "There is already an account that uses your Facebook email address. Please change the email on that account then try again. If you did not create the account using your email please contact us.")
                     break
                 case -3:

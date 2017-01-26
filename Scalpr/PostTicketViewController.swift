@@ -24,6 +24,8 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var bCancel: UIButton!
 
     @IBOutlet weak var dialogView: UIView!
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -68,8 +70,13 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         
         self.collectionView.delegate = self
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() && editAttraction == nil {
+        
+        dialogView.layer.cornerRadius = 5.0
+        dialogView.clipsToBounds = true
+        
+        if !UIAccessibilityIsReduceTransparencyEnabled(){
             self.view.backgroundColor = UIColor.clear
+            dialogView.backgroundColor = UIColor.clear
             
             let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -77,10 +84,8 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             blurEffectView.frame = self.view.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
-            self.view.insertSubview(blurEffectView, belowSubview: dialogView)
+            dialogView.insertSubview(blurEffectView, belowSubview: headerLabel)
         }
-        
-        dialogView.layer.cornerRadius = 5.0
         
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PostTicketViewController.dismissKeyboard))
@@ -233,7 +238,9 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             case tfAttractionName:
                 if !textFieldIsNull(field: tfAttractionName){
                     tfSearchImageQuery.text = tfAttractionName.text
+                    imageLoadingIndicator.startAnimating()
                     bingHelper.getSearchImages(query: tfAttractionName.text!){ responseObject, error in
+                        self.imageLoadingIndicator.stopAnimating()
                         if responseObject != nil {
                             self.items = self.bingHelper.getImageThumbURLs(array: responseObject!)
                             self.collectionView.reloadData()
@@ -247,7 +254,9 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             break
             case tfSearchImageQuery:
                 if !textFieldIsNull(field: tfSearchImageQuery){
+                    imageLoadingIndicator.startAnimating()
                     bingHelper.getSearchImages(query: tfSearchImageQuery.text!){ responseObject, error in
+                        self.imageLoadingIndicator.stopAnimating()
                         if responseObject != nil {
                             self.items = self.bingHelper.getImageThumbURLs(array: responseObject!)
                             self.collectionView.reloadData()
