@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     // MARK: Button Initialization
     @IBOutlet weak var bSignIn: UIButton!
     @IBOutlet weak var bCreateAccount: UIButton!
-    @IBOutlet weak var facebookView: UIView!
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     // MARK: Misc Initialization
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -152,8 +152,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     func facebookInitialization(){
         let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
 
-        loginButton.frame.size.width = facebookView.frame.width
-        facebookView.addSubview(loginButton)
+        loginButton.frame.size.width = fbLoginButton.frame.width
+        fbLoginButton.addSubview(loginButton)
         
 //        if let accessToken = AccessToken.current {
 //            print("logged in")

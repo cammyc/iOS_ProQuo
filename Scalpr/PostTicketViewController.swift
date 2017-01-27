@@ -85,6 +85,7 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
             dialogView.insertSubview(blurEffectView, belowSubview: headerLabel)
+            //self.view.insertSubview(blurEffectView, belowSubview: dialogView)
         }
         
         
@@ -520,8 +521,12 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         let url = URL(string: self.items[indexPath.item])
-        cell.image.kf.setImage(with: url)
-        
+        cell.image.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                if image != nil {
+                    cell.image.image = ImageHelper.circleImage(image: image!)
+                }
+            }
+        )
         
         
         return cell
@@ -534,7 +539,13 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         
         KingfisherManager.shared.cache.removeImage(forKey: selectedImageURL)
         selectedImageURL = self.items[indexPath.item]
-        ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL))
+        ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                if image != nil {
+                    self.ivSelectedImage.image = ImageHelper.circleImage(image: image!)
+                }
+            }
+        )
+
         ivSelectedImage.isHidden = false
         collectionView.isHidden = true
         self.tfSearchImageQuery.isHidden = true

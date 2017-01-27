@@ -12,9 +12,9 @@ import UIKit
 
 class cdMessageMO: NSManagedObject{
     
-    @NSManaged var id: NSInteger
-    @NSManaged var conversationID: NSInteger
-    @NSManaged var senderID: NSInteger
+    @NSManaged var id: Int64
+    @NSManaged var conversationID: Int64
+    @NSManaged var senderID: Int64
     @NSManaged var text: String?
     @NSManaged var timestamp: Date?
     

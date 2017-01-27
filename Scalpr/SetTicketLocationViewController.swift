@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import MBProgressHUD
+import Kingfisher
 
 
 class SetTicketLocationViewController: UIViewController, GMSMapViewDelegate{
@@ -46,13 +47,29 @@ class SetTicketLocationViewController: UIViewController, GMSMapViewDelegate{
             marker.map = self.mapView
             self.mapView.isMyLocationEnabled = true
             bPost.setTitle("Update Location", for: .normal)
+            
+            KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (editAttraction?.imageURL)!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if image != nil{
+                    self.marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                }
+                
+            })
         }else if let location = locationHelper.getLastLocation() as? CLLocation{
             self.mapView.isMyLocationEnabled = true
             centerMapOnLocation(location: location, withAnimation: false)
             marker.position = self.mapView.camera.target
             marker.map = self.mapView
-        }
+            
+            KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if image != nil{
+                    self.marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                }
+                
+            })
 
+        }
+        
+        
         // Do any additional setup after loading the view.
     }
 

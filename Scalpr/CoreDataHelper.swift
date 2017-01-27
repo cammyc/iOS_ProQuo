@@ -82,9 +82,9 @@ class CoreDataHelper : NSObject {
     func saveMessage(message: Message){
         let cdMessage = cdMessageMO(context: managedObjectContext)
         
-        cdMessage.id = NSInteger(message.ID)
-        cdMessage.conversationID = NSInteger(message.conversationID)
-        cdMessage.senderID = NSInteger(message.senderID)
+        cdMessage.id = message.ID
+        cdMessage.conversationID = message.conversationID
+        cdMessage.senderID = message.senderID
         cdMessage.text = message.text
         cdMessage.timestamp = message.timestamp
         
@@ -124,13 +124,13 @@ class CoreDataHelper : NSObject {
         let cdAttraction = cdAttractionMO(context: managedObjectContext)
         
         
-        cdAttraction.id = NSInteger(attraction.ID)
-        cdAttraction.creatorID = NSInteger(attraction.creatorID)
+        cdAttraction.id = attraction.ID
+        cdAttraction.creatorID = attraction.creatorID
         cdAttraction.name = attraction.name
         cdAttraction.venueName = attraction.venueName
         cdAttraction.attractionDescription = attraction.description
         cdAttraction.ticketPrice = attraction.ticketPrice
-        cdAttraction.numTickets = attraction.numTickets
+        cdAttraction.numTickets = Int64(attraction.numTickets)
         cdAttraction.imageURL = attraction.imageURL
         cdAttraction.lat = attraction.lat
         cdAttraction.lon = attraction.lon

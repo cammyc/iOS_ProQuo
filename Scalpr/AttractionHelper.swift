@@ -205,7 +205,7 @@ class AttractionHelper {
         attraction.name = attr.name!
         attraction.venueName = attr.venueName!
         attraction.ticketPrice = attr.ticketPrice
-        attraction.numTickets = attr.numTickets
+        attraction.numTickets = Int(attr.numTickets)
         attraction.date = attr.date!
         attraction.description = attr.description
         attraction.imageURL = attr.imageURL!

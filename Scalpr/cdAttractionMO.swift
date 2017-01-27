@@ -12,12 +12,12 @@ import UIKit
 
 class cdAttractionMO: NSManagedObject{
     
-    @NSManaged var id: NSInteger
-    @NSManaged var creatorID: NSInteger
+    @NSManaged var id: Int64
+    @NSManaged var creatorID: Int64
     @NSManaged var venueName: String?
     @NSManaged var name: String?
     @NSManaged var ticketPrice: Double
-    @NSManaged var numTickets: NSInteger
+    @NSManaged var numTickets: Int64
     @NSManaged var attractionDescription: String?
     @NSManaged var date: Date?
     @NSManaged var imageURL: String?
