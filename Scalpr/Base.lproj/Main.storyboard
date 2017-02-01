@@ -638,7 +638,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Conversations" id="og0-F7-IPE">
-                        <barButtonItem key="leftBarButtonItem" title="Home" style="done" id="4hF-iF-MDE">
+                        <barButtonItem key="leftBarButtonItem" title="Home" style="plain" id="4hF-iF-MDE">
                             <color key="tintColor" red="0.17905855179999999" green="0.79642182589999999" blue="0.44250935320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Dle-Q2-BI2" kind="unwind" unwindAction="unwindToHomeVCWithSegue:" id="o0m-Jm-ocS"/>
@@ -790,7 +790,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="HJh-6W-Gf2">
-                        <barButtonItem key="leftBarButtonItem" title="Home" style="done" id="Gja-bO-9iC">
+                        <barButtonItem key="leftBarButtonItem" title="Home" style="plain" id="Gja-bO-9iC">
                             <connections>
                                 <segue destination="giG-WM-1F2" kind="unwind" unwindAction="unwindToHomeVCWithSegue:" id="yNY-yc-mHl"/>
                             </connections>
@@ -824,11 +824,11 @@
                             <tableViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ticketCell" rowHeight="70" id="cmS-5g-ChN" customClass="MyTicketTableViewCell" customModule="Scalpr" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmS-5g-ChN" id="c9U-Nc-af2">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="cmS-5g-ChN" id="c9U-Nc-af2">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U41-HH-sVa">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U41-HH-sVa">
                                             <rect key="frame" x="5" y="5" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="R0W-Aa-vmd"/>
@@ -836,19 +836,19 @@
                                                 <constraint firstAttribute="width" constant="60" id="aZM-Wp-8XX"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price and tickets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqO-pZ-aRv">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Price and tickets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqO-pZ-aRv">
                                             <rect key="frame" x="73" y="48" width="239" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.17905855179999999" green="0.79642182589999999" blue="0.44250935320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attraction Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUE-Fz-nEw">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Attraction Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUE-Fz-nEw">
                                             <rect key="frame" x="73" y="5" width="239" height="20"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ur5-aL-Rng">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Venue Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ur5-aL-Rng">
                                             <rect key="frame" x="73" y="25" width="231" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -885,7 +885,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="My Tickets" id="DJa-PP-sdj">
-                        <barButtonItem key="leftBarButtonItem" title="Home" style="done" id="VKg-tf-xhS">
+                        <barButtonItem key="leftBarButtonItem" title="Home" style="plain" id="VKg-tf-xhS">
                             <color key="tintColor" red="0.17905855179999999" green="0.79642182589999999" blue="0.44250935320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Xrs-jR-9b0" kind="unwind" unwindAction="unwindToHomeVCWithSegue:" id="fch-gA-6E8"/>
@@ -1131,7 +1131,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="35n-ih-pbp">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="uFz-Bn-pDb">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="uFz-Bn-pDb">
                             <connections>
                                 <action selector="bCancelLogin:" destination="Fnh-IA-Oqm" id="oeu-8M-vcg"/>
                             </connections>
@@ -1352,12 +1352,12 @@
         <image name="user" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BJu-aO-IlD"/>
         <segue reference="Xeh-yV-ss6"/>
-        <segue reference="tPf-uy-COu"/>
-        <segue reference="G4W-z1-ANm"/>
         <segue reference="cVP-Y2-a6N"/>
         <segue reference="tts-ff-Kg5"/>
-        <segue reference="jsM-2S-dSi"/>
+        <segue reference="G4W-z1-ANm"/>
+        <segue reference="fsl-I9-VPh"/>
+        <segue reference="tvo-6I-1vm"/>
+        <segue reference="tPf-uy-COu"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,7 +21,7 @@ import Kingfisher
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let convoHelper = ConversationHelper()
+    let loginHelper = LoginHelper()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if user?.ID != 0 {
             
-            convoHelper.updateIOSDeviceToken(userID: (user?.ID)!, deviceToken: deviceTokenString){ responseObject, error in
+            loginHelper?.updateIOSDeviceToken(userID: (user?.ID)!, deviceToken: deviceTokenString){ responseObject, error in
                 if responseObject == "1"{
                 }else{
                     print(responseObject!)
@@ -157,12 +157,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
                             let announcement = Announcement(title: customData!["yourName"] as! String, subtitle: customData?["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
                             
-                            Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
+                            Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
                             
                         }else{
                             let announcement = Announcement(title: customData?["yourName"] as! String, subtitle: customData?["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
                             
-                            Whisper.show(shout: announcement, to: (self.window?.rootViewController)!)
+                            Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
                         }
                     })
                 }

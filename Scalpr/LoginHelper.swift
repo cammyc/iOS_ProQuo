@@ -168,6 +168,43 @@ class LoginHelper{
         }
     }
     
+    func updateIOSDeviceToken(userID: Int64, deviceToken: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["userID": userID, "deviceToken": deviceToken]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/update_IOSDeviceToken.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+    
+    func removeIOSDeviceToken(deviceToken: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["deviceToken": deviceToken]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/remove_IOSDeviceToken.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+
+    
     func getUserDetailsFromJson(json: String)->Any?{
         let u = User()
         

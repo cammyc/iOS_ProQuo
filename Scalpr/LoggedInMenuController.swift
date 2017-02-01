@@ -128,7 +128,7 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
                 loadingNotification.mode = MBProgressHUDMode.indeterminate
                 loadingNotification.label.text = "Logging Out"
                 
-                let _ = convoHelper.removeIOSDeviceToken(deviceToken: deviceToken!){ responseObject, error in
+                let _ = self.loginHelper.removeIOSDeviceToken(deviceToken: deviceToken!){ responseObject, error in
                     loadingNotification.hide(animated: true)
                     
                     if error == nil{

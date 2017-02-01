@@ -153,6 +153,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
 
         loginButton.frame.size.width = fbLoginButton.frame.width
+        loginButton.frame.size.height = fbLoginButton.frame.height
         fbLoginButton.addSubview(loginButton)
         
 //        if let accessToken = AccessToken.current {
@@ -595,7 +596,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         let deviceToken = preferences.string(forKey: "deviceNotificationToken")
         
         if deviceToken != nil{
-            ConversationHelper().updateIOSDeviceToken(userID: userID, deviceToken: deviceToken!){ responseObject, error in
+            LoginHelper()?.updateIOSDeviceToken(userID: userID, deviceToken: deviceToken!){ responseObject, error in
                 if responseObject == "1"{
                 }else{
                     //print(responseObject!)

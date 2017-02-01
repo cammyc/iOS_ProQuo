@@ -151,7 +151,13 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             
             self.ivSelectedImage.isHidden = false
             self.collectionView.isHidden = true
-            self.ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL))
+            
+            self.ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                    if image != nil {
+                        self.ivSelectedImage.image = ImageHelper.circleImage(image: image!)
+                    }
+                }
+            )
             
             self.bSetPostLocation.setTitle("Save Changes", for: .normal)
             
@@ -178,7 +184,9 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
     func ivSelectedTap(){
         if firstIvTap && editAttraction != nil{
             tfSearchImageQuery.text = tfAttractionName.text
+            imageLoadingIndicator.startAnimating()
             bingHelper.getSearchImages(query: tfSearchImageQuery.text!){ responseObject, error in
+                self.imageLoadingIndicator.stopAnimating()
                 if responseObject != nil {
                     self.items = self.bingHelper.getImageThumbURLs(array: responseObject!)
                     self.collectionView.reloadData()

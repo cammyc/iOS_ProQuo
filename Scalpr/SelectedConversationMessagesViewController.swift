@@ -429,15 +429,16 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         
         //sendlogic here
         stopNewMessageTimer()
+        self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
+        self.finishSendingMessage(animated: true)
         convoHelper.sendConversationMessageRequest(conversationID: conversation.ID, senderID: myUserID, message: text){ responseObject, error in
             
             self.startNewMessageTimer()//start message timer again
             
             if error == nil{
-                if responseObject != "-1" {
+                if responseObject != "-1" && responseObject != "" {
                     let date = Date.init()
                     
-                    self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
                     let m = Message()
                     m.ID = Int64(responseObject!)!
                     m.senderID = self.myUserID
@@ -446,13 +447,25 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     m.timestamp = date
                     self.coreDataHelper.saveMessage(message: m)
                     //sent message isn't showing timebreak initially if after 30 minutes - only does once convo refreshed
-                    
-                    self.finishSendingMessage()
                 }else{
-                    self.showWhisper(message: "Unable to send message, check network connection.", color: UIColor.red)
+                    
+                    self.messages.removeLast()
+                    self.collectionView.reloadData()
+                    
+                    let notification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    notification.mode = .text
+                    notification.label.text = "Unable to send message"
+                    notification.hide(animated: true, afterDelay: 3.0)
                 }
             }else{
-                self.showWhisper(message: "Unable to send message, check network connection.", color: UIColor.red)
+                self.messages.removeLast()
+                self.collectionView.reloadData()
+                
+                let notification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                notification.mode = .text
+                notification.label.text = "Unable to send message"
+                notification.hide(animated: true, afterDelay: 3.0)
+
             }
             
             return
