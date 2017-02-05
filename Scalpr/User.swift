@@ -15,6 +15,7 @@ class User {
     var email: String
     var phoneNumber: String
     var password: String
+    var accessToken: String
     
     init(){
         ID = 0
@@ -23,5 +24,6 @@ class User {
         email = ""
         phoneNumber = ""
         password = ""
+        accessToken = ""
     }
 }

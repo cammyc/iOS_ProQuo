@@ -16,6 +16,7 @@ pod 'Whisper'
 pod 'Google/SignIn'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'SwiftKeychainWrapper'
 end
 
 

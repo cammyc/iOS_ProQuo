@@ -122,8 +122,6 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
             let deviceToken = preferences.string(forKey: "deviceNotificationToken")
             
             if deviceToken != nil{
-                let convoHelper = ConversationHelper()
-                
                 let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
                 loadingNotification.mode = MBProgressHUDMode.indeterminate
                 loadingNotification.label.text = "Logging Out"
@@ -133,6 +131,14 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
                     
                     if error == nil{
                         if responseObject == "1" {
+                            self.loginHelper.removeAccessToken(accessToken: self.loginHelper.getLoggedInUser().accessToken){ responseObject, error in
+                                if error == nil {
+                                    print(responseObject)
+                                }
+                                
+                                return
+                            }
+                            
                             self.logoutLogic();
                         }else{
                             self.logoutError()

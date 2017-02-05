@@ -11,7 +11,7 @@ import MBProgressHUD
 import Whisper
 
 
-class ConversationsTableViewController: UITableViewController {
+class ConversationsTableViewController: UITableViewController, PushNotificationDelegate {
     
     // MARK: Global Variable
     var conversations = [Conversation]()
@@ -21,7 +21,8 @@ class ConversationsTableViewController: UITableViewController {
     var selectedConvo = Conversation()
     var isWhisperShowing = false
     var refreshConversationsTimer: Timer? = nil
-
+    var isInEditMode = false
+    var taskWasCanceled = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,34 +31,66 @@ class ConversationsTableViewController: UITableViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem?.title = "Delete"
         
         loadConversations()
     }
+    
+    func registerForNotificationDelegate(){
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            let pushDelegate: PushNotificationDelegate = self
+            delegate.addPushNotificationDelegate(newDelegate: pushDelegate)
+        }
+    }
+    
+    func unregisterForNotificationDelegate(){
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            let pushDelegate: PushNotificationDelegate = self
+            delegate.removePushNotificationDelegate(oldDelegate: pushDelegate)
+        }
+    }
+    
+    func didReceivePushNotification(data: [String: Any]) {
+        if !isInEditMode{
+            self.refreshConversations()
+        }
+    }
+    
+    var pushNotificationDelegateID: Int = 1 //required var declaration
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: true)
+        self.isInEditMode = editing
+
         if editing{
             navigationItem.rightBarButtonItem?.title = "Done"
-            self.stopUpdateConvosTimer()
+//            self.stopUpdateConvosTimer()
         }else{
             navigationItem.rightBarButtonItem?.title = "Delete"
-            self.startUpdateConvosTimer()
+            refreshConversations()
+//            self.startUpdateConvosTimer()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if conversations.count > 0{
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        registerForNotificationDelegate()
+
+        if conversations.count > 0{//below executes only if this viewcontroller is resumed and not being created for this first time
             refreshConversations()
-            self.startUpdateConvosTimer()
+            taskWasCanceled = false
+
+//            self.startUpdateConvosTimer()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         hideConnectingNotification()
-        stopUpdateConvosTimer()
+        unregisterForNotificationDelegate()
+        taskWasCanceled = true
+//        stopUpdateConvosTimer()
     }
     
     func loadConversations(){
@@ -80,7 +113,7 @@ class ConversationsTableViewController: UITableViewController {
                         self.conversations = tempConversations
                         self.tableView.reloadData()
                         
-                        self.startUpdateConvosTimer()
+//                        self.startUpdateConvosTimer()
 
                     }else{
                         self.showAlertMaybeClose(title: "No Conversations", text: "You don't have any active conversations")
@@ -118,10 +151,24 @@ class ConversationsTableViewController: UITableViewController {
                 }else{
                     //self.tableView.reloadData()
                     self.showConnectingNotification()
+                    
+                    if !self.taskWasCanceled {//taskWasCanceled = true when viewcontroller disappears, dont want to refresh when done with controller
+                        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+                            self?.refreshConversations()
+                        }
+                    }
+                    
                 }
             }else{
                 //self.tableView.reloadData()
                 self.showConnectingNotification()
+                
+                if !self.taskWasCanceled {
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+                        self?.refreshConversations()
+                    }
+                }
+
             }
             return
         }
@@ -147,24 +194,24 @@ class ConversationsTableViewController: UITableViewController {
         }
     }
     
-    func startUpdateConvosTimer(){
-        if self.refreshConversationsTimer != nil{
-            if (self.refreshConversationsTimer?.isValid)!{
-                self.refreshConversationsTimer?.invalidate()
-            }
-        }
-        self.refreshConversationsTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] _ in
-            self?.refreshConversations()
-        }
-        
-    }
-    
-    func stopUpdateConvosTimer(){
-        if self.refreshConversationsTimer != nil{
-            self.refreshConversationsTimer?.invalidate()
-            self.convoHelper.cancelAllRequests()
-        }
-    }
+//    func startUpdateConvosTimer(){
+//        if self.refreshConversationsTimer != nil{
+//            if (self.refreshConversationsTimer?.isValid)!{
+//                self.refreshConversationsTimer?.invalidate()
+//            }
+//        }
+//        self.refreshConversationsTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] _ in
+//            self?.refreshConversations()
+//        }
+//        
+//    }
+//    
+//    func stopUpdateConvosTimer(){
+//        if self.refreshConversationsTimer != nil{
+//            self.refreshConversationsTimer?.invalidate()
+//            self.convoHelper.cancelAllRequests()
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

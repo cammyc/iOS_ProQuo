@@ -73,6 +73,9 @@
 		E339BC381E3940CC0040FBE3 /* GTMSessionFetcher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E339BC321E3940C50040FBE3 /* GTMSessionFetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E339BC3A1E3941A10040FBE3 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */; };
 		E339BC3E1E3968100040FBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */; };
+		E377AAB81E4523FD00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; };
+		E377AAB91E45240A00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; };
+		E377AABA1E45240A00890BF4 /* SwiftKeychainWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64201E393F0C00476271 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; };
 		E37C64211E393F0C00476271 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA101E1300EA0074D6FF /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64221E393F0C00476271 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */; };
@@ -139,6 +142,7 @@
 				E37C64211E393F0C00476271 /* Alamofire.framework in Embed Frameworks */,
 				E37C64401E393F0C00476271 /* Kingfisher.framework in Embed Frameworks */,
 				E37C642D1E393F0C00476271 /* FBSDKLoginKit.framework in Embed Frameworks */,
+				E377AABA1E45240A00890BF4 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				E37C64291E393F0C00476271 /* FacebookLogin.framework in Embed Frameworks */,
 				E37C64231E393F0C00476271 /* Bolts.framework in Embed Frameworks */,
 			);
@@ -239,6 +243,7 @@
 		E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3422F651E1C66470000E1D2 /* Whisper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Whisper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Whisper/Whisper.framework"; sourceTree = "<group>"; };
+		E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"; sourceTree = "<group>"; };
 		E37C641A1E393EE800476271 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		E37C641B1E393EE800476271 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E37C641C1E393EE800476271 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
@@ -283,6 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E377AAB81E4523FD00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */,
 				E339BC331E3940C50040FBE3 /* GoogleToolboxForMac.framework in Frameworks */,
 				E339BC341E3940C50040FBE3 /* GTMSessionFetcher.framework in Frameworks */,
 				E339BC2E1E39408A0040FBE3 /* GTMOAuth2.framework in Frameworks */,
@@ -305,6 +311,7 @@
 				D25D1F241D9E07750085EA89 /* libz.tbd in Frameworks */,
 				E37C643D1E393F0C00476271 /* KCFloatingActionButton.framework in Frameworks */,
 				D25D1F231D9E076D0085EA89 /* libc++.tbd in Frameworks */,
+				E377AAB91E45240A00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */,
 				E37C643B1E393F0C00476271 /* JSQSystemSoundPlayer.framework in Frameworks */,
 				D25D1F211D9E074E0085EA89 /* GLKit.framework in Frameworks */,
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
@@ -450,6 +457,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */,
 				E339BC311E3940C50040FBE3 /* GoogleToolboxForMac.framework */,
 				E339BC321E3940C50040FBE3 /* GTMSessionFetcher.framework */,
 				E339BC2D1E39408A0040FBE3 /* GTMOAuth2.framework */,

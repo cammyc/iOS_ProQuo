@@ -144,23 +144,29 @@ class MiscHelper {
     }
 
     static func getSecurityHeader()-> HTTPHeaders{
-        let pw = "WheresTheClosestKanyeTicketAt?"
-        let key = "$c@lPrK3Y1236547"
-        var encryptedData: String? = nil
-        
-        do {
-            let aes = try AES(key: key, iv: "", blockMode: .ECB, padding: PKCS7())
-            encryptedData = try aes.encrypt(pw.utf8.map({$0})).toBase64()!
-        }catch{
-            
-        }
-        
-        if encryptedData != nil{
-            return ["ScalprVerification": encryptedData!]
+//        let pw = "WheresTheClosestKanyeTicketAt?"
+//        let key = "$c@lPrK3Y1236547"
+//        var encryptedData: String? = nil
+//        
+//        do {
+//            let aes = try AES(key: key, iv: "", blockMode: .ECB, padding: PKCS7())
+//            encryptedData = try aes.encrypt(pw.utf8.map({$0})).toBase64()!
+//        }catch{
+//            
+//        }
+//        
+//        if encryptedData != nil{
+//            return ["ScalprVerification": encryptedData!]
+//        }else{
+//            return ["":""]
+//        }
+        let user = LoginHelper()?.getLoggedInUser()
+        if user?.ID != 0 {
+            return ["ScalprVerification": (user?.accessToken)!]
         }else{
-            return ["":""]
+            return ["ScalprVerification": "-1"]
         }
-
+        
     }
     
     static func showWhisper(message: String, color: UIColor, navController: UINavigationController?){

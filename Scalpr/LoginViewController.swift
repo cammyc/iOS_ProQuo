@@ -113,8 +113,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                             MiscHelper.showWhisper(message: "Google login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
                             
                             self.googleUser.ID = response
-                            self.loginSuccessfullTasks(userID: self.googleUser.ID)
                             let _ = self.loginHelper.saveLoggedInUser(user: self.googleUser)
+                            self.loginSuccessfullTasks(userID: self.googleUser.ID) //needs to go after saveuser
+
                             
                             self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                         }
@@ -126,8 +127,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                     MiscHelper.showWhisper(message: "Google login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
                     
                     let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
-                    self.loginSuccessfullTasks(userID: (user as! User).ID)
                     let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
+                    self.loginSuccessfullTasks(userID: (user as! User).ID) //needs to go after saveuser
+
                     
                     self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                 }
@@ -244,8 +246,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                         MiscHelper.showWhisper(message: "Facebook login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
                         
                         self.facebookUser.ID = response
-                        self.loginSuccessfullTasks(userID: self.facebookUser.ID)
                         let _ = self.loginHelper.saveLoggedInUser(user: self.facebookUser)
+                        self.loginSuccessfullTasks(userID: self.facebookUser.ID) //needs to go after save user
+
                         
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
                     }
@@ -257,8 +260,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                 MiscHelper.showWhisper(message: "Facebook login successful.", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71), navController: self.navigationController)
                 
                 let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
-                self.loginSuccessfullTasks(userID: (user as! User).ID)
                 let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
+                self.loginSuccessfullTasks(userID: (user as! User).ID)//needs to go after saveuser
+
             
                 self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
             }
@@ -465,8 +469,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
 
                         }else{
                             let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
-                            self.loginSuccessfullTasks(userID: (user as! User).ID)
                             let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
+                            self.loginSuccessfullTasks(userID: (user as! User).ID)//needs to go after save user
+
                         }
                         
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
@@ -499,44 +504,38 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
                 self.loadingNotification?.hide(animated: true)
                 
                 if responseObject != nil {
-                
-                    let response = Int64(responseObject! as String)
                     
                     let loginResponseNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
                     loginResponseNotification.mode = MBProgressHUDMode.customView
-
-                    if response == 0{
-                        loginResponseNotification.label.text = "Server Error, Please Check Your Internet Connection."
-                        loginResponseNotification.hide(animated: true, afterDelay: 2)
-                    }else if response == -1{
-                        loginResponseNotification.label.text = "Email or Phone# Already Taken"
-                        loginResponseNotification.hide(animated: true, afterDelay: 2)
+                
+                    if let response = Int64(responseObject!){
+                        if response == 0{
+                            loginResponseNotification.label.text = "Connection Error, Please Try Again"
+                            loginResponseNotification.hide(animated: true, afterDelay: 2)
+                        }else if response == -1{
+                            loginResponseNotification.label.text = "Email or Phone# Already Taken"
+                            loginResponseNotification.hide(animated: true, afterDelay: 2)
+                        }else{
+                            loginResponseNotification.label.text = "Connection Error, Please Try Again"
+                            loginResponseNotification.hide(animated: true, afterDelay: 2)
+                        }
                     }else{
                         loginResponseNotification.label.text = "Account Created"
                         loginResponseNotification.hide(animated: true, afterDelay: 2)
                         
-                        let user: User = User()
-                        user.ID = response!
-                        user.firstName = self.tfFirstNameCC.text!
-                        user.lastName = self.tfLastNameCC.text!
                         
-                        if MiscHelper.isValidEmail(value: self.tfEmailPhoneCC.text!){
-                            user.email = self.tfEmailPhoneCC.text!
-                        }else{
-                            user.phoneNumber = self.tfEmailPhoneCC.text!
-                        }
-                        
-                        user.password = self.tfPasswordCC.text!
-                        
-                        let _ = self.loginHelper.saveLoggedInUser(user: user)
-                        
-                        self.loginSuccessfullTasks(userID: user.ID)
+                        let user = self.loginHelper.getUserDetailsFromJson(json: responseObject!)
+                        let _ = self.loginHelper.saveLoggedInUser(user: user as! User)
+                        self.loginSuccessfullTasks(userID: (user as! User).ID) //needs to go after save user
 
+                        
                         self.performSegue(withIdentifier: "go_home_from_login", sender: nil)
+
                     }
                     
+                                        
                 }else if error != nil {
-                    self.view.makeToast("Unable to create account. Please try again.", duration: 3.0, position: .bottom)
+                    self.view.makeToast("Unable to create account. Please try again", duration: 3.0, position: .bottom)
                 }
                 
                 return

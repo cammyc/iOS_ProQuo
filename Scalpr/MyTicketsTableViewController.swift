@@ -52,30 +52,35 @@ class MyTicketsTableViewController: UITableViewController{
         _ = attractionHelper.getUserAttractions(userID: (loginHelper?.getLoggedInUser().ID)!){ responseObject, error in
             
             if responseObject != nil {
-                self.userAttractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as! NSArray!)!
-                
-                if self.userAttractions.count > 0 {
-                
-                    var lastDate:Date = self.userAttractions[0].date
-                    var counter = 0
+                if (responseObject as? NSArray) != nil{
+                    self.userAttractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as! NSArray!)!
                     
-                    self.sections.append(MiscHelper.dateToString(date: lastDate, format: "MM/dd/yyyy"))
-                    self.items.append(Array<Attraction>())
-                    
-                    for at in self.userAttractions{
-                        if lastDate != at.date{
-                            lastDate = at.date
-                            self.sections.append(MiscHelper.dateToString(date: lastDate, format: "MM/dd/yyyy"))
-                            self.items.append(Array<Attraction>())
-                            counter += 1
+                    if self.userAttractions.count > 0 {
+                        
+                        var lastDate:Date = self.userAttractions[0].date
+                        var counter = 0
+                        
+                        self.sections.append(MiscHelper.dateToString(date: lastDate, format: "MM/dd/yyyy"))
+                        self.items.append(Array<Attraction>())
+                        
+                        for at in self.userAttractions{
+                            if lastDate != at.date{
+                                lastDate = at.date
+                                self.sections.append(MiscHelper.dateToString(date: lastDate, format: "MM/dd/yyyy"))
+                                self.items.append(Array<Attraction>())
+                                counter += 1
+                            }
+                            self.items[counter].append(at)
                         }
-                        self.items[counter].append(at)
+                        
+                        self.tableView.reloadData()
+                    }else{
+                        self.showAlertMaybeClose(title: "No Active Tickets", text: "You don't have any active tickets.")
                     }
-                    
-                    self.tableView.reloadData()
                 }else{
-                    self.showAlertMaybeClose(title: "No Active Tickets", text: "You don't have any active tickets.")
+                    self.showErrorAlert()
                 }
+                
             }else if error != nil {
                 self.showErrorAlert()
             }

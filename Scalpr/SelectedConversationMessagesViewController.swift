@@ -13,7 +13,7 @@ import JSQMessagesViewController
 import Whisper
 
 
-class SelectedConversationMessagesViewController: JSQMessagesViewController {
+class SelectedConversationMessagesViewController: JSQMessagesViewController, PushNotificationDelegate {
     
     lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
     lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
@@ -33,7 +33,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     weak var newMessageTimer: Timer?
     weak var updateLastReadMessageTimer: Timer?
     var isWhisperShowing = false
-    var taskWasCanceled = false;
+    var taskWasCanceled = false
+    var isResuming = false
     
 
     override func viewDidLoad() {
@@ -42,7 +43,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         // No avatars
         //collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
-                
+        
         
         myUserID = (loginHelper?.getLoggedInUser().ID)!
         myName = (myUserID == conversation.buyerID) ? conversation.buyerName : conversation.sellerName
@@ -79,7 +80,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                     self.addMessage(withId: String(m.senderID), name: self.yourName, text: m.text!, timestamp: m.timestamp!)
                 }
             }
-            self.collectionView?.reloadData()
+//            self.collectionView?.reloadData()
             
 //            let height1 = self.navigationController?.navigationBar.frame.height
 //            let height2 = self.inputToolbar.frame.height
@@ -88,9 +89,9 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
 //            }
             //above isn't needed here for some reason...
             
-            self.finishReceivingMessage()
+//            self.finishReceivingMessage()
             
-            getNewMessages() //will start timer and has no delay
+            getNewMessages()
             //any messages in db should be read in server db so new messages will not repeat
             //need to implement session tokens on each device because right now using the app on multiple devices at the same time will be a disaster
             //multiple missed messages and your own message will only appear on device it's sent on
@@ -102,10 +103,46 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
 
     }
     
+    func registerForNotificationDelegate(){
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            let pushDelegate: PushNotificationDelegate = self
+            delegate.addPushNotificationDelegate(newDelegate: pushDelegate)
+        }
+    }
+    
+    func unregisterForNotificationDelegate(){
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            let pushDelegate: PushNotificationDelegate = self
+            delegate.removePushNotificationDelegate(oldDelegate: pushDelegate)
+        }
+    }
+    
+    func didReceivePushNotification(data: [String: Any]) {
+        getNewMessages();
+    }
+    
+    var pushNotificationDelegateID: Int = 2 //required var declaration
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
-        stopNewMessageTimer()
-        stopUpdateLastMessageTimer()
+        unregisterForNotificationDelegate()
+//        stopNewMessageTimer()
+//        stopUpdateLastMessageTimer()
         hideConnectingNotification()
+        taskWasCanceled = true
+        isResuming = true
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        registerForNotificationDelegate()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        taskWasCanceled = false
+
+        if isResuming{
+            getNewMessages()
+            isResuming = false
+        }
     }
 
     
@@ -165,49 +202,49 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                 
                 if error == nil{
                     if responseObject != "0" {
-                        self.stopUpdateLastMessageTimer()//this will stop the timer started from startUpdateLastReadMessageIfError
-                        if startNewMessageTimer{
-                            self.startNewMessageTimer()//this will start the normal newMessage timer
-                        }
+//                        self.stopUpdateLastMessageTimer()//this will stop the timer started from startUpdateLastReadMessageIfError
+//                        if startNewMessageTimer{
+//                            self.startNewMessageTimer()//this will start the normal newMessage timer
+//                        }
                     }else{
-                        self.stopNewMessageTimer()
-                        self.stopUpdateLastMessageTimer()
-                        self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
+//                        self.stopNewMessageTimer()
+//                        self.stopUpdateLastMessageTimer()
+//                        self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
                     }
                 }else{//if last message not updated keep calling itself until it is updated so no duplicates and stop requesting new messages
-                    self.stopNewMessageTimer()
-                    self.stopUpdateLastMessageTimer()
-                    self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
+//                    self.stopNewMessageTimer()
+//                    self.stopUpdateLastMessageTimer()
+//                    self.startUpdateLastReadMessageTimerIfError(messageID: messageID)
                 }
                 return
             }
     }
     
-    func startUpdateLastReadMessageTimerIfError(messageID: Int64){
-        self.updateLastReadMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
-            self?.updateLastReadMessage(messageID: messageID, startNewMessageTimer: true)//startNewMessageTimer because this is only called if stopped
-        }
-    }
-    
-    func stopUpdateLastMessageTimer() {
-        if updateLastReadMessageTimer != nil {
-            self.updateLastReadMessageTimer?.invalidate()
-            self.convoHelper.cancelAllRequests()
-            taskWasCanceled = true;
-        }
-    }
-    
-    func startNewMessageTimer() {
-        self.newMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
-            self?.getNewMessages()
-        }
-    }
-    
-    func initialStartNewMessageTimer(){
-        if newMessageTimer == nil{
-            startNewMessageTimer()
-        }
-    }
+//    func startUpdateLastReadMessageTimerIfError(messageID: Int64){
+//        self.updateLastReadMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+//            self?.updateLastReadMessage(messageID: messageID, startNewMessageTimer: true)//startNewMessageTimer because this is only called if stopped
+//        }
+//    }
+//    
+//    func stopUpdateLastMessageTimer() {
+//        if updateLastReadMessageTimer != nil {
+//            self.updateLastReadMessageTimer?.invalidate()
+//            self.convoHelper.cancelAllRequests()
+//            taskWasCanceled = true;
+//        }
+//    }
+//    
+//    func startNewMessageTimer() {
+//        self.newMessageTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+//            self?.getNewMessages()
+//        }
+//    }
+//    
+//    func initialStartNewMessageTimer(){
+//        if newMessageTimer == nil{
+//            startNewMessageTimer()
+//        }
+//    }
     
     func getNewMessages(){
         _ = convoHelper.getNewConversationMessagesRequest(conversationID: self.conversation.ID, userID: self.myUserID) { responseObject, error in
@@ -219,7 +256,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                 if let array = responseObject as? NSArray{
                     let tempMessages = self.convoHelper.parseMessagesFromNSArray(array: array)
                     if(tempMessages.count > 0){
-                        self.stopNewMessageTimer()//stop new messages while updating last read message
+//                        self.stopNewMessageTimer()//stop new messages while updating last read message
                         self.updateLastReadMessage(messageID: tempMessages[tempMessages.count-1].ID, startNewMessageTimer: true)//new message timer is started once last read message is updated
                         for i in 0 ..< tempMessages.count{
                             let m = tempMessages[i]
@@ -242,13 +279,24 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
                         self.finishReceivingMessage()
                         
                     }else{
-                        self.initialStartNewMessageTimer()
+//                        self.initialStartNewMessageTimer()
                     }
                 }else{
                     self.showConnectingNotification()
+                    if !self.taskWasCanceled {
+                        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+                            self?.getNewMessages()
+                        }
+                    }
+                    
                 }
             }else{
                 self.showConnectingNotification()
+                if !self.taskWasCanceled {
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+                        self?.getNewMessages()
+                    }
+                }
             }
             return
         }
@@ -278,13 +326,13 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
         }
     }
     
-    func stopNewMessageTimer() {
-        if newMessageTimer != nil {
-            self.newMessageTimer?.invalidate()
-            self.convoHelper.cancelAllRequests()
-            taskWasCanceled = true
-        }
-    }
+//    func stopNewMessageTimer() {
+//        if newMessageTimer != nil {
+//            self.newMessageTimer?.invalidate()
+//            self.convoHelper.cancelAllRequests()
+//            taskWasCanceled = true
+//        }
+//    }
     
     // MARK: JSQ Overrides
 
@@ -403,7 +451,9 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, avatarImageDataForItemAt indexPath: IndexPath?) -> JSQMessageAvatarImageDataSource? {
         let message = messages[(indexPath?.item)!]
         if message.senderId != senderId {
-            return JSQMessagesAvatarImage(avatarImage: avatarImage, highlightedImage: avatarImage, placeholderImage: avatarImage!)
+            if avatarImage != nil{
+                return JSQMessagesAvatarImage(avatarImage: avatarImage, highlightedImage: avatarImage, placeholderImage: avatarImage!)
+            }
         }
 
         return nil
@@ -428,12 +478,12 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
         
         //sendlogic here
-        stopNewMessageTimer()
+//        stopNewMessageTimer()
         self.addMessage(withId: senderId, name: senderDisplayName, text: text, timestamp: date)
         self.finishSendingMessage(animated: true)
         convoHelper.sendConversationMessageRequest(conversationID: conversation.ID, senderID: myUserID, message: text){ responseObject, error in
             
-            self.startNewMessageTimer()//start message timer again
+//            self.startNewMessageTimer()//start message timer again
             
             if error == nil{
                 if responseObject != "-1" && responseObject != "" {

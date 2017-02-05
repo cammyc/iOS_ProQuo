@@ -16,12 +16,18 @@ import Whisper
 import Kingfisher
 
 
+protocol PushNotificationDelegate : class {
+    var pushNotificationDelegateID: Int {get set}
+    func didReceivePushNotification(data: [String: Any])
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let loginHelper = LoginHelper()
+    var pushDelegates = [PushNotificationDelegate]()
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -133,38 +139,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Persist it in your backend in case it's new
     }
     
+    func addPushNotificationDelegate(newDelegate: PushNotificationDelegate) {
+        if (pushDelegates.index{$0 === newDelegate} == nil) {
+            pushDelegates.append(newDelegate)
+        }
+    }
+    
+    func removePushNotificationDelegate(oldDelegate: PushNotificationDelegate){
+        for i in 0 ..< pushDelegates.count{
+            if pushDelegates[i].pushNotificationDelegateID == oldDelegate.pushNotificationDelegateID {
+                pushDelegates.remove(at: i);
+                return
+            }
+        }
+    }
+    
     // Push notification received
     func application(_ application: UIApplication, didReceiveRemoteNotification data: [AnyHashable : Any]) {
         // Print notification payload data
-        print("Push notification received: \(data)")
-        
+        //print("Push notification received: \(data)")
+//        let badgeCount = UIApplication.shared.applicationIconBadgeNumber + 1
+//        UIApplication.shared.applicationIconBadgeNumber = badgeCount
         if application.applicationState == .inactive || application.applicationState == .background {
 //            // Access the storyboard and fetch an instance of the view controller
 //            let viewController = self.window!.rootViewController as? SWRevealViewController
 //            viewController?.rearViewController.performSegue(withIdentifier: "segue_my_convos", sender: nil)
-//
+//            let badgeCount = UIApplication.shared.applicationIconBadgeNumber + 1
+//            UIApplication.shared.applicationIconBadgeNumber = badgeCount
+            
+            //this isnt being called
         }else{
-        
             let push = data as NSDictionary
             
             do {
                 if let data = push["data"] as? String{
                     
-                    let customData = try? JSONSerialization.jsonObject(with: data.data(using: .utf8)!, options: []) as! [String: Any]
+                    if let customData = try? JSONSerialization.jsonObject(with: data.data(using: .utf8)!, options: []) as! [String: Any]
+                    {
                     
-                    KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (customData?["imageURL"]) as! String)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                        if image != nil{
-                            let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
-                            let announcement = Announcement(title: customData!["yourName"] as! String, subtitle: customData?["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
-                            
-                            Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
-                            
+                        let hideWhisper = self.window?.currentViewController() is SelectedConversationMessagesViewController || self.window?.currentViewController() is ConversationsTableViewController
+                        
+                        if hideWhisper {
+                            UIApplication.shared.applicationIconBadgeNumber = 0
+
+                            for delegate in pushDelegates {
+                                delegate.didReceivePushNotification(data: customData)
+                            }
                         }else{
-                            let announcement = Announcement(title: customData?["yourName"] as! String, subtitle: customData?["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
-                            
-                            Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
+                            KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (customData["imageURL"]) as! String)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                                if image != nil{
+                                    let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
+                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
+                                    
+                                    Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
+                                    
+                                }else{
+                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
+                                    
+                                    Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
+                                }
+                            })
                         }
-                    })
+                    }
+                    
                 }
             } catch {
                 print("Error deserializing JSON: \(error)")
@@ -190,11 +227,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //convoHelper.stopBackgroundMessageCheckTimer()
+        self.window?.currentViewController()?.beginAppearanceTransition(false, animated: false)
+        self.window?.currentViewController()?.endAppearanceTransition()
     }
     
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        self.window?.currentViewController()?.beginAppearanceTransition(true, animated: false)
+        self.window?.currentViewController()?.endAppearanceTransition()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

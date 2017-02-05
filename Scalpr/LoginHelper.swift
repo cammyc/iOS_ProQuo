@@ -11,6 +11,7 @@ import Alamofire
 import FBSDKLoginKit
 import FacebookCore
 import FacebookLogin
+import SwiftKeychainWrapper
 
 
 class LoginHelper{
@@ -20,7 +21,7 @@ class LoginHelper{
     init?(){}
     
     func LoginRequest(emailPhone: String, password: String, completionHandler: @escaping (String?, NSError?) -> ()){
-        let parameters: Parameters = ["emailPhone": emailPhone, "password": password, "retrieveUserInfo": "true"]
+        let parameters: Parameters = ["emailPhone": emailPhone, "password": password]
         
 //        let configuration = URLSessionConfiguration.default
 //        configuration.timeoutIntervalForRequest = 10
@@ -204,6 +205,24 @@ class LoginHelper{
         }
     }
 
+    func removeAccessToken(accessToken: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["accessToken": accessToken]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/remove_access_token.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+
     
     func getUserDetailsFromJson(json: String)->Any?{
         let u = User()
@@ -231,6 +250,10 @@ class LoginHelper{
                 u.phoneNumber = phone
             }
             
+            if let accessToken = parsedData["accessToken"] as? String{
+                u.accessToken = accessToken
+            }
+            
         } catch let error as NSError {
             print(error)
             return nil
@@ -251,8 +274,9 @@ class LoginHelper{
         preferences.set(user.email, forKey: "email")
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
-        
-        //  Save to disk
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(user.accessToken, forKey: "accessToken")
+
+        print("save successful: " + String(saveSuccessful))
         return preferences.synchronize()
     }
     
@@ -269,6 +293,10 @@ class LoginHelper{
             user.email = preferences.object(forKey: "email") as! String
             user.phoneNumber = preferences.object(forKey: "phoneNumber") as! String
             user.password = preferences.object(forKey: "password") as! String
+            if let retrievedString = KeychainWrapper.standard.string(forKey: "accessToken") {
+                user.accessToken = retrievedString
+            }
+
         }
     
         return user
@@ -285,6 +313,7 @@ class LoginHelper{
         preferences.set(user.email, forKey: "email")
         preferences.set(user.phoneNumber, forKey: "phoneNumber")
         preferences.set(user.password, forKey: "password")
+        KeychainWrapper.standard.remove(key: "accessToken")
        // preferences.set(nil, forKey: "deviceNotificationToken") no need to do this because it never changes...
         
         FBSDKLoginManager().logOut()
