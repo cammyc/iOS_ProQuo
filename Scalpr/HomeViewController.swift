@@ -631,7 +631,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     contactSeller(attraction: attraction)
                 }
             }else{
-                contactSeller(attraction: attraction)
+//                contactSeller(attraction: attraction)
+                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
             }
         }else if let cdAttraction = marker.userData as? cdAttractionMO{
             let attraction = attractionHelper.cdAttractionToReg(attr: cdAttraction)
@@ -643,7 +644,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     contactSeller(attraction: attraction)
                 }
             }else{
-                contactSeller(attraction: attraction)
+                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
             }
 
         }

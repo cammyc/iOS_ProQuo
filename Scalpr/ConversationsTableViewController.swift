@@ -75,6 +75,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         UIApplication.shared.applicationIconBadgeNumber = 0
         registerForNotificationDelegate()
 
@@ -87,6 +88,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         hideConnectingNotification()
         unregisterForNotificationDelegate()
         taskWasCanceled = true

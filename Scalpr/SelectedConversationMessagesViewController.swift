@@ -11,6 +11,8 @@ import MBProgressHUD
 import Kingfisher
 import JSQMessagesViewController
 import Whisper
+import IQKeyboardManagerSwift
+
 
 
 class SelectedConversationMessagesViewController: JSQMessagesViewController, PushNotificationDelegate {
@@ -43,6 +45,8 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
         // No avatars
         //collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        
+        IQKeyboardManager.sharedManager().enable = false
         
         
         myUserID = (loginHelper?.getLoggedInUser().ID)!
@@ -125,6 +129,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
     
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         unregisterForNotificationDelegate()
 //        stopNewMessageTimer()
 //        stopUpdateLastMessageTimer()
@@ -135,6 +140,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
     
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         registerForNotificationDelegate()
         UIApplication.shared.applicationIconBadgeNumber = 0
         taskWasCanceled = false
