@@ -23,6 +23,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
     var refreshConversationsTimer: Timer? = nil
     var isInEditMode = false
     var taskWasCanceled = false;
+    var jumpToConvoID = -1;
 
     override func viewDidLoad() {
         super.viewDidLoad()

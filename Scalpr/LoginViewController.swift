@@ -11,6 +11,7 @@ import MBProgressHUD
 import FacebookLogin
 import FacebookCore
 import FBSDKLoginKit
+import SafariServices
 
 class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
@@ -61,6 +62,12 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PostTicketViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+    }
+    
+    
+    @IBAction func bForgotPassword(_ sender: Any) {
+        let svc = SFSafariViewController(url: NSURL(string: "http://proquoapp.com/forgotPassword.html") as! URL)
+        present(svc, animated: true, completion: nil)
     }
     
 
