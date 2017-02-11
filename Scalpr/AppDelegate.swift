@@ -190,12 +190,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (customData["imageURL"]) as! String)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                                 if image != nil{
                                     let circleImage = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 50, height: 50)))
-                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: circleImage, duration: TimeInterval(5), action: nil)
+                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: circleImage, duration: TimeInterval(5), action: {
+                                        
+//                                        self.window?.currentViewController()?.performSegue(withIdentifier: "segue_my_convos", sender: nil)
+                                        
+                                    })
+
                                     
                                     Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
                                     
                                 }else{
-                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: nil, duration: TimeInterval(5), action: nil)
+                                    let announcement = Announcement(title: customData["yourName"] as! String, subtitle: customData["message"] as? String, image: nil, duration: TimeInterval(5), action: {
+                                    
+//                                        if let viewController = self.window?.currentViewController(), viewController is HomeViewController {
+//                                            viewController.revealViewController().rearViewController.performSegue(withIdentifier: "segue_my_convos", sender: nil)
+//                                        }
+                                    
+                                    })
+                                    
                                     
                                     Whisper.show(shout: announcement, to: (self.window?.currentViewController())!)
                                 }
