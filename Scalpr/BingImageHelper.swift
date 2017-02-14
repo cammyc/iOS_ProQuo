@@ -38,7 +38,7 @@ class BingImageHelper{
         urlString?.append("&mkt=en-us")
         urlString?.append("&safeSearch=Moderate")
         
-        let header = ["Ocp-Apim-Subscription-Key":"eda851850263475eafeab76e243880ac"]
+        let header = ["Ocp-Apim-Subscription-Key":"af466a4301e4434aab69bbc02176a9e9"]
         
         Alamofire.request(urlString!, method: .post, headers: header).responseJSON { response in
             switch response.result {

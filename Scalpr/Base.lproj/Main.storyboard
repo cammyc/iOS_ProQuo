@@ -1065,7 +1065,6 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="He4-0a-vjI">
                                 <rect key="frame" x="16" y="102" width="288" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ld9-Tw-DcE"/>
                                 </constraints>
@@ -1089,8 +1088,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CSD-5R-BQr" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="0a5-ju-HBN"/>
-                            <constraint firstItem="He4-0a-vjI" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="1hD-D5-d9L"/>
                             <constraint firstItem="CSD-5R-BQr" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="2g2-QS-3Vx"/>
+                            <constraint firstItem="He4-0a-vjI" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="5d8-MA-r41"/>
                             <constraint firstItem="jnY-gq-ECz" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="6UG-4V-Rtj"/>
                             <constraint firstItem="CSD-5R-BQr" firstAttribute="top" secondItem="ctl-Ev-Psu" secondAttribute="bottom" constant="8" id="6Um-7M-6z0"/>
                             <constraint firstItem="XHJ-NN-bqF" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="6wA-Rq-qCT"/>
@@ -1101,7 +1100,6 @@
                             <constraint firstItem="ctl-Ev-Psu" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="Fac-4e-r8W"/>
                             <constraint firstItem="aJa-RL-IbE" firstAttribute="centerX" secondItem="BQe-XS-hrs" secondAttribute="centerX" id="HhV-5b-qO8"/>
                             <constraint firstItem="b7G-4l-5bK" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="KeM-Qp-1CC"/>
-                            <constraint firstItem="He4-0a-vjI" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="KfH-Zj-S9a"/>
                             <constraint firstItem="nxL-Qh-lJ3" firstAttribute="top" secondItem="He4-0a-vjI" secondAttribute="bottom" constant="8" id="KrR-yc-lRR"/>
                             <constraint firstItem="XHJ-NN-bqF" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="M4y-Go-gc1"/>
                             <constraint firstItem="ctl-Ev-Psu" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="PuR-fW-I6S"/>
@@ -1117,6 +1115,7 @@
                             <constraint firstItem="DxG-XM-2t5" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="Xzi-6j-mGB"/>
                             <constraint firstItem="jnY-gq-ECz" firstAttribute="top" secondItem="Sf4-aY-CL5" secondAttribute="bottom" constant="4" id="Z2Q-1m-P7B"/>
                             <constraint firstItem="eWX-06-3Qp" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="aOg-Pm-qpe"/>
+                            <constraint firstItem="He4-0a-vjI" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="bEh-AI-hrc"/>
                             <constraint firstItem="eWX-06-3Qp" firstAttribute="leading" secondItem="BQe-XS-hrs" secondAttribute="leadingMargin" id="ci6-at-J6e"/>
                             <constraint firstItem="eWX-06-3Qp" firstAttribute="top" secondItem="CSD-5R-BQr" secondAttribute="bottom" constant="8" id="ddK-Xc-xtw"/>
                             <constraint firstItem="jnY-gq-ECz" firstAttribute="trailing" secondItem="BQe-XS-hrs" secondAttribute="trailingMargin" id="e29-Ym-X1K"/>
@@ -1151,6 +1150,7 @@
                         <outlet property="bCreateAccount" destination="HhA-zU-Lyn" id="a1C-Jv-RsW"/>
                         <outlet property="bSignIn" destination="XHJ-NN-bqF" id="dDh-cx-emX"/>
                         <outlet property="fbLoginView" destination="He4-0a-vjI" id="C2R-ce-OE6"/>
+                        <outlet property="googleSignInButton" destination="jnY-gq-ECz" id="CwD-2v-BuW"/>
                         <outlet property="tfConfirmEmailPhoneCC" destination="ecA-3c-H3r" id="d75-nx-89Z"/>
                         <outlet property="tfEmailPhoneCC" destination="QLX-Cq-lKZ" id="OVM-Bw-2P8"/>
                         <outlet property="tfEmailPhoneLogin" destination="nxL-Qh-lJ3" id="77w-fs-U2m"/>

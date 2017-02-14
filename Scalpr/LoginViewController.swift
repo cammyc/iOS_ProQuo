@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     @IBOutlet weak var bSignIn: UIButton!
     @IBOutlet weak var bCreateAccount: UIButton!
     @IBOutlet weak var fbLoginView: UIView!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
     
     // MARK: Misc Initialization
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -50,7 +51,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        facebookInitialization()
+//        facebookInitialization()
         
         googleInitialization()
         
@@ -62,6 +63,13 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PostTicketViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        facebookInitialization() //need view parameters to be defined for login button, 
+
     }
     
     
@@ -81,6 +89,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     func googleInitialization(){
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+        
+        googleSignInButton.style = .wide
     }
     
     
@@ -163,13 +173,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
 
         loginButton.frame.size.width = fbLoginView.frame.width
         loginButton.frame.size.height = fbLoginView.frame.height
-        //loginButton.frame.origin.x = (fbLoginView.frame.width - loginButton.frame.width) / 2.0;
         fbLoginView.addSubview(loginButton)
-        
-//        if let accessToken = AccessToken.current {
-//            print("logged in")
-//        }
-        
+     
         loginButton.delegate = self
     }
     
