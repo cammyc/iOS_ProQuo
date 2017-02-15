@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import Whisper
+import UserNotifications
 
 
 class ConversationsTableViewController: UITableViewController, PushNotificationDelegate {
@@ -96,6 +97,51 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
 //        stopUpdateConvosTimer()
     }
     
+    func requestNotificationsAlert(){ //TEST ON PHONE TO MAKE SURE DEVICE TOKEN IS REGISTERED
+        
+        let preferences = UserDefaults.standard
+        let hasRequestedNotifications = preferences.object(forKey: "hasRequestedNotifications")
+        
+        if hasRequestedNotifications == nil{
+            
+            let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when a new message is received?",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
+                // iOS 10 support
+                if #available(iOS 10, *) {
+                    UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                    // iOS 9 support
+                else if #available(iOS 9, *) {
+                    UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                    // iOS 8 support
+                else if #available(iOS 8, *) {
+                    UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                    // iOS 7 support
+                else {
+                    UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
+                }
+                
+                preferences.set(true, forKey: "hasRequestedNotifications")
+                preferences.synchronize()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (test) -> Void in
+                
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+
+    
     func loadConversations(){
         conversations.removeAll()
         let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -117,7 +163,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
                         self.tableView.reloadData()
                         
 //                        self.startUpdateConvosTimer()
-
+                        self.requestNotificationsAlert()
                     }else{
                         self.showAlertMaybeClose(title: "No Conversations", text: "You don't have any active conversations")
                     }

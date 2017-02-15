@@ -14,6 +14,7 @@ import MBProgressHUD
 import MessageUI
 import KCFloatingActionButton
 import Whisper
+import UserNotifications
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -38,6 +39,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     var searchActive = false
     var lastZoom: Float = 0.00
     var idleFromTap = false
+    var requestNotification = false;
     var selectedMarker:GMSMarker? = nil
     let fabPostTicket = KCFloatingActionButton()
     let fabGoToMyLocation = KCFloatingActionButton()
@@ -126,14 +128,25 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 //        
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        let nc = NotificationCenter.default
-//        nc.post(name:myNotification,
-//                object: nil,
-//                userInfo:["message":"Hello there!", "date":Date()])
-//    }
-//    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if requestNotification {
+            requestNotificationsAlert()
+            requestNotification = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if CoreDataHelper.attractionChanged {
+            getInitialTickets()
+            CoreDataHelper.attractionChanged = false
+        }
+    }
+
+
+    
+//
 //    func catchNotification(notification:Notification) -> Void {
 //        print("Catch notification")
 //        
@@ -180,12 +193,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         self.searchBar.endEditing(true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if CoreDataHelper.attractionChanged {
-            getInitialTickets()
-            CoreDataHelper.attractionChanged = false
-        }
-    }
     
     func emptyKCFABSelected(_ fab: KCFloatingActionButton) {
         if fab == fabPostTicket{
@@ -852,6 +859,50 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
     }
     
+    func requestNotificationsAlert(){ //TEST ON PHONE TO MAKE SURE DEVICE TOKEN IS REGISTERED
+        
+        let preferences = UserDefaults.standard
+        let hasRequestedNotifications = preferences.object(forKey: "hasRequestedNotifications")
+        
+        if hasRequestedNotifications == nil{
+        
+            let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when contacted by a buyer?",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
+                    // iOS 10 support
+                    if #available(iOS 10, *) {
+                        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 9 support
+                    else if #available(iOS 9, *) {
+                        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 8 support
+                    else if #available(iOS 8, *) {
+                        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 7 support
+                    else {  
+                        UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
+                    }
+                
+                preferences.set(true, forKey: "hasRequestedNotifications")
+                preferences.synchronize()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (test) -> Void in
+                
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+
+    }
+    
     @IBAction func unwindToHomeVC(segue:UIStoryboardSegue) {
         
         
@@ -870,6 +921,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             loginResponseNotification.mode = MBProgressHUDMode.customView
             loginResponseNotification.label.text = "Ticket Posted!"
             loginResponseNotification.hide(animated: true, afterDelay: 3)
+            
+            requestNotification = true;
+            
             
             if newAttraction != nil{
                 let marker = showMarker(attraction: self.newAttraction!)
