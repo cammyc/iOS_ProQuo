@@ -132,8 +132,13 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (test) -> Void in
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (test) -> Void in
                 
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Never", style: .cancel, handler: { (test) -> Void in
+                preferences.set(false, forKey: "hasRequestedNotifications")
+                preferences.synchronize()
             }))
             
             self.present(alert, animated: true, completion: nil)
