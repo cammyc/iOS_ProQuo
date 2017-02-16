@@ -865,13 +865,29 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let hasRequestedNotifications = preferences.object(forKey: "hasRequestedNotifications")
         
         if hasRequestedNotifications == nil{
+            
+            let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
+            
+            if notificationType == [] {
         
-            let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when contacted by a buyer?",
-                                          preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
+                let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when contacted by a buyer?",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
                     // iOS 10 support
                     if #available(iOS 10, *) {
-                        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+                        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+                            
+                            if granted == false {
+                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find ProQuo and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
+                                
+                                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (test) -> Void in
+                                    
+                                }))
+                                
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            
+                        }
                         UIApplication.shared.registerForRemoteNotifications()
                     }
                         // iOS 9 support
@@ -885,25 +901,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         UIApplication.shared.registerForRemoteNotifications()
                     }
                         // iOS 7 support
-                    else {  
+                    else {
                         UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
                     }
+                    
+                    preferences.set(true, forKey: "hasRequestedNotifications")
+                    preferences.synchronize()
+                    
+                }))
                 
-                preferences.set(true, forKey: "hasRequestedNotifications")
-                preferences.synchronize()
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (test) -> Void in
+                    
+                }))
                 
-            }))
-            
-            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (test) -> Void in
+                alert.addAction(UIAlertAction(title: "Never", style: .cancel, handler: { (test) -> Void in
+                    preferences.set(false, forKey: "hasRequestedNotifications")
+                    preferences.synchronize()
+                }))
                 
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Never", style: .cancel, handler: { (test) -> Void in
-                preferences.set(false, forKey: "hasRequestedNotifications")
-                preferences.synchronize()
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
 
     }
@@ -942,6 +959,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     func showMarker(attraction: Attraction)->GMSMarker{
         let marker = GMSMarker()
+        marker.tracksInfoWindowChanges = true
         marker.position = CLLocationCoordinate2D(latitude: attraction.lat, longitude: attraction.lon)
         marker.title = attraction.name
         marker.userData = attraction

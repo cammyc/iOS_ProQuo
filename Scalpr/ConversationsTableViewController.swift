@@ -104,44 +104,62 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
         
         if hasRequestedNotifications == nil{
             
-            let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when a new message is received?",
-                                          preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
-                // iOS 10 support
-                if #available(iOS 10, *) {
-                    UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-                    // iOS 9 support
-                else if #available(iOS 9, *) {
-                    UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-                    // iOS 8 support
-                else if #available(iOS 8, *) {
-                    UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-                    // iOS 7 support
-                else {
-                    UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
-                }
-                
-                preferences.set(true, forKey: "hasRequestedNotifications")
-                preferences.synchronize()
-                
-            }))
+            let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
             
-            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (test) -> Void in
+            if notificationType == [] {
+                let alert = UIAlertController(title: "Notifications", message:"Would you like to receive a notification when a new message is received?",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (test) -> Void in
+                    // iOS 10 support
+                    if #available(iOS 10, *) {
+                        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+                        
+                            if granted == false {
+                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find ProQuo and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
+                                
+                                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (test) -> Void in
+                                    
+                                }))
+                                
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        
+                        }
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 9 support
+                    else if #available(iOS 9, *) {
+                        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 8 support
+                    else if #available(iOS 8, *) {
+                        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                        // iOS 7 support
+                    else {
+                        UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
+                    }
+                    
+                    preferences.set(true, forKey: "hasRequestedNotifications")
+                    preferences.synchronize()
+                    
+                }))
                 
-            }))
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (test) -> Void in
+                    
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Never", style: .cancel, handler: { (test) -> Void in
+                    preferences.set(false, forKey: "hasRequestedNotifications")
+                    preferences.synchronize()
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+
+            }
             
-            alert.addAction(UIAlertAction(title: "Never", style: .cancel, handler: { (test) -> Void in
-                preferences.set(false, forKey: "hasRequestedNotifications")
-                preferences.synchronize()
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
         }
         
     }
