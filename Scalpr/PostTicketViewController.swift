@@ -547,13 +547,13 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         
         KingfisherManager.shared.cache.removeImage(forKey: selectedImageURL)
         selectedImageURL = self.items[indexPath.item]
-        ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+        ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL), placeholder: nil, options: [.forceRefresh], progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
                 if image != nil {
                     self.ivSelectedImage.image = ImageHelper.circleImage(image: image!)
                 }
             }
         )
-
+        
         ivSelectedImage.isHidden = false
         collectionView.isHidden = true
         self.tfSearchImageQuery.isHidden = true
