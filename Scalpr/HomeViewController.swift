@@ -44,6 +44,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     let fabPostTicket = KCFloatingActionButton()
     let fabGoToMyLocation = KCFloatingActionButton()
     var firstLocationUpdate = true
+    
+    var postSelectedFromList: cdAttractionMO? = nil
+    var idleFromAttractionListContactSeller = false
 
     var blurView: UIVisualEffectView? = nil
     
@@ -530,7 +533,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if idleFromTap {
             mapView.selectedMarker = selectedMarker
             idleFromTap = false
+        }else if idleFromAttractionListContactSeller{
+            self.contactSeller(attraction: attractionHelper.cdAttractionToReg(attr: postSelectedFromList!))
+            idleFromAttractionListContactSeller = false //reset
         }
+        
+        
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -698,8 +706,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         self.present(alert,animated: true,completion: nil)
 
-        
-        
         
         
 //        loginHelper.getAccountDetails(userID: attraction.creatorID){ responseObject, error in
@@ -925,6 +931,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue_attraction_list"{
+            let attractionListTableViewController = (segue.destination as! AttractionListTableViewController)
+            attractionListTableViewController.attractions = coreDataHelper.getAttractionsByDate() as! [cdAttractionMO]
+        }
+    }
+    
     @IBAction func unwindToHomeVC(segue:UIStoryboardSegue) {
         
         
@@ -952,6 +965,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 mapView.selectedMarker = marker
                 _ = CLLocation(latitude: (self.newAttraction?.lat)!, longitude: (self.newAttraction?.lon)!)
                 centerInfoWindow(mapView: self.mapView, marker: marker)
+            }
+        }else if segue.identifier == "segue_go_to_post"{
+            if postSelectedFromList != nil{
+                mapView.animate(to: GMSCameraPosition.camera(withLatitude: (postSelectedFromList?.lat)!, longitude: (postSelectedFromList?.lon)!, zoom: 15.5))
+            }
+        }else if segue.identifier == "segue_contact_seller_from_list"{
+            if postSelectedFromList != nil{
+                let zoomTo:Float = (self.mapView.camera.zoom == 15.5) ? 15.4 : 15.5
+                mapView.animate(to: GMSCameraPosition.camera(withLatitude: (postSelectedFromList?.lat)!, longitude: (postSelectedFromList?.lon)!, zoom: zoomTo))
+                idleFromAttractionListContactSeller = true
             }
         }
     }

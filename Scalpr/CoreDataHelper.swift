@@ -166,6 +166,29 @@ class CoreDataHelper : NSObject {
         return array as NSArray
     }
     
+    func getAttractionsByDate()->NSArray{
+        
+        let moc = managedObjectContext
+        
+        var array = [cdAttractionMO]()
+        
+        let attractionFetch: NSFetchRequest<cdAttractionMO> = NSFetchRequest(entityName: "Attraction")
+        
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        attractionFetch.sortDescriptors = sortDescriptors
+        
+        
+        do {
+            array = try moc.fetch(attractionFetch as! NSFetchRequest<NSFetchRequestResult>) as! [cdAttractionMO]
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+        
+        return array as NSArray
+    }
+
+    
     func getAttractions(query: String)->NSArray{
         
         let moc = managedObjectContext

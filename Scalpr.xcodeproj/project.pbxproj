@@ -62,6 +62,7 @@
 		D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB896B1DA178BE005DB173 /* LoginViewController.swift */; };
 		D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */; };
 		E330E78F1E232BDE001932C0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E330E78E1E232BDE001932C0 /* UserNotifications.framework */; };
+		E334392B1E5792FC0019AE1B /* AttractionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E334392A1E5792FC0019AE1B /* AttractionListTableViewController.swift */; };
 		E339BC2E1E39408A0040FBE3 /* GTMOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E339BC2D1E39408A0040FBE3 /* GTMOAuth2.framework */; };
 		E339BC2F1E3940A80040FBE3 /* GTMOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E339BC2D1E39408A0040FBE3 /* GTMOAuth2.framework */; };
 		E339BC301E3940A80040FBE3 /* GTMOAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E339BC2D1E39408A0040FBE3 /* GTMOAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -234,6 +235,7 @@
 		E330E7D81E234382001932C0 /* APNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APNS.framework; path = "Pods/../build/Debug-iphoneos/APNS/APNS.framework"; sourceTree = "<group>"; };
 		E330E7D91E234382001932C0 /* ProtocolBuffers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProtocolBuffers.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ProtocolBuffers-Swift/ProtocolBuffers.framework"; sourceTree = "<group>"; };
 		E330E7E51E234458001932C0 /* APNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APNS.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/APNS/APNS.framework"; sourceTree = "<group>"; };
+		E334392A1E5792FC0019AE1B /* AttractionListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttractionListTableViewController.swift; sourceTree = "<group>"; };
 		E339BC241E3940100040FBE3 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		E339BC251E3940100040FBE3 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E339BC261E3940100040FBE3 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				D24C433E1DA76B3500547332 /* SetTicketLocationViewController.swift */,
 				D2FB896B1DA178BE005DB173 /* LoginViewController.swift */,
 				D2F413A31DAB309E0047A3C6 /* CustomInfoWindow.swift */,
+				E334392A1E5792FC0019AE1B /* AttractionListTableViewController.swift */,
 				D211351C1DAC4B4C0064EACF /* MyTicketsTableViewController.swift */,
 				D21135321DAC51860064EACF /* MyTicketTableViewCell.swift */,
 				D26C0EDE1D9F1D5300ECE9F2 /* BingImageCollectionViewCell.swift */,
@@ -725,6 +728,7 @@
 				D20637451D9B31DB00EAFF0F /* HomeViewController.swift in Sources */,
 				D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */,
 				D228D5381E02150B009200E6 /* MessagingPaddingLabel.swift in Sources */,
+				E334392B1E5792FC0019AE1B /* AttractionListTableViewController.swift in Sources */,
 				D24C43411DA76B5D00547332 /* LocationHelper.swift in Sources */,
 				D26C0EDF1D9F1D5300ECE9F2 /* BingImageCollectionViewCell.swift in Sources */,
 				D24C433F1DA76B3500547332 /* SetTicketLocationViewController.swift in Sources */,
