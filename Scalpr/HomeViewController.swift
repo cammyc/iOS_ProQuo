@@ -384,6 +384,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     // MARK: Get Ticket Functions
     func getInitialTickets(){
+        self.coreDataHelper.wipeAttractionsFromDB()
+
         mapView.clear()
         let bound = GMSCoordinateBounds(region: mapView.projection.visibleRegion())
         let northEast = bound.northEast
@@ -396,12 +398,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
         attractionHelper.getInitialAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude) { responseObject, error in
             
-            
             if responseObject != nil {
                 // use responseObject and error here
                 
                 if let attractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as? NSArray){
-                    self.coreDataHelper.wipeAttractionsFromDB()
 
                     for i in 0 ..< attractions.count{
                         
@@ -414,6 +414,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     }
                 }
             }else if error != nil {
+
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
                     self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
                 }else{
