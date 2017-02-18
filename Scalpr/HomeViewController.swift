@@ -534,7 +534,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             mapView.selectedMarker = selectedMarker
             idleFromTap = false
         }else if idleFromAttractionListContactSeller{
-            self.contactSeller(attraction: attractionHelper.cdAttractionToReg(attr: postSelectedFromList!))
+            let user = loginHelper.getLoggedInUser()
+            if user.ID != 0{
+                self.contactSeller(attraction: attractionHelper.cdAttractionToReg(attr: postSelectedFromList!))
+            }else{
+                //MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
+                self.showOkAlert(title: "Please Login", text: "You must be logged in to contact the seller.")
+            }
             idleFromAttractionListContactSeller = false //reset
         }
         
@@ -647,7 +653,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 }
             }else{
 //                contactSeller(attraction: attraction)
-                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
+//                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
+                  self.showOkAlert(title: "Please Login", text: "You must be logged in to contact the seller.")
+
             }
         }else if let cdAttraction = marker.userData as? cdAttractionMO{
             let attraction = attractionHelper.cdAttractionToReg(attr: cdAttraction)
@@ -1144,7 +1152,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
     }
 
-    
+    func showOkAlert(title: String, text: String){
+        let refreshAlert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            self.dismiss(animated: true)
+        }))
+        
+        self.present(refreshAlert,animated: true,completion: nil)
+    }
 
 
 }
