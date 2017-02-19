@@ -44,6 +44,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     let fabPostTicket = KCFloatingActionButton()
     let fabGoToMyLocation = KCFloatingActionButton()
     var firstLocationUpdate = true
+    var attemptedInitialTickets = false
     
     var postSelectedFromList: cdAttractionMO? = nil
     var idleFromAttractionListContactSeller = false
@@ -398,6 +399,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
         attractionHelper.getInitialAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude) { responseObject, error in
             
+            self.attemptedInitialTickets = true
+            
             if responseObject != nil {
                 // use responseObject and error here
                 
@@ -431,6 +434,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     func getNewTickets(){
+        if !attemptedInitialTickets {
+            return //don't get new tickets if initial aren't loaded - really should get rid of initial function...
+        }
+        
         let oldIDs = self.coreDataHelper.getCommaSeperatedAttractionIDString()
         
         let bound = GMSCoordinateBounds(region: self.mapView.projection.visibleRegion())
