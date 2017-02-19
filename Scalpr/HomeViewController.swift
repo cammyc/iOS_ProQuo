@@ -279,6 +279,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             if CLLocationManager.authorizationStatus() == .denied{
                 self.enableLocInSettings()
             }
+            
         }))
         
         
@@ -811,6 +812,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             locationManager.requestLocation()
             
             if userLocation == nil{
+                attemptedInitialTickets = true //so that when location updates new tickets appear
                 self.view.makeToast("Retrieving Your Location...", duration: 2.0, position: .bottom)
             }
         }
