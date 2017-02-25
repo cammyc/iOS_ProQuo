@@ -530,14 +530,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        if self.mapView.camera.zoom >= 12.0{
-            getNewTickets()
-        }else{
-            if lastZoom != self.mapView.camera.zoom && userLocation != nil{
-                self.view.makeToast("Please zoom in to load posts", duration: 1.0, position: .bottom)
-                lastZoom = self.mapView.camera.zoom
-            }
-        }
+        getNewTickets()
+//        if self.mapView.camera.zoom >= 12.0{
+//            getNewTickets()
+//        }else{
+//            if lastZoom != self.mapView.camera.zoom && userLocation != nil{
+//                self.view.makeToast("Please zoom in to load posts", duration: 1.0, position: .bottom)
+//                lastZoom = self.mapView.camera.zoom
+//            }
+//        }
         
         if idleFromTap {
             mapView.selectedMarker = selectedMarker
