@@ -150,6 +150,7 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             
             
             self.ivSelectedImage.isHidden = false
+            self.tfSearchImageQuery.isHidden = true
             self.collectionView.isHidden = true
             
             self.ivSelectedImage.kf.setImage(with: URL(string: selectedImageURL), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
