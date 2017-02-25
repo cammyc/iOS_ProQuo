@@ -43,6 +43,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     var selectedMarker:GMSMarker? = nil
     let fabPostTicket = KCFloatingActionButton()
     let fabGoToMyLocation = KCFloatingActionButton()
+    let fabAttractionList = KCFloatingActionButton()
     var firstLocationUpdate = true
     var attemptedInitialTickets = false
     
@@ -112,6 +113,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         searchBar.delegate = self
         
         
+        
         let icon = UIImage(named: "ic_money_white")
         fabPostTicket.buttonImage = ImageHelper.ResizeImage(image: icon!, size: CGSize(width: (icon?.size.width)!/2, height: (icon?.size.height)!/2))
         fabPostTicket.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
@@ -119,17 +121,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabPostTicket.friendlyTap = false
         self.view.addSubview(fabPostTicket)
         
+        let icon2 = UIImage(named: "list_icon_green")
+        fabAttractionList.buttonImage = ImageHelper.ResizeImage(image: icon2!, size: CGSize(width: (icon2?.size.width)!/2, height: (icon2?.size.height)!/2))
+        fabAttractionList.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0xFFFFFF)
+        fabAttractionList.fabDelegate = self
+        fabAttractionList.friendlyTap = false
+        fabAttractionList.paddingY = fabAttractionList.frame.height + 25
+        self.view.addSubview(fabAttractionList)
+
+        
         let icon1 = UIImage(named: "My_Location")
         fabGoToMyLocation.buttonImage = ImageHelper.ResizeImage(image: icon1!, size: CGSize(width: (icon1?.size.width)!/2, height: (icon1?.size.height)!/2))
         fabGoToMyLocation.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0xFFFFFF)
         fabGoToMyLocation.fabDelegate = self
         fabGoToMyLocation.friendlyTap = false
-        fabGoToMyLocation.paddingY = fabGoToMyLocation.frame.height + 25
+        fabGoToMyLocation.paddingY =  fabAttractionList.paddingY + fabGoToMyLocation.frame.height + 12.5
         self.view.addSubview(fabGoToMyLocation)
-
-//        let nc = NotificationCenter.default
-//        nc.addObserver(forName:myNotification, object:nil, queue:nil, using:catchNotification)
-//        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -215,6 +223,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 
                 present(refreshAlert, animated: true, completion: nil)
             }
+        }else if fab == fabAttractionList{
+            self.performSegue(withIdentifier: "segue_attraction_list", sender: nil)
         }else{
             if let location = locationHelper.getLastLocation() as? CLLocation{
                 self.centerMapOnLocation(location: location, withAnimation: true)
