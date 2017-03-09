@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-Ps-znz" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omr-Pf-MB5">
@@ -825,7 +825,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmS-5g-ChN" id="c9U-Nc-af2">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U41-HH-sVa">
@@ -960,6 +960,11 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="vq8-pu-xLn">
                             <color key="tintColor" red="0.17905855179999999" green="0.79642182589999999" blue="0.44250935320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="myT-Vf-bqC">
+                            <connections>
+                                <segue destination="dEX-w8-8eb" kind="presentation" identifier="segue_modal" id="zow-fp-fcC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="uYp-2s-Bek" id="gZG-Bp-0M7"/>
@@ -974,7 +979,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KA5-dJ-1bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2461.5999999999999" y="-155.17241379310346"/>
+            <point key="canvasLocation" x="2460" y="-155.28169014084509"/>
         </scene>
         <!--Login-->
         <scene sceneID="xj2-aH-KhT">
@@ -1166,7 +1171,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dq3-Zg-9hk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="byp-Z1-1Il" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2773.125" y="858.80281690140851"/>
+            <point key="canvasLocation" x="2769" y="1123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2GA-Lq-PFV">
@@ -1202,7 +1207,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfp-KT-hPJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1946" y="861"/>
+            <point key="canvasLocation" x="1931" y="1123"/>
         </scene>
         <!--LoggedOutMenuController-->
         <scene sceneID="Rf9-9W-2Bq">
@@ -1350,6 +1355,138 @@
             </objects>
             <point key="canvasLocation" x="1521" y="-1680"/>
         </scene>
+        <!--Modal View Controller-->
+        <scene sceneID="SZg-jH-igI">
+            <objects>
+                <viewController id="dEX-w8-8eb" customClass="ModalViewController" customModule="Scalpr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9w5-46-VtV"/>
+                        <viewControllerLayoutGuide type="bottom" id="kbb-4R-cl5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tMQ-Wt-ndB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ix-Wg-CHM">
+                                <rect key="frame" x="0.0" y="80" width="320" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C91-ds-VPm" customClass="DLRadioButton">
+                                        <rect key="frame" x="162" y="0.0" width="150" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="Lj8-tz-1PY"/>
+                                        </constraints>
+                                        <state key="normal" title="Being Sold">
+                                            <color key="titleColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
+                                                <real key="value" value="18"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                                <color key="value" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                                <color key="value" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyY-1V-egx" customClass="DLRadioButton">
+                                        <rect key="frame" x="8" y="0.0" width="150" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="rZc-B7-H9i"/>
+                                        </constraints>
+                                        <state key="normal" title="Requested">
+                                            <color key="titleColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
+                                                <real key="value" value="18"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                                <color key="value" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                                <color key="value" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="C91-ds-VPm" secondAttribute="bottom" id="8Pl-xF-jAZ"/>
+                                    <constraint firstItem="kyY-1V-egx" firstAttribute="leading" secondItem="7Ix-Wg-CHM" secondAttribute="leading" constant="8" id="H4T-9T-9II"/>
+                                    <constraint firstItem="kyY-1V-egx" firstAttribute="top" secondItem="7Ix-Wg-CHM" secondAttribute="top" id="Pej-Jv-Vbh"/>
+                                    <constraint firstAttribute="trailing" secondItem="C91-ds-VPm" secondAttribute="trailing" constant="8" id="dwu-xo-ucU"/>
+                                    <constraint firstAttribute="width" constant="320" id="jqR-gE-4qX"/>
+                                    <constraint firstAttribute="bottom" secondItem="kyY-1V-egx" secondAttribute="bottom" id="mPc-ql-sOY"/>
+                                    <constraint firstItem="C91-ds-VPm" firstAttribute="top" secondItem="7Ix-Wg-CHM" secondAttribute="top" id="p6P-CN-b89"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show tickets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHS-zg-rBM">
+                                <rect key="frame" x="102" y="49" width="116" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="KeP-30-EiL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3u8-26-iUm">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Options" id="a8m-pA-o6j">
+                                        <barButtonItem key="backBarButtonItem" title="Cancel" id="Gv4-wd-dkH"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="gis-Z7-rVX">
+                                            <connections>
+                                                <action selector="bFullScreen:" destination="dEX-w8-8eb" id="isN-QQ-QwZ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="cancel" id="Rrz-Dw-WfT">
+                                            <connections>
+                                                <action selector="bCancelTapped:" destination="dEX-w8-8eb" id="cwo-oS-eS4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RHS-zg-rBM" firstAttribute="top" secondItem="3u8-26-iUm" secondAttribute="bottom" constant="5" id="2Mz-vL-AIR"/>
+                            <constraint firstItem="7Ix-Wg-CHM" firstAttribute="centerX" secondItem="tMQ-Wt-ndB" secondAttribute="centerX" id="MQD-4Q-JgM"/>
+                            <constraint firstItem="3u8-26-iUm" firstAttribute="leading" secondItem="tMQ-Wt-ndB" secondAttribute="leading" id="Q2i-nc-vZB"/>
+                            <constraint firstItem="7Ix-Wg-CHM" firstAttribute="top" secondItem="RHS-zg-rBM" secondAttribute="bottom" constant="10" id="oMy-GT-ZPp"/>
+                            <constraint firstAttribute="trailing" secondItem="3u8-26-iUm" secondAttribute="trailing" id="p6Q-aT-wm9"/>
+                            <constraint firstItem="3u8-26-iUm" firstAttribute="top" secondItem="tMQ-Wt-ndB" secondAttribute="top" id="r4i-lS-Yh1"/>
+                            <constraint firstItem="RHS-zg-rBM" firstAttribute="centerX" secondItem="tMQ-Wt-ndB" secondAttribute="centerX" id="sRN-Yd-Qru"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="radioRequest" destination="kyY-1V-egx" id="iA1-B7-syD"/>
+                        <outlet property="radioSell" destination="C91-ds-VPm" id="ShG-Ls-95I"/>
+                        <outletCollection property="radioRequest" destination="kyY-1V-egx" id="tqH-fN-eCH"/>
+                        <outletCollection property="radioRequestSell" destination="kyY-1V-egx" collectionClass="NSMutableArray" id="ciw-a3-Zok"/>
+                        <outletCollection property="radioRequestSell" destination="C91-ds-VPm" collectionClass="NSMutableArray" id="rln-nn-Xnd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E2J-nb-4lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="536"/>
+        </scene>
         <!--Map Posts-->
         <scene sceneID="uwm-e8-HEg">
             <objects>
@@ -1363,7 +1500,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2K-7E-PTu" id="Sha-Co-jwY">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ozq-T2-P7z">
@@ -1432,7 +1569,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIS-XN-bEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="NGb-Tg-Yw1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3401" y="373"/>
+            <point key="canvasLocation" x="3401" y="434"/>
         </scene>
     </scenes>
     <resources>
@@ -1447,12 +1584,12 @@
         <image name="user" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G4W-z1-ANm"/>
+        <segue reference="tvo-6I-1vm"/>
+        <segue reference="tts-ff-Kg5"/>
         <segue reference="JWh-zl-6qP"/>
         <segue reference="BJu-aO-IlD"/>
+        <segue reference="G4W-z1-ANm"/>
         <segue reference="cVP-Y2-a6N"/>
-        <segue reference="tts-ff-Kg5"/>
-        <segue reference="jsM-2S-dSi"/>
         <segue reference="tPf-uy-COu"/>
     </inferredMetricsTieBreakers>
 </document>

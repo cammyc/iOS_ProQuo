@@ -15,6 +15,7 @@ import MessageUI
 import KCFloatingActionButton
 import Whisper
 import UserNotifications
+import DLRadioButton
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -52,6 +53,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
     var blurView: UIVisualEffectView? = nil
     
+    var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
+    
 //    let myNotification = Notification.Name(rawValue:"MyNotification")
 
     
@@ -60,10 +63,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         //print("view did load")
         mapView.delegate = self
         mapView.settings.consumesGesturesInView = false
+
         
         searchBar.delegate = self
         searchBar.layer.borderWidth = 0
-        
+                
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap))
         tapGesture.cancelsTouchesInView = false
@@ -111,8 +115,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         checkLocationAuthorizationStatus()
         searchBar.delegate = self
-        
-        
+                
         
         let icon = UIImage(named: "ic_money_white")
         fabPostTicket.buttonImage = ImageHelper.ResizeImage(image: icon!, size: CGSize(width: (icon?.size.width)!/2, height: (icon?.size.height)!/2))
@@ -139,6 +142,45 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         self.view.addSubview(fabGoToMyLocation)
         
     }
+    
+//    func setSwitchButton () {
+//        
+//        switchControl.backgroundColor = UIColor.red;
+//        switchControl.layer.cornerRadius = 16.0;
+//        
+//        switchControl.setOn(false, animated: false)
+//        switchControl.addTarget(self, action: #selector(switchValueDidChange(sender:)), for: .valueChanged)
+//        }
+//    
+//    
+//    func switchValueDidChange(sender:UISwitch!)
+//    {
+//        
+//        let preferences = UserDefaults.standard
+//        
+//        if preferences.object(forKey: "hasToggled") == nil{
+//            
+//            let explanation = "Now you can view tickets being sold and tickets that are being requested! When toggled on, instead of the map showing you tickets being sold by sellers it will show you the tickets that have been requested by buyers."
+//            
+//            let alert = UIAlertController(title: "View Requested Tickets!",message: explanation,
+//                        preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//
+//            preferences.set(true, forKey: "hasToggled")
+//        }
+//        
+//        
+//        if sender.isOn {
+//            print("on")
+//            //showrequests
+//        } else{
+//            print("off")
+//            //showsell
+//        }
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -961,9 +1003,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        
         if segue.identifier == "segue_attraction_list"{
             let attractionListTableViewController = (segue.destination as! AttractionListTableViewController)
             attractionListTableViewController.attractions = coreDataHelper.getAttractionsByDate() as! [cdAttractionMO]
+        }else if segue.identifier == "segue_modal"{
+            
+            self.halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: self, presentingViewController: segue.destination)
+            
+            segue.destination.modalPresentationStyle = .custom
+            segue.destination.transitioningDelegate = self.halfModalTransitioningDelegate
         }
     }
     
