@@ -16,6 +16,15 @@ import KCFloatingActionButton
 import Whisper
 import UserNotifications
 import DLRadioButton
+import ARNTransitionAnimator
+
+
+protocol SliderDelegate {
+    
+    func sliderFocused()
+    
+    func sliderUnfocused()
+}
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -53,13 +62,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
     var blurView: UIVisualEffectView? = nil
     
-    var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
+    // MARK: Music Player
+    @IBOutlet weak var optionsButton: UIButton!
+    @IBOutlet weak var optionsView: UIView!
+    private var animator : ARNTransitionAnimator?
+    private var tempAnimator : ARNTransitionAnimator?
+
+    fileprivate var modalVC : ModalViewController!
+
     
-//    let myNotification = Notification.Name(rawValue:"MyNotification")
+//    let myNotification = Notification.Name(rawValue:"MyNotification"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initiateOptions()
+        
         //print("view did load")
         mapView.delegate = self
         mapView.settings.consumesGesturesInView = false
@@ -122,6 +141,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabPostTicket.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
         fabPostTicket.fabDelegate = self
         fabPostTicket.friendlyTap = false
+        fabPostTicket.paddingY =  fabPostTicket.paddingY + 50
         self.view.addSubview(fabPostTicket)
         
         let icon2 = UIImage(named: "list_icon_green")
@@ -129,7 +149,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabAttractionList.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0xFFFFFF)
         fabAttractionList.fabDelegate = self
         fabAttractionList.friendlyTap = false
-        fabAttractionList.paddingY = fabAttractionList.frame.height + 25
+        fabAttractionList.paddingY = fabAttractionList.frame.height + 25 + 50
         self.view.addSubview(fabAttractionList)
 
         
@@ -141,6 +161,66 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabGoToMyLocation.paddingY =  fabAttractionList.paddingY + fabGoToMyLocation.frame.height + 12.5
         self.view.addSubview(fabGoToMyLocation)
         
+    }
+    
+    func setupAnimator() {
+        
+
+            let animation = MusicPlayerTransitionAnimation(rootVC: self, modalVC: self.modalVC)
+            animation.completion = { [weak self] isPresenting in
+                if isPresenting {
+                    guard let _self = self else { return }
+                    let modalGestureHandler = TransitionGestureHandler(targetVC: _self, direction: .bottom)
+                    modalGestureHandler.registerGesture(_self.modalVC.view)
+                    modalGestureHandler.panCompletionThreshold = 15.0
+                    _self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
+                    //self?.animator?.unregisgterInteractiveTransitioning()
+                } else {
+                    self?.setupAnimator()
+                }
+            }
+            
+            let gestureHandler = TransitionGestureHandler(targetVC: self, direction: .top)
+            gestureHandler.registerGesture(self.optionsView)
+            gestureHandler.panCompletionThreshold = 15.0
+            
+            self.animator = ARNTransitionAnimator(duration: 0.5, animation: animation)
+            self.animator?.registerInteractiveTransitioning(.present, gestureHandler: gestureHandler)
+            
+            self.modalVC.transitioningDelegate = self.animator
+            self.modalVC.delegate = self
+
+        
+        
+    }
+    
+    func registerAnimator(){
+        let modalGestureHandler = TransitionGestureHandler(targetVC: self, direction: .bottom)
+        modalGestureHandler.registerGesture(modalVC.view)
+        modalGestureHandler.panCompletionThreshold = 15.0
+        self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
+    }
+ 
+    func unRegisterAnimator(){
+        animator?.unregisgterInteractiveTransitioning()
+    }
+
+    
+    @IBAction func tappedOptions(_ sender: Any) {
+        self.present(self.modalVC, animated: true, completion: nil)
+    }
+    
+    
+    func initiateOptions(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.modalVC = storyboard.instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController
+        self.modalVC.modalPresentationStyle = .overFullScreen
+        
+        let color = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.3)
+       // self.miniPlayerButton.setBackgroundImage(self.generateImageWithColor(color), for: .highlighted)
+        
+        self.setupAnimator()
+    
     }
     
 //    func setSwitchButton () {
@@ -363,6 +443,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     let _ = self.showMarker(attraction: attraction)
                 }
                 searchActive = true
+                
+                let count = attractions.count
+                self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
             }
             
             
@@ -383,6 +466,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             }
             
             searchActive = false
+            
+            let count = attractions.count
+            self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
         }
     }
     
@@ -468,6 +554,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         let _ = self.showMarker(attraction: attraction)
                         
                     }
+                    
+                    if attractions.count > 0 {
+                        let count = self.coreDataHelper.getAttractions().count
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                    }
                 }
             }else if error != nil {
 
@@ -514,6 +605,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         let _ = self.showMarker(attraction: attraction)
                         
                     }
+                    
+                    if attractions.count > 0 {
+                        let count = self.coreDataHelper.getAttractions().count
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                    }
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
@@ -535,7 +631,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let northEast = bound.northEast
         let southWest = bound.southWest
         
-        currentDataRequest = attractionHelper.getNewAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
+        let query = searchBar.text!
+        
+        currentDataRequest = attractionHelper.getNewAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: query){ responseObject, error in
             
             
             if responseObject != nil {
@@ -552,6 +650,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0{
                         self.centerMapOnLocation(location: CLLocation(latitude: attractions[0].lat, longitude: attractions[0].lon), withAnimation: true)
+                        let count = self.coreDataHelper.getAttractions(query: query).count
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
                     }else{
                         self.view.makeToast("No tickets found. Try another area.", duration: 3.0, position: .bottom)
                     }
@@ -1009,12 +1109,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if segue.identifier == "segue_attraction_list"{
             let attractionListTableViewController = (segue.destination as! AttractionListTableViewController)
             attractionListTableViewController.attractions = coreDataHelper.getAttractionsByDate() as! [cdAttractionMO]
-        }else if segue.identifier == "segue_modal"{
-            
-            self.halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: self, presentingViewController: segue.destination)
-            
-            segue.destination.modalPresentationStyle = .custom
-            segue.destination.transitioningDelegate = self.halfModalTransitioningDelegate
+        }else if segue.identifier == "login_to_post_ticket"{
+            let modal = segue.destination as! ModalViewController
         }
     }
     
@@ -1237,5 +1333,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
 }
 
+
+extension HomeViewController : SliderDelegate {
+    internal func sliderFocused() {
+        unRegisterAnimator()
+    }
+
+    internal func sliderUnfocused() {
+        registerAnimator()
+    }
+}
 
 

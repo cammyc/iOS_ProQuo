@@ -18,6 +18,9 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SwiftKeychainWrapper'
 pod 'DLRadioButton', '~> 1.4'
+pod 'ARNTransitionAnimator'
+pod 'TTRangeSlider'
+
 end
 
 
