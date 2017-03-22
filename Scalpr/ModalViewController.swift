@@ -8,10 +8,10 @@
 
 import UIKit
 import DLRadioButton
-import ZMSwiftRangeSlider
 import ARNTransitionAnimator
 import TTRangeSlider
 import KCFloatingActionButton
+import MMSegmentSlider
 
 
 class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingActionButtonDelegate {
@@ -28,6 +28,7 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     // MARK: Slider init
     @IBOutlet weak var priceSlider: TTRangeSlider!
     var delegate: SliderDelegate?
+    @IBOutlet weak var bUpdateMax: UIButton!
     
     // MARK: Fab init
     @IBOutlet weak var fabBackToMap: KCFloatingActionButton!
@@ -38,25 +39,36 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     var startDatePicker: UIDatePicker? = nil
     var endDatePicker: UIDatePicker? = nil
     
+    // MARK: # tickets init
+    @IBOutlet weak var ticketIntervalSlider: MMSegmentSlider!
     
-    override func viewDidAppear(_ animated: Bool) {
-        
+    override func viewDidLoad() {
         fabBackToMap.fabDelegate = self
         
         radioRequest.isMultipleSelectionEnabled = true
         radioSell.isMultipleSelectionEnabled = true
-        
-        
-        let format:NumberFormatter = NumberFormatter()
-        format.positiveSuffix = "$"
-        
-        priceSlider.numberFormatterOverride = format
+
         
         self.priceSlider.delegate = self
         
         initializeDatePicker(dateField: self.tfDateStart, action: #selector(ModalViewController.dateSelectedDateStart))
         initializeDatePicker(dateField: self.tfDateEnd, action: #selector(ModalViewController.dateSelectedDateEnd))
+        
+        bUpdateMax.layer.cornerRadius = 5
+        
+        ticketIntervalSlider.values = [-1, 1, 2, 3, 4]
+        ticketIntervalSlider.labels = ["Any", "1", "2", "3" , "4+"]
+
+    }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let format:NumberFormatter = NumberFormatter() //cool animiation
+        format.positiveSuffix = "$"
+        
+        priceSlider.numberFormatterOverride = format
+        
     }
     
     // MARK: Slider

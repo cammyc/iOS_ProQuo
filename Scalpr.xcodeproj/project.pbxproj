@@ -85,6 +85,9 @@
 		E348A3B91E6A082E007CDE51 /* DLRadioButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */; };
 		E348A3BA1E6A082E007CDE51 /* DLRadioButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E357EAF11E709FA0003EB4F1 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */; };
+		E36AB12A1E83064A0028E683 /* MMSegmentSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */; };
+		E36AB12B1E8306520028E683 /* MMSegmentSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */; };
+		E36AB12C1E8306520028E683 /* MMSegmentSlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E377AAB81E4523FD00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; };
 		E377AAB91E45240A00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; };
 		E377AABA1E45240A00890BF4 /* SwiftKeychainWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -118,9 +121,6 @@
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
-		E3AFFE721E7340E1001E8389 /* ZMSwiftRangeSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */; };
-		E3AFFE731E7340E7001E8389 /* ZMSwiftRangeSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */; };
-		E3AFFE741E7340E7001E8389 /* ZMSwiftRangeSlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,11 +146,11 @@
 				E37C643C1E393F0C00476271 /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
 				E348A3BA1E6A082E007CDE51 /* DLRadioButton.framework in Embed Frameworks */,
 				E37C643A1E393F0C00476271 /* JSQMessagesViewController.framework in Embed Frameworks */,
-				E3AFFE741E7340E7001E8389 /* ZMSwiftRangeSlider.framework in Embed Frameworks */,
 				E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */,
 				E37C64381E393F0C00476271 /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
 				E37C64251E393F0C00476271 /* CryptoSwift.framework in Embed Frameworks */,
 				E37C642B1E393F0C00476271 /* FBSDKCoreKit.framework in Embed Frameworks */,
+				E36AB12C1E8306520028E683 /* MMSegmentSlider.framework in Embed Frameworks */,
 				E339BC361E3940CC0040FBE3 /* GoogleToolboxForMac.framework in Embed Frameworks */,
 				E37C64451E393F0C00476271 /* (null) in Embed Frameworks */,
 				E37C64271E393F0C00476271 /* FacebookCore.framework in Embed Frameworks */,
@@ -270,6 +270,7 @@
 		E348A3B31E6A07C8007CDE51 /* DLRadioButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DLRadioButton.framework; path = "Pods/../build/Debug-iphoneos/DLRadioButton/DLRadioButton.framework"; sourceTree = "<group>"; };
 		E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DLRadioButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/DLRadioButton/DLRadioButton.framework"; sourceTree = "<group>"; };
 		E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMSegmentSlider.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/MMSegmentSlider/MMSegmentSlider.framework"; sourceTree = "<group>"; };
 		E377AAB71E4523FD00890BF4 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"; sourceTree = "<group>"; };
 		E37C641A1E393EE800476271 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		E37C641B1E393EE800476271 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
@@ -316,8 +317,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E36AB12A1E83064A0028E683 /* MMSegmentSlider.framework in Frameworks */,
 				E32FDD421E80652B00858B29 /* TTRangeSlider.framework in Frameworks */,
-				E3AFFE721E7340E1001E8389 /* ZMSwiftRangeSlider.framework in Frameworks */,
 				E30DBFE31E72361C00EE7C51 /* ARNTransitionAnimator.framework in Frameworks */,
 				E348A3B81E6A0827007CDE51 /* DLRadioButton.framework in Frameworks */,
 				E377AAB81E4523FD00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */,
@@ -347,7 +348,6 @@
 				D25D1F231D9E076D0085EA89 /* libc++.tbd in Frameworks */,
 				E377AAB91E45240A00890BF4 /* SwiftKeychainWrapper.framework in Frameworks */,
 				E37C643B1E393F0C00476271 /* JSQSystemSoundPlayer.framework in Frameworks */,
-				E3AFFE731E7340E7001E8389 /* ZMSwiftRangeSlider.framework in Frameworks */,
 				E32FDD431E80653200858B29 /* TTRangeSlider.framework in Frameworks */,
 				D25D1F211D9E074E0085EA89 /* GLKit.framework in Frameworks */,
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
@@ -356,6 +356,7 @@
 				E339BC371E3940CC0040FBE3 /* GTMSessionFetcher.framework in Frameworks */,
 				E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */,
 				D25D1F1F1D9E073F0085EA89 /* CoreLocation.framework in Frameworks */,
+				E36AB12B1E8306520028E683 /* MMSegmentSlider.framework in Frameworks */,
 				D25D1F1E1D9E07390085EA89 /* CoreGraphics.framework in Frameworks */,
 				E37C642A1E393F0C00476271 /* FBSDKCoreKit.framework in Frameworks */,
 				D25D1F1D1D9E07310085EA89 /* CoreData.framework in Frameworks */,
@@ -496,6 +497,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */,
 				E32FDD411E80652B00858B29 /* TTRangeSlider.framework */,
 				E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */,
 				E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */,

@@ -20,6 +20,8 @@ pod 'SwiftKeychainWrapper'
 pod 'DLRadioButton', '~> 1.4'
 pod 'ARNTransitionAnimator'
 pod 'TTRangeSlider'
+pod 'MMSegmentSlider'
+
 
 end
 
