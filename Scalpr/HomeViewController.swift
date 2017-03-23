@@ -445,7 +445,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 searchActive = true
                 
                 let count = attractions.count
-                self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
             }
             
             
@@ -468,7 +468,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             searchActive = false
             
             let count = attractions.count
-            self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+            self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
         }
     }
     
@@ -557,7 +557,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0 {
                         let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
                     }
                 }
             }else if error != nil {
@@ -608,7 +608,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0 {
                         let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
                     }
                 }
             } else if error != nil {
@@ -651,7 +651,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     if attractions.count > 0{
                         self.centerMapOnLocation(location: CLLocation(latitude: attractions[0].lat, longitude: attractions[0].lon), withAnimation: true)
                         let count = self.coreDataHelper.getAttractions(query: query).count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Options", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
                     }else{
                         self.view.makeToast("No tickets found. Try another area.", duration: 3.0, position: .bottom)
                     }

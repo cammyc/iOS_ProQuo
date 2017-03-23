@@ -47,6 +47,9 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     
     override func viewDidLoad() {
         fabBackToMap.fabDelegate = self
+        fabClearFilters.fabDelegate = self
+        
+        setDates()
         
         radioRequest.isMultipleSelectionEnabled = true
         radioSell.isMultipleSelectionEnabled = true
@@ -138,6 +141,22 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     func emptyKCFABSelected(_ fab: KCFloatingActionButton) {
         if fab == fabBackToMap{
             self.dismiss(animated: true, completion: nil)
+        }else if fab == fabClearFilters {
+            
+            setDates()
+            
+            if !self.radioRequest.isSelected{
+                self.radioRequest.isSelected = true
+            }
+            
+            if !self.radioSell.isSelected{
+                self.radioSell.isSelected = true
+            }
+            
+            priceSlider.selectedMaximum = priceSlider.maxValue
+            priceSlider.selectedMinimum = priceSlider.minValue
+                        
+            ticketIntervalSlider.selectedItemIndex = 0
         }
     }
     
@@ -146,6 +165,14 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         self.view.endEditing(true)
+    }
+    
+    func setDates(){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        tfDateStart.text = dateFormatter.string(from: Date())
+        tfDateEnd.text = dateFormatter.string(from: Calendar.current.date(byAdding: .year, value: 1, to: Date())!)
     }
     
 }

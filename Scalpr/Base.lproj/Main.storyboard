@@ -953,7 +953,7 @@
                                             <constraint firstAttribute="height" constant="50" id="wkV-Mn-Od2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Options"/>
+                                        <state key="normal" title="Filters"/>
                                         <connections>
                                             <action selector="tappedOptions:" destination="uld-Bj-Ufn" eventType="touchUpInside" id="dqb-qL-Yhl"/>
                                             <action selector="tappedOptions:" destination="uld-Bj-Ufn" eventType="touchUpOutside" id="wgG-Nm-7Xi"/>
@@ -1380,10 +1380,10 @@
             </objects>
             <point key="canvasLocation" x="1521" y="-1680"/>
         </scene>
-        <!--Modal View Controller-->
+        <!--Post Filters-->
         <scene sceneID="SZg-jH-igI">
             <objects>
-                <viewController storyboardIdentifier="ModalViewController" id="dEX-w8-8eb" customClass="ModalViewController" customModule="Scalpr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModalViewController" title="Post Filters" id="dEX-w8-8eb" customClass="ModalViewController" customModule="Scalpr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9w5-46-VtV"/>
                         <viewControllerLayoutGuide type="bottom" id="kbb-4R-cl5"/>
@@ -1495,41 +1495,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZj-bJ-pyQ">
                                 <rect key="frame" x="0.0" y="60" width="320" height="46"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Today" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsa-Qy-1X1">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Today" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsa-Qy-1X1">
                                         <rect key="frame" x="8" y="8" width="116" height="30"/>
                                         <color key="textColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="End of Time" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fuc-vr-fdV">
-                                        <rect key="frame" x="198" y="8" width="114" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End of Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fuc-vr-fdV">
+                                        <rect key="frame" x="198" y="8" width="116" height="30"/>
                                         <color key="textColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0x3-oh-sUt">
-                                        <rect key="frame" x="140" y="13" width="42" height="21"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_circle_right_white" translatesAutoresizingMaskIntoConstraints="NO" id="vi4-Pv-YMU">
+                                        <rect key="frame" x="153" y="15" width="16" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="42" id="rrN-8o-773"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="sU0-P8-0Fn"/>
-                                            <constraint firstAttribute="height" constant="21" id="zBT-7E-81S"/>
+                                            <constraint firstAttribute="height" constant="16" id="Er1-pL-aHz"/>
+                                            <constraint firstAttribute="width" constant="16" id="GVu-RY-MOP"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="0x3-oh-sUt" firstAttribute="leading" secondItem="jsa-Qy-1X1" secondAttribute="trailing" constant="16" id="75N-GU-05d"/>
                                     <constraint firstAttribute="trailing" secondItem="Fuc-vr-fdV" secondAttribute="trailing" constant="8" id="7r9-MJ-9xb"/>
                                     <constraint firstAttribute="height" constant="46" id="8st-Nv-iAE"/>
-                                    <constraint firstItem="0x3-oh-sUt" firstAttribute="centerX" secondItem="AZj-bJ-pyQ" secondAttribute="centerX" id="GdA-5i-hIb"/>
+                                    <constraint firstItem="vi4-Pv-YMU" firstAttribute="centerY" secondItem="AZj-bJ-pyQ" secondAttribute="centerY" id="EOz-BL-h9j"/>
                                     <constraint firstItem="jsa-Qy-1X1" firstAttribute="top" secondItem="AZj-bJ-pyQ" secondAttribute="top" constant="8" id="HKl-8s-MQ6"/>
-                                    <constraint firstItem="Fuc-vr-fdV" firstAttribute="leading" secondItem="0x3-oh-sUt" secondAttribute="trailing" constant="16" id="QkA-Bj-i1x"/>
+                                    <constraint firstItem="vi4-Pv-YMU" firstAttribute="centerX" secondItem="AZj-bJ-pyQ" secondAttribute="centerX" id="LVI-IR-Rd4"/>
                                     <constraint firstItem="jsa-Qy-1X1" firstAttribute="leading" secondItem="AZj-bJ-pyQ" secondAttribute="leading" constant="8" id="UyP-N5-eqQ"/>
                                     <constraint firstItem="Fuc-vr-fdV" firstAttribute="top" secondItem="AZj-bJ-pyQ" secondAttribute="top" constant="8" id="ed0-AH-Ays"/>
-                                    <constraint firstItem="0x3-oh-sUt" firstAttribute="top" secondItem="AZj-bJ-pyQ" secondAttribute="top" constant="13" id="rzi-OQ-dPd"/>
+                                    <constraint firstItem="Fuc-vr-fdV" firstAttribute="leading" secondItem="vi4-Pv-YMU" secondAttribute="trailing" constant="29" id="hCI-9y-47r"/>
+                                    <constraint firstItem="vi4-Pv-YMU" firstAttribute="leading" secondItem="jsa-Qy-1X1" secondAttribute="trailing" constant="29" id="q8U-Q2-psk"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ivd-ab-g0N">
@@ -1829,6 +1825,7 @@
         <image name="Messages" width="50" height="50"/>
         <image name="Multiple_Tickets" width="50" height="50"/>
         <image name="Search" width="50" height="50"/>
+        <image name="ic_circle_right_white" width="25" height="25"/>
         <image name="ic_clear_filter" width="25" height="25"/>
         <image name="ic_down" width="25" height="25"/>
         <image name="menu" width="22" height="22"/>
