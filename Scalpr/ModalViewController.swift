@@ -29,9 +29,12 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     @IBOutlet weak var priceSlider: TTRangeSlider!
     var delegate: SliderDelegate?
     @IBOutlet weak var bUpdateMax: UIButton!
+    @IBOutlet weak var tfUpdateMax: UITextField!
+    
     
     // MARK: Fab init
     @IBOutlet weak var fabBackToMap: KCFloatingActionButton!
+    @IBOutlet weak var fabClearFilters: KCFloatingActionButton!
     
     // MARK: tfDate init
     @IBOutlet weak var tfDateStart: UITextField!
