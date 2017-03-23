@@ -23,6 +23,8 @@ class cdAttractionMO: NSManagedObject{
     @NSManaged var imageURL: String?
     @NSManaged var lat: Double
     @NSManaged var lon: Double
+    @NSManaged var postType: Int64
+
     //@NSManaged var timeStamp: String?
 
 }

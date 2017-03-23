@@ -80,28 +80,30 @@ class AttractionHelper {
         
         if array != nil{
             for i in 0 ..< array.count{
-                let attraction:NSDictionary = array[i] as! NSDictionary
-                
-                let a : Attraction = Attraction()
-                let id = attraction["attractionID"] as! NSNumber
-                a.ID = id.int64Value
-                a.creatorID = (attraction["creatorID"] as! NSNumber).int64Value
-                a.venueName = attraction["venueName"] as! String
-                a.name = attraction["name"] as! String
-                a.ticketPrice = attraction["ticketPrice"] as! Double
-                a.numTickets = attraction["numTickets"] as! Int
-                a.description = attraction["description"] as! String
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let dateObj = dateFormatter.date(from: attraction["date"] as! String)
-                
-                a.date = dateObj!
-                a.imageURL = attraction["imageURL"] as! String
-                a.lat = Double(attraction["lat"] as! String)!
-                a.lon = Double(attraction["lon"] as! String)!
-                
-                attractions.append(a)
+
+                    let attraction:NSDictionary = array[i] as! NSDictionary
+                    
+                    let a : Attraction = Attraction()
+                    let id = attraction["attractionID"] as! NSNumber
+                    a.ID = id.int64Value
+                    a.creatorID = (attraction["creatorID"] as! NSNumber).int64Value
+                    a.venueName = attraction["venueName"] as! String
+                    a.name = attraction["name"] as! String
+                    a.ticketPrice = attraction["ticketPrice"] as! Double
+                    a.numTickets = attraction["numTickets"] as! Int
+                    a.description = attraction["description"] as! String
+                    a.postType = (attraction["postType"] as! NSNumber).int64Value
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let dateObj = dateFormatter.date(from: attraction["date"] as! String)
+                    
+                    a.date = dateObj!
+                    a.imageURL = attraction["imageURL"] as! String
+                    a.lat = Double(attraction["lat"] as! String)!
+                    a.lon = Double(attraction["lon"] as! String)!
+                    
+                    attractions.append(a)
                 
             }
 
@@ -117,7 +119,7 @@ class AttractionHelper {
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
         
-        let parameters: Parameters = ["creatorID" : attraction.creatorID, "venueName" : attraction.venueName, "attractionName": attraction.name, "ticketPrice": attraction.ticketPrice, "numberOfTickets" : attraction.numTickets, "description" : attraction.description, "date" : dateFormatter.string(from: attraction.date), "imageURL" :attraction.imageURL, "lat" : attraction.lat, "lon" : attraction.lon]
+        let parameters: Parameters = ["creatorID" : attraction.creatorID, "venueName" : attraction.venueName, "attractionName": attraction.name, "ticketPrice": attraction.ticketPrice, "numberOfTickets" : attraction.numTickets, "description" : attraction.description, "date" : dateFormatter.string(from: attraction.date), "imageURL" :attraction.imageURL, "lat" : attraction.lat, "lon" : attraction.lon, "postType": attraction.postType]
         
         Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/post_attraction.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
             
@@ -138,7 +140,7 @@ class AttractionHelper {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         
-        let parameters: Parameters = ["creatorID" : attraction.creatorID, "attractionID": attraction.ID, "venueName" : attraction.venueName, "attractionName": attraction.name, "ticketPrice": attraction.ticketPrice, "numberOfTickets" : attraction.numTickets, "description" : attraction.description, "date" : dateFormatter.string(from: attraction.date), "imageURL" :attraction.imageURL]
+        let parameters: Parameters = ["creatorID" : attraction.creatorID, "attractionID": attraction.ID, "venueName" : attraction.venueName, "attractionName": attraction.name, "ticketPrice": attraction.ticketPrice, "numberOfTickets" : attraction.numTickets, "description" : attraction.description, "date" : dateFormatter.string(from: attraction.date), "imageURL" :attraction.imageURL, "postType": attraction.postType]
         
         Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/update_attraction_details.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
             
@@ -211,6 +213,7 @@ class AttractionHelper {
         attraction.imageURL = attr.imageURL!
         attraction.lat = attr.lat
         attraction.lon = attr.lon
+        attraction.postType = Int64(attr.postType)
         
         return attraction
     }

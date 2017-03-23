@@ -23,8 +23,6 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
     
     let loginHelper: LoginHelper = LoginHelper()!
     
-    let coreDataHelper: CoreDataHelper = CoreDataHelper()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -164,7 +162,8 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
     }
     
     func logoutLogic(){
-        self.coreDataHelper.wipeMessagesFromDB()
+        let coreDataHelper: CoreDataHelper = CoreDataHelper()
+        coreDataHelper.wipeMessagesFromDB()
         let _ = self.loginHelper.logout()
         
         let loggedOutMenuController: LoggedOutMenuController = self.storyboard?.instantiateViewController(withIdentifier: "LoggedOutMenuController") as! LoggedOutMenuController

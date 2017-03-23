@@ -25,6 +25,7 @@ class CoreDataHelper : NSObject {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = psc
+        
         DispatchQueue.global().async() {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex-1]
@@ -33,7 +34,8 @@ class CoreDataHelper : NSObject {
              */
             let storeURL = docURL.appendingPathComponent("DataModel.sqlite")
             do {
-                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true,                           NSInferMappingModelAutomaticallyOption: true])
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
+                
             } catch {
                 fatalError("Error migrating store: \(error)")
             }
@@ -135,6 +137,7 @@ class CoreDataHelper : NSObject {
         cdAttraction.lat = attraction.lat
         cdAttraction.lon = attraction.lon
         cdAttraction.date = attraction.date
+        cdAttraction.postType = attraction.postType
         
         //cdAttraction.timeStamp = attraction.timeStamp
         

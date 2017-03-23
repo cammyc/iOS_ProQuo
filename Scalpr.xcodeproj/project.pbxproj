@@ -234,6 +234,7 @@
 		D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedOutMenuController.swift; sourceTree = "<group>"; };
 		D7B5A9B7067731A7ED6CC873 /* Pods-Scalpr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scalpr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scalpr/Pods-Scalpr.debug.xcconfig"; sourceTree = "<group>"; };
 		D94C21191F8CCC91FDA71194 /* Pods_Scalpr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scalpr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E301A8A71E846EB0009B8E7F /* CoreDataModels3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels3.xcdatamodel; sourceTree = "<group>"; };
 		E30DBFDD1E7235CF00EE7C51 /* ARNTransitionAnimator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARNTransitionAnimator.framework; path = "Pods/../build/Debug-iphoneos/ARNTransitionAnimator/ARNTransitionAnimator.framework"; sourceTree = "<group>"; };
 		E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARNTransitionAnimator.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ARNTransitionAnimator/ARNTransitionAnimator.framework"; sourceTree = "<group>"; };
 		E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerTransitionAnimation.swift; sourceTree = "<group>"; };
@@ -1060,10 +1061,11 @@
 		D2F4139C1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E301A8A71E846EB0009B8E7F /* CoreDataModels3.xcdatamodel */,
 				D2F413A51DAB40CD0047A3C6 /* CoreDataModels2.xcdatamodel */,
 				D2F4139D1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodel */,
 			);
-			currentVersion = D2F413A51DAB40CD0047A3C6 /* CoreDataModels2.xcdatamodel */;
+			currentVersion = E301A8A71E846EB0009B8E7F /* CoreDataModels3.xcdatamodel */;
 			path = CoreDataModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

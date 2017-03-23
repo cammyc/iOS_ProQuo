@@ -22,6 +22,7 @@ class Attraction {
     var lat: Double
     var lon: Double
     var timeStamp: String
+    var postType: Int64
     
     init() {
         ID = 0;
@@ -36,6 +37,7 @@ class Attraction {
         lat = 0.0
         lon = 0.0
         timeStamp = ""
+        postType = 0 //1 is selling , 2 is requesting
     }
     
 }

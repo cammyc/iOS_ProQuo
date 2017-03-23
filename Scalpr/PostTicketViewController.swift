@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import DLRadioButton
 
 class PostTicketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,  UITextFieldDelegate, UITextViewDelegate{
     
@@ -22,6 +23,10 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBOutlet weak var bSetPostLocation: UIButton!
     @IBOutlet weak var bCancel: UIButton!
+    
+    
+    @IBOutlet weak var radioSelling: DLRadioButton!
+    @IBOutlet weak var radioRequesting: DLRadioButton!
 
     @IBOutlet weak var dialogView: UIView!
     @IBOutlet weak var headerLabel: UILabel!
@@ -63,6 +68,13 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         self.tvDescription.layer.cornerRadius = 5.0
         let borderColor = UIColor(red:204.0/255.0, green:204.0/255.0, blue:204.0/255.0, alpha:1.0);
         self.tvDescription.layer.borderColor = borderColor.cgColor
+   
+        
+        radioSelling.otherButtons = [radioRequesting]
+        
+        radioSelling.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
+        radioRequesting.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
+
         
         initializeDatePicker()
         
@@ -446,6 +458,11 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             return
         }
         
+        if !radioRequesting.isSelected && !radioSelling.isSelected {
+            bSetPostLocation.isEnabled = false
+            return
+        }
+        
         bSetPostLocation.isEnabled = true
     }
     
@@ -474,6 +491,7 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         attraction.venueName = tfVenueName.text!
         attraction.ticketPrice = Double(tfTicketPrice.text!)!
         attraction.numTickets = Int(tfNumTickets.text!)!
+        attraction.postType = (radioSelling.isSelected) ? 1 : 2
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
