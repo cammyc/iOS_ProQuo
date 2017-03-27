@@ -48,7 +48,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IAI-HU-C5n">
                                 <rect key="frame" x="40" y="75" width="288" height="480"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SELL TICKET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-Fi-itl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POST TICKET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-Fi-itl">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="55"/>
                                         <color key="backgroundColor" red="0.17180371284484863" green="0.77708756923675537" blue="0.42681729793548584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -105,66 +105,34 @@
                                             <action selector="bSetPostLocation:" destination="IFT-y0-lAl" eventType="touchUpInside" id="2eg-Tt-q8c"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F6-mZ-8Dp" customClass="DLRadioButton">
-                                        <rect key="frame" x="155" y="219" width="120" height="30"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IcN-Rx-sRB" customClass="MMSegmentSlider">
+                                        <rect key="frame" x="44" y="209" width="200" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="1r2-Qj-ona"/>
-                                            <constraint firstAttribute="height" constant="30" id="j2U-kZ-IOt"/>
+                                            <constraint firstAttribute="width" constant="200" id="In9-PW-VhF"/>
+                                            <constraint firstAttribute="height" constant="55" id="NT7-yt-ruQ"/>
                                         </constraints>
-                                        <state key="normal" title="Selling">
-                                            <color key="titleColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                                <real key="value" value="18"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="basicColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                            <userDefinedRuntimeAttribute type="color" keyPath="labelColor">
                                                 <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedValueColor">
                                                 <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLabelColor">
+                                                <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circlesRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="textOffset">
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ejt-1O-xsN" customClass="DLRadioButton">
-                                        <rect key="frame" x="12" y="219" width="120" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="j1N-Np-d2u"/>
-                                            <constraint firstAttribute="height" constant="30" id="sqo-zR-m9s"/>
-                                        </constraints>
-                                        <state key="normal" title="Requesting">
-                                            <color key="titleColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                                <real key="value" value="18"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
-                                                <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
+                                    </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Description (Optional)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="asY-vm-yoe">
                                         <rect key="frame" x="0.0" y="252" width="288" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,12 +209,11 @@
                                 <constraints>
                                     <constraint firstItem="I1R-ff-fRQ" firstAttribute="leading" secondItem="K7b-Yw-kcb" secondAttribute="trailing" constant="5" id="0MR-Qe-GUb"/>
                                     <constraint firstItem="K7b-Yw-kcb" firstAttribute="top" secondItem="buw-gM-dtb" secondAttribute="bottom" constant="36" id="27x-PN-sFx"/>
-                                    <constraint firstItem="3F6-mZ-8Dp" firstAttribute="top" secondItem="BcW-sF-OdP" secondAttribute="bottom" constant="12" id="4MO-ZH-Pl5"/>
                                     <constraint firstItem="Pl0-Z0-3ei" firstAttribute="top" secondItem="9mM-zL-fde" secondAttribute="bottom" constant="8" id="4c3-b0-8al"/>
                                     <constraint firstItem="Pl0-Z0-3ei" firstAttribute="width" secondItem="kXA-g6-Eku" secondAttribute="width" id="6J8-ez-TAU"/>
                                     <constraint firstItem="buw-gM-dtb" firstAttribute="centerX" secondItem="IAI-HU-C5n" secondAttribute="centerX" id="7Lj-5r-cjN"/>
                                     <constraint firstItem="bFv-P8-FW5" firstAttribute="centerX" secondItem="IAI-HU-C5n" secondAttribute="centerX" id="9FT-cM-3Zk"/>
-                                    <constraint firstItem="Ejt-1O-xsN" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="12" id="9kZ-oa-k9t"/>
+                                    <constraint firstItem="IcN-Rx-sRB" firstAttribute="centerX" secondItem="IAI-HU-C5n" secondAttribute="centerX" id="9VB-oO-KrF"/>
                                     <constraint firstItem="sWl-CR-Pwp" firstAttribute="top" secondItem="Iel-Fi-itl" secondAttribute="bottom" constant="8" id="AMU-PT-mlx"/>
                                     <constraint firstItem="MmN-0M-7uQ" firstAttribute="top" secondItem="asY-vm-yoe" secondAttribute="bottom" constant="8" id="B5b-QI-A1t"/>
                                     <constraint firstItem="BcW-sF-OdP" firstAttribute="top" secondItem="Pl0-Z0-3ei" secondAttribute="bottom" constant="8" id="Cwb-Vj-znv"/>
@@ -265,21 +232,18 @@
                                     <constraint firstAttribute="trailing" secondItem="Iel-Fi-itl" secondAttribute="trailing" id="TeU-nY-CZf"/>
                                     <constraint firstItem="BcW-sF-OdP" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="Uf3-gW-V8x"/>
                                     <constraint firstItem="Pl0-Z0-3ei" firstAttribute="leading" secondItem="kXA-g6-Eku" secondAttribute="trailing" constant="5" id="UvB-d7-3ch"/>
-                                    <constraint firstItem="asY-vm-yoe" firstAttribute="top" secondItem="Ejt-1O-xsN" secondAttribute="bottom" constant="12" id="VkE-EX-msj"/>
                                     <constraint firstAttribute="trailing" secondItem="buw-gM-dtb" secondAttribute="trailing" id="dkN-fJ-oOb"/>
                                     <constraint firstAttribute="trailing" secondItem="9mM-zL-fde" secondAttribute="trailing" constant="8" id="eUy-Jc-Dsw"/>
-                                    <constraint firstItem="Ejt-1O-xsN" firstAttribute="top" secondItem="BcW-sF-OdP" secondAttribute="bottom" constant="12" id="fbd-pd-Ssf"/>
-                                    <constraint firstAttribute="trailing" secondItem="3F6-mZ-8Dp" secondAttribute="trailing" constant="12" id="hYc-f3-LAj"/>
                                     <constraint firstItem="I1R-ff-fRQ" firstAttribute="leading" secondItem="K7b-Yw-kcb" secondAttribute="trailing" constant="5" id="hs2-tX-rXw"/>
                                     <constraint firstAttribute="bottom" secondItem="I1R-ff-fRQ" secondAttribute="bottom" constant="8" id="hwH-g1-bdL"/>
                                     <constraint firstAttribute="trailing" secondItem="I1R-ff-fRQ" secondAttribute="trailing" constant="8" id="ji3-26-KMM"/>
-                                    <constraint firstItem="3F6-mZ-8Dp" firstAttribute="leading" secondItem="Ejt-1O-xsN" secondAttribute="trailing" constant="23" id="kaj-uj-d1V"/>
                                     <constraint firstItem="Iel-Fi-itl" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" id="m8O-U4-7YC"/>
                                     <constraint firstItem="sWl-CR-Pwp" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="n90-lZ-MtN"/>
                                     <constraint firstItem="9mM-zL-fde" firstAttribute="top" secondItem="sWl-CR-Pwp" secondAttribute="bottom" constant="8" id="nxk-S5-jWf"/>
                                     <constraint firstItem="bFv-P8-FW5" firstAttribute="top" secondItem="MmN-0M-7uQ" secondAttribute="bottom" constant="8" id="p9G-jy-1cZ"/>
-                                    <constraint firstItem="Ejt-1O-xsN" firstAttribute="width" secondItem="3F6-mZ-8Dp" secondAttribute="width" id="piP-kP-oKe"/>
+                                    <constraint firstItem="IcN-Rx-sRB" firstAttribute="top" secondItem="BcW-sF-OdP" secondAttribute="bottom" constant="4" id="ptb-Or-GGx"/>
                                     <constraint firstAttribute="trailing" secondItem="BcW-sF-OdP" secondAttribute="trailing" constant="8" id="pun-0w-db0"/>
+                                    <constraint firstItem="asY-vm-yoe" firstAttribute="top" secondItem="IcN-Rx-sRB" secondAttribute="bottom" constant="3" id="rcY-uv-1ob"/>
                                     <constraint firstItem="kXA-g6-Eku" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="spy-SJ-hlP"/>
                                     <constraint firstItem="K7b-Yw-kcb" firstAttribute="leading" secondItem="IAI-HU-C5n" secondAttribute="leading" constant="8" id="t13-FV-Lse"/>
                                     <constraint firstItem="27I-36-8u3" firstAttribute="centerX" secondItem="IAI-HU-C5n" secondAttribute="centerX" id="uMf-3Q-Hlv"/>
@@ -305,8 +269,7 @@
                         <outlet property="headerLabel" destination="Iel-Fi-itl" id="6tf-cp-7Ks"/>
                         <outlet property="imageLoadingIndicator" destination="27I-36-8u3" id="U3c-Wx-Mgv"/>
                         <outlet property="ivSelectedImage" destination="bFv-P8-FW5" id="M8d-g6-fT3"/>
-                        <outlet property="radioRequesting" destination="Ejt-1O-xsN" id="zJs-5A-Oj0"/>
-                        <outlet property="radioSelling" destination="3F6-mZ-8Dp" id="lA3-Zd-A6M"/>
+                        <outlet property="requestSellSlider" destination="IcN-Rx-sRB" id="4an-Xs-ysb"/>
                         <outlet property="tfAttractionName" destination="sWl-CR-Pwp" id="rJN-w8-Kfc"/>
                         <outlet property="tfDate" destination="BcW-sF-OdP" id="y9X-Dm-nGR"/>
                         <outlet property="tfNumTickets" destination="Pl0-Z0-3ei" id="Bsc-3G-5gA"/>
@@ -322,7 +285,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8J0-RH-4W9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8pe-fv-BP1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3401.25" y="-360.21126760563379"/>
+            <point key="canvasLocation" x="3400.8000000000002" y="-360.2698650674663"/>
         </scene>
         <!--Set Ticket Location View Controller-->
         <scene sceneID="Uux-dH-r6Z">
@@ -443,7 +406,7 @@
                                                     <rect key="frame" x="10" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Tickets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-f1-UOy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-f1-UOy">
                                                     <rect key="frame" x="61" y="6" width="306" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
@@ -746,7 +709,7 @@
         <scene sceneID="AyY-4q-wo4">
             <objects>
                 <navigationController id="mdD-ht-Sxm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qdA-Ux-eq0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qdA-Ux-eq0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -893,7 +856,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmS-5g-ChN" id="c9U-Nc-af2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U41-HH-sVa">
@@ -976,7 +939,7 @@
         <scene sceneID="vOC-j1-Vmx">
             <objects>
                 <navigationController id="cg1-Cp-NYq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eHG-AF-NtY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eHG-AF-NtY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1271,7 +1234,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JNP-Vr-O4E" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9QS-eJ-UWt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9QS-eJ-UWt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1289,7 +1252,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Paq-07-Hdp" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eQw-9p-o36">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eQw-9p-o36">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1435,7 +1398,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HfK-4O-UAd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2o-EW-llB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2o-EW-llB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1781,7 +1744,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bUpdateMax" destination="Jw7-My-lSe" id="CuH-QM-9CQ"/>
+                        <outlet property="bUpdateMax" destination="Jw7-My-lSe" id="fSO-1i-JF8"/>
                         <outlet property="fabBackToMap" destination="exy-EE-bqB" id="jM8-GN-w3J"/>
                         <outlet property="fabClearFilters" destination="h55-hH-p8V" id="Hhj-Lc-xrG"/>
                         <outlet property="labelShowTickets" destination="RHS-zg-rBM" id="raN-hb-pl5"/>
@@ -1813,7 +1776,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2K-7E-PTu" id="Sha-Co-jwY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ozq-T2-P7z">
@@ -1900,12 +1863,12 @@
         <image name="user" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JWh-zl-6qP"/>
-        <segue reference="tts-ff-Kg5"/>
-        <segue reference="cVP-Y2-a6N"/>
-        <segue reference="G4W-z1-ANm"/>
-        <segue reference="BJu-aO-IlD"/>
-        <segue reference="jsM-2S-dSi"/>
+        <segue reference="Coi-VA-9zw"/>
         <segue reference="tPf-uy-COu"/>
+        <segue reference="WjW-LE-aHX"/>
+        <segue reference="jsM-2S-dSi"/>
+        <segue reference="G4W-z1-ANm"/>
+        <segue reference="JWh-zl-6qP"/>
+        <segue reference="cVP-Y2-a6N"/>
     </inferredMetricsTieBreakers>
 </document>

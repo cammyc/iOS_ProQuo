@@ -45,6 +45,23 @@ class ImageHelper {
         return result!
     }
     
+    static func circleImageBordered(image: UIImage, rgb: UInt, borderWidth: CGFloat)->UIImage {
+        let square = CGSize(width: min(image.size.width, image.size.height), height: min(image.size.width, image.size.height))
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: square))
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = borderWidth
+        imageView.layer.borderColor = MiscHelper.UIColorFromRGB(rgbValue: rgb).cgColor
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, image.scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return image }
+        imageView.layer.render(in: context)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result!
+    }
+    
     static func centerImage(image: UIImage)->UIImage{
         let square = CGSize(width: min(image.size.width, image.size.height), height: min(image.size.width, image.size.height))
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: square))

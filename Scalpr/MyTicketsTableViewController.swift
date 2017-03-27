@@ -137,10 +137,12 @@ class MyTicketsTableViewController: UITableViewController{
     
     func updateCell(attraction: Attraction, cell: MyTicketTableViewCell)->MyTicketTableViewCell{
         let url = URL(string: attraction.imageURL)
+        let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+
         
         cell.ivImage.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
                 if image != nil {
-                    cell.ivImage.image = ImageHelper.circleImage(image: image!)
+                    cell.ivImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
 
                 }
             }
@@ -154,6 +156,7 @@ class MyTicketsTableViewController: UITableViewController{
         
         let price = String(format: attraction.ticketPrice == floor(attraction.ticketPrice) ? "%.0f" : "%.2f", attraction.ticketPrice)
         cell.priceAndNumTickets.text = "$" + price + " - " + String(attraction.numTickets) + " Tickets"
+        cell.priceAndNumTickets.textColor = MiscHelper.UIColorFromRGB(rgbValue: color)
         
         return cell
     }

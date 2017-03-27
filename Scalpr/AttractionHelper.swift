@@ -15,12 +15,14 @@ class AttractionHelper {
     init(){
     }
     
-    func getInitialAttractions(northLat: Double, southLat: Double, eastLon: Double, westLon: Double, completionHandler: @escaping (AnyObject?, NSError?) -> ()){
+    func getInitialAttractions(filters: Filters, northLat: Double, southLat: Double, eastLon: Double, westLon: Double, completionHandler: @escaping (AnyObject?, NSError?) -> ()){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.string(from: Date())
         
-        let parameters: Parameters = ["latBoundLeft": northLat, "latBoundRight": southLat, "lonBoundLeft": eastLon, "lonBoundRight": westLon, "currentDate": date]
+        let filters: Parameters = ["startDate": filters.startDateToString(), "endDate": filters.endDateToString(), "requestedTickets": filters.showRequested, "sellingTickets": filters.showSelling, "minPrice": filters.minPrice, "maxPrice": filters.maxPrice, "numTickets": filters.numTickets]
+        
+        let parameters: Parameters = ["filters": filters, "latBoundLeft": northLat, "latBoundRight": southLat, "lonBoundLeft": eastLon, "lonBoundRight": westLon, "currentDate": date]
         
         Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/get_attractions.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).responseJSON { response in
             switch response.result {
@@ -33,12 +35,14 @@ class AttractionHelper {
         
     }
     
-    func getNewAttractions(northLat: Double, southLat: Double, eastLon: Double, westLon: Double, commaString: String, searchQuery: String, completionHandler: @escaping (AnyObject?, NSError?) -> ())->DataRequest{
+    func getNewAttractions(filters: Filters, northLat: Double, southLat: Double, eastLon: Double, westLon: Double, commaString: String, searchQuery: String, completionHandler: @escaping (AnyObject?, NSError?) -> ())->DataRequest{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.string(from: Date())
         
-        let parameters: Parameters = ["latBoundLeft": northLat, "latBoundRight": southLat, "lonBoundLeft": eastLon, "lonBoundRight": westLon, "currentDate": date, "oldIDs": commaString, "searchViewQuery": searchQuery]
+        let filters: Parameters = ["startDate": filters.startDateToString(), "endDate": filters.endDateToString(), "requestedTickets": filters.showRequested, "sellingTickets": filters.showSelling, "minPrice": filters.minPrice, "maxPrice": filters.maxPrice, "numTickets": filters.numTickets]
+        
+        let parameters: Parameters = ["filters": filters, "latBoundLeft": northLat, "latBoundRight": southLat, "lonBoundLeft": eastLon, "lonBoundRight": westLon, "currentDate": date, "oldIDs": commaString, "searchViewQuery": searchQuery]
         
         let request = Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/get_new_attractions.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader())
             

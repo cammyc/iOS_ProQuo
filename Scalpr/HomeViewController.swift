@@ -19,11 +19,13 @@ import DLRadioButton
 import ARNTransitionAnimator
 
 
-protocol SliderDelegate {
+protocol FilterDelegate {
     
     func sliderFocused()
     
     func sliderUnfocused()
+    
+    func updateFilters(updatedFilter: Filters)
 }
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
@@ -62,6 +64,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
     var blurView: UIVisualEffectView? = nil
     
+    var postFilters = Filters()
+    
     // MARK: Music Player
     @IBOutlet weak var optionsButton: UIButton!
     @IBOutlet weak var optionsView: UIView!
@@ -91,7 +95,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
-        
+                
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -465,6 +469,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 let _ = self.showMarker(attraction: attraction)
             }
             
+            getNewTickets()
+            
             searchActive = false
             
             let count = attractions.count
@@ -536,7 +542,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         loadingNotification?.mode = MBProgressHUDMode.indeterminate
         loadingNotification?.label.text = "Retrieving Tickets"
 
-        attractionHelper.getInitialAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude) { responseObject, error in
+        attractionHelper.getInitialAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude) { responseObject, error in
             
             self.attemptedInitialTickets = true
             
@@ -588,7 +594,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let northEast = bound.northEast
         let southWest = bound.southWest
         
-        currentDataRequest = attractionHelper.getNewAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
+        currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
             
             
             if responseObject != nil {
@@ -624,6 +630,57 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
     }
     
+    func getNewTicketsFromFilter(){
+        self.coreDataHelper.wipeAttractionsFromDB()
+        mapView.clear()
+        
+        let oldIDs = self.coreDataHelper.getCommaSeperatedAttractionIDString()
+        
+        let bound = GMSCoordinateBounds(region: self.mapView.projection.visibleRegion())
+        let northEast = bound.northEast
+        let southWest = bound.southWest
+        
+        self.loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.loadingNotification?.mode = MBProgressHUDMode.indeterminate
+        self.loadingNotification?.label.text = "Retrieving Tickets"
+        
+        
+        currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
+            
+            
+            if responseObject != nil {
+                // use responseObject and error here
+                
+                if let attractions = self.attractionHelper.getAttractionsFromNSArray(array: responseObject as? NSArray){
+                    
+                    for i in 0 ..< attractions.count{
+                        
+                        let attraction = attractions[i]
+                        
+                        self.coreDataHelper.saveAttraction(attraction: attraction)
+                        
+                        let _ = self.showMarker(attraction: attraction)
+                        
+                    }
+                    
+                    if attractions.count > 0 {
+                        let count = self.coreDataHelper.getAttractions().count
+                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+                    }
+                }
+            } else if error != nil {
+                if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
+                    self.view.makeToast("Unable to retreive posts. Move the map to try again.", duration: 3.0, position: .bottom)
+                }
+            }
+            
+            self.loadingNotification?.hide(animated: true)
+            
+            return
+        }
+
+    }
+    
     func getNewSearchTickets(){
         let oldIDs = self.coreDataHelper.getCommaSeperatedAttractionIDString()
         
@@ -633,7 +690,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         let query = searchBar.text!
         
-        currentDataRequest = attractionHelper.getNewAttractions(northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: query){ responseObject, error in
+        currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: query){ responseObject, error in
             
             
             if responseObject != nil {
@@ -747,11 +804,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if let cdAttraction = marker.userData as? cdAttractionMO{
             infoWindow.date.text = MiscHelper.dateToString(date: cdAttraction.date!, format: "MMM dd, yyyy")
             
+            let color: UInt = (cdAttraction.postType == 1) ? 0x2ecc71 : 0x3498db
+            infoWindow.date.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: color)
+            
             infoWindow.attractionName.text = cdAttraction.name
             infoWindow.venueName.text = cdAttraction.venueName
             infoWindow.numTickets.text = String(cdAttraction.numTickets)
             infoWindow.ticketPrice.text = currencyFormatter.string(for: cdAttraction.ticketPrice)! + "/Ticket"
             infoWindow.attractionDescription.text = cdAttraction.attractionDescription
+            
+            infoWindow.contact.textColor = MiscHelper.UIColorFromRGB(rgbValue: color)
 
             
             if loggedInID != Int64(cdAttraction.creatorID){
@@ -774,12 +836,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         }else if let attraction = marker.userData as? Attraction{
             infoWindow.date.text = MiscHelper.dateToString(date: attraction.date, format: "MMM dd, yyyy")
             
+            let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+            infoWindow.date.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: color)
+            
             infoWindow.attractionName.text = attraction.name
             infoWindow.venueName.text = attraction.venueName
             infoWindow.numTickets.text = String(attraction.numTickets)
             infoWindow.ticketPrice.text = currencyFormatter.string(for: attraction.ticketPrice)! + "/Ticket"
-            
             infoWindow.attractionDescription.text = attraction.description
+            
+            infoWindow.contact.textColor = MiscHelper.UIColorFromRGB(rgbValue: color)
 
             if loggedInID != attraction.creatorID {
                 infoWindow.contact.text = "CONTACT SELLER"
@@ -1109,9 +1175,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if segue.identifier == "segue_attraction_list"{
             let attractionListTableViewController = (segue.destination as! AttractionListTableViewController)
             attractionListTableViewController.attractions = coreDataHelper.getAttractionsByDate() as! [cdAttractionMO]
-        }else if segue.identifier == "login_to_post_ticket"{
-            let modal = segue.destination as! ModalViewController
         }
+//        else if segue.identifier == "login_to_post_ticket"{
+//            let modal = segue.destination as! ModalViewController
+//        }
     }
     
     @IBAction func unwindToHomeVC(segue:UIStoryboardSegue) {
@@ -1176,7 +1243,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if Foundation.URL(string: attraction.imageURL) != nil{
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil{
-                    marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                    
+                    let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+                    
+                    marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
                 }
                 
                 marker.map = self.mapView
@@ -1208,7 +1278,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             if image != nil{
-                marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                
+                let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+                
+                marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
 
             }
             
@@ -1334,13 +1407,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 }
 
 
-extension HomeViewController : SliderDelegate {
+extension HomeViewController : FilterDelegate {
     internal func sliderFocused() {
         unRegisterAnimator()
     }
 
     internal func sliderUnfocused() {
         registerAnimator()
+    }
+    
+    internal func updateFilters(updatedFilter: Filters){
+        self.postFilters = updatedFilter
+        self.getNewTicketsFromFilter()
+        //refreshMapWithNewParams()
     }
 }
 

@@ -61,6 +61,7 @@
 		D2F413A41DAB309E0047A3C6 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F413A31DAB309E0047A3C6 /* CustomInfoWindow.swift */; };
 		D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB896B1DA178BE005DB173 /* LoginViewController.swift */; };
 		D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB89821DA17E2A005DB173 /* LoggedOutMenuController.swift */; };
+		E301A8A91E85BDB3009B8E7F /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301A8A81E85BDB3009B8E7F /* Filters.swift */; };
 		E30DBFE31E72361C00EE7C51 /* ARNTransitionAnimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */; };
 		E30DBFE41E72362500EE7C51 /* ARNTransitionAnimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */; };
 		E30DBFE51E72362500EE7C51 /* ARNTransitionAnimator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -235,6 +236,7 @@
 		D7B5A9B7067731A7ED6CC873 /* Pods-Scalpr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scalpr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scalpr/Pods-Scalpr.debug.xcconfig"; sourceTree = "<group>"; };
 		D94C21191F8CCC91FDA71194 /* Pods_Scalpr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scalpr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E301A8A71E846EB0009B8E7F /* CoreDataModels3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModels3.xcdatamodel; sourceTree = "<group>"; };
+		E301A8A81E85BDB3009B8E7F /* Filters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		E30DBFDD1E7235CF00EE7C51 /* ARNTransitionAnimator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARNTransitionAnimator.framework; path = "Pods/../build/Debug-iphoneos/ARNTransitionAnimator/ARNTransitionAnimator.framework"; sourceTree = "<group>"; };
 		E30DBFE21E72361C00EE7C51 /* ARNTransitionAnimator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARNTransitionAnimator.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ARNTransitionAnimator/ARNTransitionAnimator.framework"; sourceTree = "<group>"; };
 		E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerTransitionAnimation.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				E3E69B861E1B471E001908DF /* cdMessageMO.swift */,
 				D20ECC951DF7D296008B315F /* Conversation.swift */,
 				D20ECC971DF7D2A4008B315F /* Message.swift */,
+				E301A8A81E85BDB3009B8E7F /* Filters.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */,
+				E301A8A91E85BDB3009B8E7F /* Filters.swift in Sources */,
 				D20637681D9B39A400EAFF0F /* LoggedInMenuController.swift in Sources */,
 				D20ECC981DF7D2A4008B315F /* Message.swift in Sources */,
 				D20ECC941DF7D264008B315F /* ConversationsTableViewController.swift in Sources */,

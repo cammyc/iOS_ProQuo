@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-import DLRadioButton
+import MMSegmentSlider
 
 class PostTicketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,  UITextFieldDelegate, UITextViewDelegate{
     
@@ -25,8 +25,8 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var bCancel: UIButton!
     
     
-    @IBOutlet weak var radioSelling: DLRadioButton!
-    @IBOutlet weak var radioRequesting: DLRadioButton!
+    @IBOutlet weak var requestSellSlider: MMSegmentSlider!
+
 
     @IBOutlet weak var dialogView: UIView!
     @IBOutlet weak var headerLabel: UILabel!
@@ -70,10 +70,14 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         self.tvDescription.layer.borderColor = borderColor.cgColor
    
         
-        radioSelling.otherButtons = [radioRequesting]
-        
-        radioSelling.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
-        radioRequesting.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
+//        radioSelling.otherButtons = [radioRequesting]
+//        
+//        radioSelling.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
+//        radioRequesting.addTarget(self, action: #selector(PostTicketViewController.validateFields), for: UIControlEvents.touchUpInside)
+//
+        requestSellSlider.values = [1, 2]
+        requestSellSlider.labels = ["Sell", "Request"]
+        requestSellSlider.labelsFont = requestSellSlider.labelsFont.withSize(13)
 
         
         initializeDatePicker()
@@ -156,6 +160,12 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             if editAttraction!.description != ""{
                 self.tvDescription.text = editAttraction!.description
                 tvDescription.textColor = UIColor.black
+            }
+            
+            if editAttraction?.postType == 1 {
+               self.requestSellSlider.setSelectedItemIndex(0, animated: true)
+            }else{
+                self.requestSellSlider.setSelectedItemIndex(1, animated: true)
             }
             
             self.selectedImageURL = (editAttraction!.imageURL)
@@ -458,10 +468,10 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
             return
         }
         
-        if !radioRequesting.isSelected && !radioSelling.isSelected {
-            bSetPostLocation.isEnabled = false
-            return
-        }
+//        if !radioRequesting.isSelected && !radioSelling.isSelected {
+//            bSetPostLocation.isEnabled = false
+//            return
+//        }
         
         bSetPostLocation.isEnabled = true
     }
@@ -491,7 +501,7 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         attraction.venueName = tfVenueName.text!
         attraction.ticketPrice = Double(tfTicketPrice.text!)!
         attraction.numTickets = Int(tfNumTickets.text!)!
-        attraction.postType = (radioSelling.isSelected) ? 1 : 2
+        attraction.postType = requestSellSlider.currentValue as! Int64
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
