@@ -296,7 +296,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         }
     }
 
-
     
 //
 //    func catchNotification(notification:Notification) -> Void {
