@@ -22,6 +22,7 @@ class Conversation {
     var messages: [Message]
     var creationTimeStamp: Date
     var isLastMessageRead: Bool
+    var postType: Int64
     
     init() {
         ID = 0
@@ -36,6 +37,7 @@ class Conversation {
         messages = [Message]()
         creationTimeStamp = Date.init()
         isLastMessageRead = false
+        postType = 0
     }
     
 }

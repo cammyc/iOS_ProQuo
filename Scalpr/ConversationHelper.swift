@@ -231,6 +231,7 @@ class ConversationHelper {
                 convo.attractionImageURL = conversation["attractionImageURL"] as! String
                 convo.creationTimeStamp = dateFormatter.date(from: conversation["creationTimestamp"] as! String)!
                 convo.isLastMessageRead = (conversation["isLastMessageRead"] as! Int == 0) ? false : true
+                convo.postType = conversation["postType"] as! Int64
                 
                 conversations.append(convo)
                 

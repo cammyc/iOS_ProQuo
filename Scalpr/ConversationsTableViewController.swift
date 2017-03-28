@@ -318,14 +318,19 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
     
     func updateCell(conversation: Conversation, cell: ConversationTableViewCell)->ConversationTableViewCell{
         let url = URL(string: conversation.attractionImageURL)
-        
-        cell.ivAttractionImage.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
-            if image != nil {
-                cell.ivAttractionImage.image = ImageHelper.circleImage(image: image!)
-                
+       
+            
+            let color: UInt = (conversation.postType == 1) ? 0x2ecc71 : 0x3498db
+            
+            
+            cell.ivAttractionImage.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
+                if image != nil {
+                    cell.ivAttractionImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
+                    
+                }
             }
-            }
-        )
+            )
+
         
         cell.contentView.isUserInteractionEnabled = false
         

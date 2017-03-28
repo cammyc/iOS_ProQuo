@@ -122,6 +122,13 @@
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
+		E3DDBD2C1E898B57006F3121 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; };
+		E3DDBD2D1E898B5F006F3121 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; };
+		E3DDBD2E1E898B5F006F3121 /* Presentr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3DDBD301E89B076006F3121 /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */; };
+		E3DDBD321E89D634006F3121 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */; };
+		E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */; };
+		E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +150,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E32FDD441E80653200858B29 /* TTRangeSlider.framework in Embed Frameworks */,
+				E3DDBD2E1E898B5F006F3121 /* Presentr.framework in Embed Frameworks */,
 				E37C643E1E393F0C00476271 /* KCFloatingActionButton.framework in Embed Frameworks */,
 				E37C643C1E393F0C00476271 /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
 				E348A3BA1E6A082E007CDE51 /* DLRadioButton.framework in Embed Frameworks */,
@@ -286,6 +294,11 @@
 		E3C525971E393DCA00D83F18 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		E3C525981E393DCA00D83F18 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E3C525991E393DCA00D83F18 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
+		E3DDBD2B1E898B57006F3121 /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Presentr.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Presentr/Presentr.framework"; sourceTree = "<group>"; };
+		E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
+		E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
+		E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
+		E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
@@ -320,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3DDBD2C1E898B57006F3121 /* Presentr.framework in Frameworks */,
 				E36AB12A1E83064A0028E683 /* MMSegmentSlider.framework in Frameworks */,
 				E32FDD421E80652B00858B29 /* TTRangeSlider.framework in Frameworks */,
 				E30DBFE31E72361C00EE7C51 /* ARNTransitionAnimator.framework in Frameworks */,
@@ -361,6 +375,7 @@
 				D25D1F1F1D9E073F0085EA89 /* CoreLocation.framework in Frameworks */,
 				E36AB12B1E8306520028E683 /* MMSegmentSlider.framework in Frameworks */,
 				D25D1F1E1D9E07390085EA89 /* CoreGraphics.framework in Frameworks */,
+				E3DDBD2D1E898B5F006F3121 /* Presentr.framework in Frameworks */,
 				E37C642A1E393F0C00476271 /* FBSDKCoreKit.framework in Frameworks */,
 				D25D1F1D1D9E07310085EA89 /* CoreData.framework in Frameworks */,
 				D25D1F1C1D9E07260085EA89 /* Accelerate.framework in Frameworks */,
@@ -421,6 +436,10 @@
 				D206378E1D9B867200EAFF0F /* Objects */,
 				D20637621D9B321C00EAFF0F /* SWRevealViewController */,
 				D20637441D9B31DB00EAFF0F /* HomeViewController.swift */,
+				E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */,
+				E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */,
+				E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */,
+				E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */,
 				E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */,
 				E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */,
 				D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */,
@@ -501,6 +520,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3DDBD2B1E898B57006F3121 /* Presentr.framework */,
 				E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */,
 				E32FDD411E80652B00858B29 /* TTRangeSlider.framework */,
 				E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */,
@@ -768,6 +788,7 @@
 			files = (
 				D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */,
 				E301A8A91E85BDB3009B8E7F /* Filters.swift in Sources */,
+				E3DDBD321E89D634006F3121 /* TutorialPageViewController.swift in Sources */,
 				D20637681D9B39A400EAFF0F /* LoggedInMenuController.swift in Sources */,
 				D20ECC981DF7D2A4008B315F /* Message.swift in Sources */,
 				D20ECC941DF7D264008B315F /* ConversationsTableViewController.swift in Sources */,
@@ -795,6 +816,7 @@
 				D2A09D171DAF47E700F4012A /* UpdateAccountViewController.swift in Sources */,
 				D228D5331DF9314C009200E6 /* MyMessageTableViewCell.swift in Sources */,
 				E357EAF11E709FA0003EB4F1 /* ModalViewController.swift in Sources */,
+				E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */,
 				D20637431D9B31DB00EAFF0F /* AppDelegate.swift in Sources */,
 				D20637661D9B324700EAFF0F /* SWRevealViewController.m in Sources */,
 				D29D7A4B1DC82AE700F937FF /* FlagHelper.swift in Sources */,
@@ -803,8 +825,10 @@
 				D20ECC961DF7D296008B315F /* Conversation.swift in Sources */,
 				D25E543A1D9F658D003164E8 /* BingImageHelper.swift in Sources */,
 				D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */,
+				E3DDBD301E89B076006F3121 /* HomeTutorialViewController.swift in Sources */,
 				D211351D1DAC4B4C0064EACF /* MyTicketsTableViewController.swift in Sources */,
 				E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */,
+				E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */,
 				D24C433B1DA4C16700547332 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

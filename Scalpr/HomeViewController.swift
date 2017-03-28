@@ -17,6 +17,7 @@ import Whisper
 import UserNotifications
 import DLRadioButton
 import ARNTransitionAnimator
+import Presentr
 
 
 protocol FilterDelegate {
@@ -83,8 +84,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         initiateOptions()
         
-        //print("view did load")
-        mapView.delegate = self
+        let preferences = UserDefaults.standard
+        
+        if preferences.object(forKey: "viewedTutorial") == nil{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let controller = storyboard.instantiateViewController(withIdentifier: "TutorialPageViewController") as? TutorialPageViewController
+            let presenter = Presentr(presentationType: .popup)
+            
+            preferences.set(true, forKey: "viewedTutorial")
+            preferences.synchronize()
+            
+            customPresentViewController(presenter, viewController: controller!, animated: true, completion: nil)
+        }
+        
+               mapView.delegate = self
         mapView.settings.consumesGesturesInView = false
 
         
@@ -310,6 +324,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     func revealControllerPanGestureEnded(_ revealController: SWRevealViewController!) {
         mapView.settings.scrollGestures = true
     }
+
     
     func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
         self.searchBar.resignFirstResponder()
@@ -449,7 +464,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 searchActive = true
                 
                 let count = attractions.count
-                self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+                self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
             }
             
             
@@ -474,7 +489,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             searchActive = false
             
             let count = attractions.count
-            self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+            self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
         }
     }
     
@@ -563,7 +578,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0 {
                         let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
                     }
                 }
             }else if error != nil {
@@ -614,7 +629,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0 {
                         let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
                     }
                 }
             } else if error != nil {
@@ -663,10 +678,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                     }
                     
-                    if attractions.count > 0 {
-                        let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
-                    }
+                    let count = self.coreDataHelper.getAttractions().count
+                    self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+                
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
@@ -708,7 +722,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     if attractions.count > 0{
                         self.centerMapOnLocation(location: CLLocation(latitude: attractions[0].lat, longitude: attractions[0].lon), withAnimation: true)
                         let count = self.coreDataHelper.getAttractions(query: query).count
-                        self.optionsButton.setTitle(String(count) + " Posts Retrieved • Filters", for: UIControlState.normal)
+                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
                     }else{
                         self.view.makeToast("No tickets found. Try another area.", duration: 3.0, position: .bottom)
                     }

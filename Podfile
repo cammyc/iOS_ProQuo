@@ -21,6 +21,7 @@ pod 'DLRadioButton', '~> 1.4'
 pod 'ARNTransitionAnimator'
 pod 'TTRangeSlider'
 pod 'MMSegmentSlider'
+pod 'Presentr'
 
 
 end
