@@ -501,7 +501,7 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         attraction.venueName = tfVenueName.text!
         attraction.ticketPrice = Double(tfTicketPrice.text!)!
         attraction.numTickets = Int(tfNumTickets.text!)!
-        attraction.postType = requestSellSlider.currentValue as! Int64
+        attraction.postType = (requestSellSlider.currentValue as! NSNumber).int64Value
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
