@@ -26,7 +26,7 @@ class CoreDataHelper : NSObject {
         managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = psc
         
-        DispatchQueue.global().async() {
+       // DispatchQueue.global().async() {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex-1]
             /* The directory the application uses to store the Core Data store file.
@@ -39,7 +39,7 @@ class CoreDataHelper : NSObject {
             } catch {
                 fatalError("Error migrating store: \(error)")
             }
-        }
+       // }
     }
     
     func wipeAttractionsFromDB(){
@@ -56,7 +56,7 @@ class CoreDataHelper : NSObject {
     }
     
     func wipeMessagesFromDB(){
-        let moc = managedObjectContext
+        let moc = managedObjectContext//definitely re-accessing db incorrectly
         
         let messageFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
         let delete = NSBatchDeleteRequest(fetchRequest: messageFetch)

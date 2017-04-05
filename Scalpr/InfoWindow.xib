@@ -166,7 +166,7 @@
                 <outlet property="ticketPrice" destination="n7a-cK-Y9c" id="cHO-s0-tzY"/>
                 <outlet property="venueName" destination="esx-Sw-eE2" id="5r1-Gh-b0D"/>
             </connections>
-            <point key="canvasLocation" x="-168.5" y="-138"/>
+            <point key="canvasLocation" x="-224" y="-178"/>
         </view>
     </objects>
     <resources>

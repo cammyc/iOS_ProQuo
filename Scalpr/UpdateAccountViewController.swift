@@ -55,7 +55,7 @@ class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
             
             if responseObject != nil {
                 
-                if responseObject == "0" {
+                if responseObject == "0" || responseObject == "-1" {
                     self.showErrorAlert()
                 }else{
                     if let u = self.loginHelper.getUserDetailsFromJson(json: responseObject!) as? User{

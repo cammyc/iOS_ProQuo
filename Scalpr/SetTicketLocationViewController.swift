@@ -48,11 +48,16 @@ class SetTicketLocationViewController: UIViewController, GMSMapViewDelegate{
             self.mapView.isMyLocationEnabled = true
             bPost.setTitle("Update Location", for: .normal)
             
-            let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+           // let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0xe74c3c
             
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: (editAttraction?.imageURL)!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil{
-                    self.marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
+                    if self.editAttraction?.postType == 2 {
+                        self.marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: 0x3498db, borderWidth: 4)
+                    }else{
+                        self.marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                    }
+
                 }
                 
             })
@@ -63,11 +68,16 @@ class SetTicketLocationViewController: UIViewController, GMSMapViewDelegate{
             marker.position = self.mapView.camera.target
             marker.map = self.mapView
             
-            let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+            //let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0xe74c3c
             
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil{
-                    self.marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
+                    if self.attraction.postType == 2 {
+                        self.marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: 0x3498db, borderWidth: 4)
+                    }else{
+                        self.marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                    }
+
                 }
                 
             })

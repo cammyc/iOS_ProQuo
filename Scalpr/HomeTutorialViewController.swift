@@ -20,7 +20,7 @@ class HomeTutorialViewController: UIViewController {
         
         blueImage.image = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: blueImage.image!), size: CGSize(width: 55, height: 55)), rgb: 0x3498db, borderWidth: 3)
 
-        greenImage.image = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: greenImage.image!), size: CGSize(width: 55, height: 55)), rgb: 0x2ecc71, borderWidth: 3)
+        greenImage.image = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: greenImage.image!), size: CGSize(width: 55, height: 55)))
         
         // Do any additional setup after loading the view.
     }

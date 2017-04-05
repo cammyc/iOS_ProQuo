@@ -320,12 +320,18 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
         let url = URL(string: conversation.attractionImageURL)
        
             
-            let color: UInt = (conversation.postType == 1) ? 0x2ecc71 : 0x3498db
+           // let color: UInt = (conversation.postType == 1) ? 0x2ecc71 : 0x9b59b6
             
             
             cell.ivAttractionImage.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
                 if image != nil {
-                    cell.ivAttractionImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
+                    //cell.ivAttractionImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
+                    
+                    if conversation.postType == 2 {
+                        cell.ivAttractionImage.image = ImageHelper.circleImageBordered(image: image!, rgb: 0x3498db, borderWidth: 12)
+                    }else{
+                        cell.ivAttractionImage.image = ImageHelper.circleImage(image: image!)
+                    }
                     
                 }
             }

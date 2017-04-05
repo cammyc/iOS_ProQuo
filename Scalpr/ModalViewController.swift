@@ -81,7 +81,7 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
     override func viewDidAppear(_ animated: Bool) {
         
         let format:NumberFormatter = NumberFormatter() //cool animiation
-        format.positiveSuffix = "$"
+        format.positivePrefix = "$"
         
         priceSlider.numberFormatterOverride = format
         

@@ -129,6 +129,7 @@
 		E3DDBD321E89D634006F3121 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */; };
 		E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */; };
 		E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */; };
+		E3DDBD381E91B4DA006F3121 /* FourthTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 /* End PBXBuildFile section */
 
@@ -299,6 +300,7 @@
 		E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
+		E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTutorialViewController.swift; sourceTree = "<group>"; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */,
 				E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */,
 				E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */,
+				E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */,
 				E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */,
 				E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */,
 				E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */,
@@ -790,6 +793,7 @@
 				E301A8A91E85BDB3009B8E7F /* Filters.swift in Sources */,
 				E3DDBD321E89D634006F3121 /* TutorialPageViewController.swift in Sources */,
 				D20637681D9B39A400EAFF0F /* LoggedInMenuController.swift in Sources */,
+				E3DDBD381E91B4DA006F3121 /* FourthTutorialViewController.swift in Sources */,
 				D20ECC981DF7D2A4008B315F /* Message.swift in Sources */,
 				D20ECC941DF7D264008B315F /* ConversationsTableViewController.swift in Sources */,
 				D25E544F1D9F7593003164E8 /* ImageHelper.swift in Sources */,

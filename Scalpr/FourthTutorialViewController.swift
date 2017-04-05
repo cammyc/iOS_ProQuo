@@ -1,47 +1,32 @@
 //
-//  SecondTutorialViewController.swift
+//  FourthTutorialViewController.swift
 //  Scalpr
 //
-//  Created by Cameron Connor on 3/27/17.
+//  Created by Cameron Connor on 4/2/17.
 //  Copyright © 2017 ProQuo. All rights reserved.
 //
 
 import UIKit
-import TTRangeSlider
-import MMSegmentSlider
 
-class SecondTutorialViewController: UIViewController{
-    
-    // MARK: Var init
-    @IBOutlet weak var priceSlider: TTRangeSlider!
-    @IBOutlet weak var numTicketSlider: MMSegmentSlider!
+class FourthTutorialViewController: UIViewController {
     
     
+    @IBOutlet weak var pic: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        numTicketSlider.values = [-1, 1, 2, 3, 4]
-        numTicketSlider.labels = ["Any", "1", "2", "3" , "4+"]
-        
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        let format:NumberFormatter = NumberFormatter() //cool animiation
-        format.positivePrefix = "$"
-        
-        priceSlider.numberFormatterOverride = format
-        
-    }
+        pic.image = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: pic.image!), size: CGSize(width: 60, height: 60)))
 
+        // Do any additional setup after loading the view.
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+
     /*
     // MARK: - Navigation
 

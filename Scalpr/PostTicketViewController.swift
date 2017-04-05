@@ -122,6 +122,9 @@ class PostTicketViewController: UIViewController, UICollectionViewDataSource, UI
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
         datePickerView.minimumDate = Date()
+        let endDate = Calendar.current.date(byAdding: .year, value: 5, to: Date())!
+        datePickerView.maximumDate = endDate
+
         
         datePickerView.addTarget(self, action: #selector(PostTicketViewController.dateSelected), for: .valueChanged)
         

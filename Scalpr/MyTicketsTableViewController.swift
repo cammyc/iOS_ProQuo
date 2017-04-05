@@ -142,7 +142,13 @@ class MyTicketsTableViewController: UITableViewController{
         
         cell.ivImage.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { image, error,cacheType, imageURL in
                 if image != nil {
-                    cell.ivImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
+                    //cell.ivImage.image = ImageHelper.circleImageBordered(image: image!, rgb: color, borderWidth: 12)
+                    
+                    if attraction.postType == 2 {
+                        cell.ivImage.image = ImageHelper.circleImageBordered(image: image!, rgb: 0x3498db, borderWidth: 12)
+                    }else{
+                        cell.ivImage.image = ImageHelper.circleImage(image: image!)
+                    }
 
                 }
             }
@@ -155,7 +161,9 @@ class MyTicketsTableViewController: UITableViewController{
         cell.venueName.text = attraction.venueName
         
         let price = String(format: attraction.ticketPrice == floor(attraction.ticketPrice) ? "%.0f" : "%.2f", attraction.ticketPrice)
-        cell.priceAndNumTickets.text = "$" + price + " - " + String(attraction.numTickets) + " Tickets"
+        let requestOrSell = (attraction.postType == 1) ? "Being Sold" : "Requested"
+
+        cell.priceAndNumTickets.text = "$" + price + " - " + String(attraction.numTickets) + " Tickets " + requestOrSell
         cell.priceAndNumTickets.textColor = MiscHelper.UIColorFromRGB(rgbValue: color)
         
         return cell

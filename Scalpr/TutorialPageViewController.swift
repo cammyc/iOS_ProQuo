@@ -11,8 +11,10 @@ import UIKit
 class TutorialPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var index = 0
-    var identifiers: NSArray = ["FirstTutorialViewController", "SecondTutorialViewController", "ThirdTutorialViewController"]
+    var identifiers: NSArray = ["FirstTutorialViewController", "SecondTutorialViewController", "ThirdTutorialViewController", "FourthTutorialViewController"]
     private var pages: [UIViewController]!
+    
+    var tutorialDelegate: TutorialDelegate?
 
        override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +22,12 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerData
         // Do any additional setup after loading the view.
         
         self.dataSource = self
-        self.delegate = self
+        self.delegate = self//FourthTutorialViewController
         
         pages = [self.storyboard!.instantiateViewController(withIdentifier: "FirstTutorialViewController") as! HomeTutorialViewController,
                      self.storyboard!.instantiateViewController(withIdentifier: "SecondTutorialViewController") as! SecondTutorialViewController,
-                     self.storyboard!.instantiateViewController(withIdentifier: "ThirdTutorialViewController") as! ThirdTutorialViewController]
+                     self.storyboard!.instantiateViewController(withIdentifier: "ThirdTutorialViewController") as! ThirdTutorialViewController,
+                     self.storyboard!.instantiateViewController(withIdentifier: "FourthTutorialViewController") as! FourthTutorialViewController]
         
 
         
@@ -60,11 +63,15 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerData
         appearance.pageIndicatorTintColor = UIColor.white
         appearance.currentPageIndicatorTintColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
         appearance.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: 0xecf0f1)
-        return 3
+        return 4
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.tutorialDelegate?.checkVersionAndTerms()
     }
     
 }

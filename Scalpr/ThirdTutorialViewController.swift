@@ -17,9 +17,9 @@ class ThirdTutorialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chance.image = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: chance.image!), size: CGSize(width: 60, height: 60)), rgb: 0x3498db, borderWidth: 3)
+        chance.image = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: chance.image!), size: CGSize(width: 60, height: 60)), rgb: 0x3498db, borderWidth: 4)
         
-        yankee.image = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: yankee.image!), size: CGSize(width: 60, height: 60)), rgb: 0x2ecc71, borderWidth: 3)
+        yankee.image = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: yankee.image!), size: CGSize(width: 60, height: 60)))
 
 
         // Do any additional setup after loading the view.

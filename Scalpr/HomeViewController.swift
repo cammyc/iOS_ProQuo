@@ -29,6 +29,11 @@ protocol FilterDelegate {
     func updateFilters(updatedFilter: Filters)
 }
 
+protocol TutorialDelegate{
+    func checkVersionAndTerms()
+}
+
+
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, KCFloatingActionButtonDelegate, GMSMapViewDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
     // MARK: Variable Initialization
@@ -90,6 +95,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             let controller = storyboard.instantiateViewController(withIdentifier: "TutorialPageViewController") as? TutorialPageViewController
+            controller?.tutorialDelegate = self
             let presenter = Presentr(presentationType: .popup)
             
             preferences.set(true, forKey: "viewedTutorial")
@@ -98,7 +104,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             customPresentViewController(presenter, viewController: controller!, animated: true, completion: nil)
         }
         
-               mapView.delegate = self
+        mapView.delegate = self
         mapView.settings.consumesGesturesInView = false
 
         
@@ -830,7 +836,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
             
             if loggedInID != Int64(cdAttraction.creatorID){
-                infoWindow.contact.text = "CONTACT SELLER"
+                let requestOrSell = (cdAttraction.postType == 1) ? "CONTACT SELLER" : "CONTACT REQUESTER"
+
+                infoWindow.contact.text = requestOrSell
             }else{
                 infoWindow.contact.text = "THIS IS YOUR POST"
             }
@@ -861,7 +869,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             infoWindow.contact.textColor = MiscHelper.UIColorFromRGB(rgbValue: color)
 
             if loggedInID != attraction.creatorID {
-                infoWindow.contact.text = "CONTACT SELLER"
+                let requestOrSell = (attraction.postType == 1) ? "CONTACT SELLER" : "CONTACT REQUESTER"
+
+                infoWindow.contact.text = requestOrSell
             }else{
                 infoWindow.contact.text = "THIS IS YOUR POST"
             }
@@ -1257,9 +1267,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil{
                     
-                    let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
+                    if attraction.postType == 2 {
+                        marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: 0x3498db, borderWidth: 4)
+                    }else{
+                        marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                    }
                     
-                    marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
+                    
                 }
                 
                 marker.map = self.mapView
@@ -1292,9 +1306,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         KingfisherManager.shared.retrieveImage(with: Foundation.URL(string: attraction.imageURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             if image != nil{
                 
-                let color: UInt = (attraction.postType == 1) ? 0x2ecc71 : 0x3498db
                 
-                marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: color, borderWidth: 4)
+                if attraction.postType == 2 {
+                    marker.icon = ImageHelper.circleImageBordered(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)), rgb: 0x3498db, borderWidth: 4)
+                }else{
+                    marker.icon = ImageHelper.circleImage(image: ImageHelper.ResizeImage(image: ImageHelper.centerImage(image: image!), size: CGSize(width: 55, height: 55)))
+                }
+
 
             }
             
@@ -1435,5 +1453,32 @@ extension HomeViewController : FilterDelegate {
         //refreshMapWithNewParams()
     }
 }
+
+extension HomeViewController : TutorialDelegate {
+    
+    internal func checkVersionAndTerms(){
+        let miscHelper = MiscHelper()
+        miscHelper.getMinimumAppVersion(){ responseObject, error in
+            if responseObject != nil{
+                if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    if Double(version)! < responseObject!{
+                        self.neverEndingAlert()
+                    }else{
+                        self.terms() //not worried about terms if update is required, it will show once updated
+                    }
+                }else{
+                    self.terms()
+                }
+                
+            }else{
+                self.terms()
+            }
+            
+            return
+        }
+
+    }
+}
+
 
 
