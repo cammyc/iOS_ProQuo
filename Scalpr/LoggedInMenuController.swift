@@ -65,19 +65,19 @@ class LoggedInMenuController: UITableViewController, MFMailComposeViewController
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["support@proquoapp.com"])
+            mail.setToRecipients(["support@belivetickets.com"])
             
             present(mail, animated: true)
         } else {
             //showSendMailErrorAlert(email: recipientEmail)
-            let coded = "mailto:support@proquoapp.com"
+            let coded = "mailto:support@belivetickets.com"
             if let emailURL:URL = URL(string: coded)
             {
                 if UIApplication.shared.canOpenURL(emailURL as URL)
                 {
                     UIApplication.shared.open(emailURL, options: [:])
                 }else{
-                    showSendMailErrorAlert(email: "support@proquoapp.com")
+                    showSendMailErrorAlert(email: "support@belivetickets.com")
                 }
             }
             

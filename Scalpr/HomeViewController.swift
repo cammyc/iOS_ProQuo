@@ -905,7 +905,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             }else{
 //                contactSeller(attraction: attraction)
 //                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
-                  self.showOkAlert(title: "Please Login", text: "You must be logged in to contact the seller.")
+                let text = (attraction.postType == 1) ? "seller." : "requester."
+                
+                  self.showOkAlert(title: "Please Login", text: "You must be logged in to contact the " + text)
 
             }
         }else if let cdAttraction = marker.userData as? cdAttractionMO{
@@ -918,7 +920,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     contactSeller(attraction: attraction)
                 }
             }else{
-                MiscHelper.showWhisper(message: "You must be logged in to contact the seller", color: .red, navController: self.navigationController)
+                let text = (attraction.postType == 1) ? "seller." : "requester."
+
+                MiscHelper.showWhisper(message: "You must be logged in to contact the " + text, color: .red, navController: self.navigationController)
             }
 
         }
@@ -926,9 +930,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     func contactSeller(attraction: Attraction){
         
+        let text = (attraction.postType == 1) ? "seller?" : "requester?"
+
+        
         let alert = UIAlertController(
             title: "Contact Seller",
-            message: "Would you like to contact the seller?",
+            message: "Would you like to contact the " + text,
             preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { (test) -> Void in
