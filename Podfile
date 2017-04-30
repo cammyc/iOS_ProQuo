@@ -22,6 +22,7 @@ pod 'ARNTransitionAnimator'
 pod 'TTRangeSlider'
 pod 'MMSegmentSlider'
 pod 'Presentr'
+pod 'Stripe'
 
 
 end

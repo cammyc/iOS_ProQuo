@@ -74,7 +74,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDel
     
     
     @IBAction func bForgotPassword(_ sender: Any) {
-        let svc = SFSafariViewController(url: NSURL(string: "http://proquoapp.com/forgotPassword.html") as! URL)
+        let svc = SFSafariViewController(url: NSURL(string: "http://belivetickets.com/forgotPassword.html") as! URL)
         present(svc, animated: true, completion: nil)
     }
     

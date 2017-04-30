@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>2.02</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -36,11 +36,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>8</string>
 	<key>FacebookAppID</key>
 	<string>1061021274043467</string>
 	<key>FacebookDisplayName</key>
-	<string>ProQuo</string>
+	<string>BeLive</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQuerieSchemes</key>

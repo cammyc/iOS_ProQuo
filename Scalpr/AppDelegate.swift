@@ -14,6 +14,7 @@ import FBSDKCoreKit
 import UserNotifications
 import Whisper
 import Kingfisher
+import Stripe
 
 
 protocol PushNotificationDelegate : class {
@@ -49,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_EUXTG75yVL1mFS57Q7b0Svkz"
         
                         
         return true

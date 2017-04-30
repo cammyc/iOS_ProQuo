@@ -122,6 +122,16 @@
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
+		E395B2391EB3D67C00C7D407 /* videobg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E395B2381EB3D5E300C7D407 /* videobg.mp4 */; };
+		E395B23B1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */; };
+		E3BDD27E1EAEC4A500714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
+		E3BDD27F1EAEC4AB00714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
+		E3BDD2801EAEC4AB00714929 /* Stripe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3BDD2821EAEDA5B00714929 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD2811EAEDA5B00714929 /* StripeAPIClient.swift */; };
+		E3BDD2851EB133B400714929 /* StripePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD2841EB133B400714929 /* StripePaymentViewController.swift */; };
+		E3BDD28A1EB1353200714929 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD2881EB1353200714929 /* CheckoutRowView.swift */; };
+		E3BDD28B1EB1353200714929 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD2891EB1353200714929 /* Buttons.swift */; };
+		E3BDD28D1EB1355A00714929 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD28C1EB1355A00714929 /* SettingsViewController.swift */; };
 		E3DDBD2C1E898B57006F3121 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; };
 		E3DDBD2D1E898B5F006F3121 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; };
 		E3DDBD2E1E898B5F006F3121 /* Presentr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -130,7 +140,10 @@
 		E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */; };
 		E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */; };
 		E3DDBD381E91B4DA006F3121 /* FourthTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */; };
+		E3E06ABA1EB409E10003F218 /* videobg_alt.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */; };
+		E3E06ABC1EB40B130003F218 /* videobg_alt2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
+		E3EF417E1EB5562D0090550D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EF417D1EB5562D0090550D /* CreateAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +186,7 @@
 				E37C642D1E393F0C00476271 /* FBSDKLoginKit.framework in Embed Frameworks */,
 				E377AABA1E45240A00890BF4 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				E37C64291E393F0C00476271 /* FacebookLogin.framework in Embed Frameworks */,
+				E3BDD2801EAEC4AB00714929 /* Stripe.framework in Embed Frameworks */,
 				E37C64231E393F0C00476271 /* Bolts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -291,7 +305,15 @@
 		E37C644A1E393F5E00476271 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E37C644B1E393F5E00476271 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E395B2381EB3D5E300C7D407 /* videobg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg.mp4; sourceTree = "<group>"; };
+		E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountOrLoginViewController.swift; sourceTree = "<group>"; };
 		E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZMSwiftRangeSlider.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ZMSwiftRangeSlider/ZMSwiftRangeSlider.framework"; sourceTree = "<group>"; };
+		E3BDD27D1EAEC4A500714929 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Stripe/Stripe.framework"; sourceTree = "<group>"; };
+		E3BDD2811EAEDA5B00714929 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
+		E3BDD2841EB133B400714929 /* StripePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripePaymentViewController.swift; sourceTree = "<group>"; };
+		E3BDD2881EB1353200714929 /* CheckoutRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
+		E3BDD2891EB1353200714929 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		E3BDD28C1EB1355A00714929 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E3C525971E393DCA00D83F18 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		E3C525981E393DCA00D83F18 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E3C525991E393DCA00D83F18 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
@@ -301,6 +323,8 @@
 		E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTutorialViewController.swift; sourceTree = "<group>"; };
+		E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg_alt.mp4; sourceTree = "<group>"; };
+		E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg_alt2.mp4; sourceTree = "<group>"; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
@@ -328,6 +352,7 @@
 		E3E8AA6E1E13F23C0074D6FF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Bolts/Bolts.framework"; sourceTree = "<group>"; };
 		E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		E3EF417D1EB5562D0090550D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +360,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3BDD27E1EAEC4A500714929 /* Stripe.framework in Frameworks */,
 				E3DDBD2C1E898B57006F3121 /* Presentr.framework in Frameworks */,
 				E36AB12A1E83064A0028E683 /* MMSegmentSlider.framework in Frameworks */,
 				E32FDD421E80652B00858B29 /* TTRangeSlider.framework in Frameworks */,
@@ -372,6 +398,7 @@
 				D25D1F201D9E07460085EA89 /* CoreText.framework in Frameworks */,
 				E37C64371E393F0C00476271 /* IQKeyboardManagerSwift.framework in Frameworks */,
 				E37C643F1E393F0C00476271 /* Kingfisher.framework in Frameworks */,
+				E3BDD27F1EAEC4AB00714929 /* Stripe.framework in Frameworks */,
 				E339BC371E3940CC0040FBE3 /* GTMSessionFetcher.framework in Frameworks */,
 				E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */,
 				D25D1F1F1D9E073F0085EA89 /* CoreLocation.framework in Frameworks */,
@@ -410,6 +437,9 @@
 				E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */,
 				E38609A31E12ECDF004E4B3C /* Podfile */,
 				E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */,
+				E395B2381EB3D5E300C7D407 /* videobg.mp4 */,
+				E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */,
+				E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */,
 				D20637411D9B31DB00EAFF0F /* Scalpr */,
 				D20637561D9B31DC00EAFF0F /* ScalprTests */,
 				D20637401D9B31DB00EAFF0F /* Products */,
@@ -437,28 +467,26 @@
 				D20637911D9B96DB00EAFF0F /* Helpers */,
 				D206378E1D9B867200EAFF0F /* Objects */,
 				D20637621D9B321C00EAFF0F /* SWRevealViewController */,
-				D20637441D9B31DB00EAFF0F /* HomeViewController.swift */,
-				E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */,
-				E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */,
-				E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */,
-				E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */,
-				E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */,
-				E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */,
-				E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */,
-				D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */,
+				E334392A1E5792FC0019AE1B /* AttractionListTableViewController.swift */,
+				D26C0EDE1D9F1D5300ECE9F2 /* BingImageCollectionViewCell.swift */,
 				D20ECC931DF7D264008B315F /* ConversationsTableViewController.swift */,
 				D20ECC9B1DF88E4E008B315F /* ConversationTableViewCell.swift */,
-				D23C15421E085E6500A4BCAC /* SelectedConversationMessagesViewController.swift */,
-				D228D5321DF9314C009200E6 /* MyMessageTableViewCell.swift */,
-				D228D5341DF9316C009200E6 /* YourMessageTableViewCell.swift */,
-				D24C433E1DA76B3500547332 /* SetTicketLocationViewController.swift */,
-				D2FB896B1DA178BE005DB173 /* LoginViewController.swift */,
+				E3EF417F1EB556330090550D /* CreateAccountAndLogin */,
 				D2F413A31DAB309E0047A3C6 /* CustomInfoWindow.swift */,
-				E334392A1E5792FC0019AE1B /* AttractionListTableViewController.swift */,
+				D20637441D9B31DB00EAFF0F /* HomeViewController.swift */,
+				D2FB896B1DA178BE005DB173 /* LoginViewController.swift */,
+				E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */,
+				E30DBFE81E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift */,
+				D228D5321DF9314C009200E6 /* MyMessageTableViewCell.swift */,
 				D211351C1DAC4B4C0064EACF /* MyTicketsTableViewController.swift */,
 				D21135321DAC51860064EACF /* MyTicketTableViewCell.swift */,
-				D26C0EDE1D9F1D5300ECE9F2 /* BingImageCollectionViewCell.swift */,
 				D2916A821D9ED2D2008970EA /* PostTicketViewController.swift */,
+				D23C15421E085E6500A4BCAC /* SelectedConversationMessagesViewController.swift */,
+				D24C433E1DA76B3500547332 /* SetTicketLocationViewController.swift */,
+				E3BDD2871EB1345A00714929 /* Stripe */,
+				E3BDD2861EB1340E00714929 /* Tutorial */,
+				D2A09D161DAF47E600F4012A /* UpdateAccountViewController.swift */,
+				D228D5341DF9316C009200E6 /* YourMessageTableViewCell.swift */,
 				D20637461D9B31DB00EAFF0F /* Main.storyboard */,
 				D2F413A11DAB2E1B0047A3C6 /* InfoWindow.xib */,
 				D2F4139C1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld */,
@@ -523,6 +551,7 @@
 		D20637AE1D9CA54100EAFF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3BDD27D1EAEC4A500714929 /* Stripe.framework */,
 				E3DDBD2B1E898B57006F3121 /* Presentr.framework */,
 				E36AB1291E83064A0028E683 /* MMSegmentSlider.framework */,
 				E32FDD411E80652B00858B29 /* TTRangeSlider.framework */,
@@ -616,6 +645,39 @@
 				D228D5371E02150B009200E6 /* MessagingPaddingLabel.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		E3BDD2861EB1340E00714929 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */,
+				E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */,
+				E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */,
+				E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */,
+				E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
+		E3BDD2871EB1345A00714929 /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+				E3BDD28C1EB1355A00714929 /* SettingsViewController.swift */,
+				E3BDD2881EB1353200714929 /* CheckoutRowView.swift */,
+				E3BDD2891EB1353200714929 /* Buttons.swift */,
+				E3BDD2811EAEDA5B00714929 /* StripeAPIClient.swift */,
+				E3BDD2841EB133B400714929 /* StripePaymentViewController.swift */,
+			);
+			name = Stripe;
+			sourceTree = "<group>";
+		};
+		E3EF417F1EB556330090550D /* CreateAccountAndLogin */ = {
+			isa = PBXGroup;
+			children = (
+				E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */,
+				E3EF417D1EB5562D0090550D /* CreateAccountViewController.swift */,
+			);
+			name = CreateAccountAndLogin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -717,6 +779,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3E06ABC1EB40B130003F218 /* videobg_alt2.mp4 in Resources */,
+				E3E06ABA1EB409E10003F218 /* videobg_alt.mp4 in Resources */,
+				E395B2391EB3D67C00C7D407 /* videobg.mp4 in Resources */,
 				E38609A41E12ECDF004E4B3C /* Podfile in Resources */,
 				D206374D1D9B31DB00EAFF0F /* LaunchScreen.storyboard in Resources */,
 				D2F413A21DAB2E1B0047A3C6 /* InfoWindow.xib in Resources */,
@@ -799,6 +864,7 @@
 				D25E544F1D9F7593003164E8 /* ImageHelper.swift in Sources */,
 				D2F413A01DA9BF7A0047A3C6 /* cdAttractionMO.swift in Sources */,
 				D21135351DAD680E0064EACF /* Toast.swift in Sources */,
+				E3BDD2821EAEDA5B00714929 /* StripeAPIClient.swift in Sources */,
 				D20637451D9B31DB00EAFF0F /* HomeViewController.swift in Sources */,
 				D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */,
 				D228D5381E02150B009200E6 /* MessagingPaddingLabel.swift in Sources */,
@@ -813,12 +879,16 @@
 				D2986EA61DA1709400CF2104 /* MiscHelper.swift in Sources */,
 				D21135331DAC51860064EACF /* MyTicketTableViewCell.swift in Sources */,
 				E30DBFE91E7239B900EE7C51 /* MusicPlayerTransitionAnimation.swift in Sources */,
+				E3BDD28A1EB1353200714929 /* CheckoutRowView.swift in Sources */,
 				D228D5351DF9316C009200E6 /* YourMessageTableViewCell.swift in Sources */,
 				D2916A831D9ED2D3008970EA /* PostTicketViewController.swift in Sources */,
+				E3BDD28B1EB1353200714929 /* Buttons.swift in Sources */,
 				D23C15431E085E6600A4BCAC /* SelectedConversationMessagesViewController.swift in Sources */,
 				D20ECC9A1DF87BB9008B315F /* ConversationHelper.swift in Sources */,
 				D2A09D171DAF47E700F4012A /* UpdateAccountViewController.swift in Sources */,
+				E395B23B1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift in Sources */,
 				D228D5331DF9314C009200E6 /* MyMessageTableViewCell.swift in Sources */,
+				E3BDD28D1EB1355A00714929 /* SettingsViewController.swift in Sources */,
 				E357EAF11E709FA0003EB4F1 /* ModalViewController.swift in Sources */,
 				E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */,
 				D20637431D9B31DB00EAFF0F /* AppDelegate.swift in Sources */,
@@ -828,9 +898,11 @@
 				D2F413A41DAB309E0047A3C6 /* CustomInfoWindow.swift in Sources */,
 				D20ECC961DF7D296008B315F /* Conversation.swift in Sources */,
 				D25E543A1D9F658D003164E8 /* BingImageHelper.swift in Sources */,
+				E3EF417E1EB5562D0090550D /* CreateAccountViewController.swift in Sources */,
 				D2FB89831DA17E2A005DB173 /* LoggedOutMenuController.swift in Sources */,
 				E3DDBD301E89B076006F3121 /* HomeTutorialViewController.swift in Sources */,
 				D211351D1DAC4B4C0064EACF /* MyTicketsTableViewController.swift in Sources */,
+				E3BDD2851EB133B400714929 /* StripePaymentViewController.swift in Sources */,
 				E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */,
 				E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */,
 				D24C433B1DA4C16700547332 /* User.swift in Sources */,

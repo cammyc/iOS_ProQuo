@@ -564,5 +564,9 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
         let message = JSQMessage(senderId: id, senderDisplayName: name, date: timestamp, text: text)
         messages.append(message!)
     }
+    
+    
+    // MARK: STRIPE Payment
 
+        
 }

@@ -186,6 +186,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         self.view.addSubview(fabGoToMyLocation)
         
     }
+
     
     func setupAnimator() {
         
@@ -392,7 +393,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     func neverEndingAlert(){
         let alert = UIAlertController(
             title: "Update Required",
-            message: "An update is required to continue using ProQuo. Please close the app and update it in the app store.",
+            message: "An update is required to continue using BeLive. Please close the app and update it in the app store.",
             preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (test) -> Void in
@@ -420,11 +421,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     func termsAlert(){
         let alert = UIAlertController(
             title: "Terms of Service",
-            message: "You must agree to ProQuo's Terms of Service to continue using the app.",
+            message: "You must agree to BeLive's Terms of Service to continue using the app.",
             preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "View Terms", style: .default, handler: { (test) -> Void in
-            UIApplication.shared.open(NSURL(string: "http://www.proquoapp.com/help/policies/terms_of_service.html")! as URL, options: [:])
+            UIApplication.shared.open(NSURL(string: "http://www.belivetickets.com/help/policies/terms_of_service.html")! as URL, options: [:])
             self.termsAlert()
         }))
         
@@ -1151,7 +1152,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
                             
                             if granted == false {
-                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find ProQuo and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
+                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find BeLive and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
                                 
                                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (test) -> Void in
                                     
@@ -1354,8 +1355,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         // localize to your grouping and decimal separator
         currencyFormatter.locale = NSLocale.current
 
-        let subject = "ProQuo - " + attraction.name + " at " + attraction.venueName
-        let message = "Hey, I saw your " + attraction.name + " at " + attraction.venueName + " tickets on ProQuo for " + currencyFormatter.string(for: attraction.ticketPrice)! + "/Ticket.\n\nAre they still for sale?"
+        let subject = "BeLive - " + attraction.name + " at " + attraction.venueName
+        let message = "Hey, I saw your " + attraction.name + " at " + attraction.venueName + " tickets on BeLive for " + currencyFormatter.string(for: attraction.ticketPrice)! + "/Ticket.\n\nAre they still for sale?"
         
         if MFMailComposeViewController.canSendMail() {
             
@@ -1393,7 +1394,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             
             let controller = MFMessageComposeViewController()
             controller.messageComposeDelegate = self
-            let message = "Hey, I saw your " + attraction.name + " at " + attraction.venueName + " tickets on ProQuo for " + currencyFormatter.string(for: attraction.ticketPrice)! + "/Ticket. Are they still for sale?"
+            let message = "Hey, I saw your " + attraction.name + " at " + attraction.venueName + " tickets on BeLive for " + currencyFormatter.string(for: attraction.ticketPrice)! + "/Ticket. Are they still for sale?"
             controller.body = message
             controller.recipients = [recipientPhone]
             present(controller, animated: true)

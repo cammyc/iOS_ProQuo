@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import Stripe
+import IQKeyboardManagerSwift
 
 class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
     
@@ -25,6 +27,10 @@ class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
     // MARK: Button Outlets
     @IBOutlet weak var bUpdate: UIButton!
     @IBOutlet weak var bChangePassword: UIButton!
+    
+    // MARK: Stripe View Controllers
+   // let settingsVC = SettingsViewController()
+
     
 
     override func viewDidLoad() {
@@ -322,5 +328,46 @@ class UpdateAccountViewController: UIViewController, UITextFieldDelegate {
         
         self.present(refreshAlert,animated: true,completion: nil)
     }
+    
+    
+    // MARK: STRIPE Payment info
+    
+//    @IBAction func addPayment(_ sender: Any) {
+//        IQKeyboardManager.sharedManager().enable = false
+////        let addCardViewController = STPAddCardViewController()
+////        addCardViewController.delegate = self
+////        // STPAddCardViewController must be shown inside a UINavigationController.
+////        let navigationController = UINavigationController(rootViewController: addCardViewController)
+//        
+//        let checkoutViewController = StripePaymentViewController(product: "Hiiii",
+//                                                            price: 10,
+//                                                            settings: self.settingsVC.settings)
+//        
+//        self.navigationController?.pushViewController(checkoutViewController, animated: true)
+//
+//    }
+//    
+//    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+//        IQKeyboardManager.sharedManager().enable = true
+//        self.dismiss(animated: true, completion: nil)
+//    }
+//    
+//    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+//        IQKeyboardManager.sharedManager().enable = true
+//        
+//        let savedToken = token;
+//        //        self.submitTokenToBackend(token, completion: { (error: Error?) in
+//        //            if let error = error {
+//        //                completion(error)
+//        //            } else {
+//        //                self.dismiss(animated: true, completion: {
+//        //                    self.showReceiptPage()
+//        //                    completion(nil)
+//        //                })
+//        //            }
+//        //        })
+//    }
+//
+    
 
 }

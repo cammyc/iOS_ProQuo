@@ -115,7 +115,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
                         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
                         
                             if granted == false {
-                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find ProQuo and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
+                                let alert = UIAlertController(title: "Declined Notifications", message:"It appears you have previously declined notifications from this app. Please go to Settings->Notifications, find BeLive and re-enable notifications to receive updates when messaged.",preferredStyle: UIAlertControllerStyle.alert)
                                 
                                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (test) -> Void in
                                     
@@ -413,7 +413,7 @@ class ConversationsTableViewController: UITableViewController, PushNotificationD
                         self.conversations.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .fade)
                         
-                        self.showWhisper(message: "Left Conversation", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71))
+                        //self.showWhisper(message: "Left Conversation", color: MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71))
                         
                         CoreDataHelper().wipeConversationFromDB(convoID: convo.ID)
                     }else{
