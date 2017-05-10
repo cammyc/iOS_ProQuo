@@ -19,6 +19,7 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
     
     // MARK: bgVideo
     var player: AVPlayer?
+    var videoPaused = false
     
     // MARK: fields
     @IBOutlet weak var tfEmailPhone: UITextField!
@@ -40,7 +41,6 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
     var fbUserID: String? = nil
     var googleUserID: String? = nil
     var googleDisplayPicURL: String? = nil
-    
     
 
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
     
     func initVideoBG(){
         // Do any additional setup after loading the view.
-        let videoURL: NSURL = Bundle.main.url(forResource: "videobg_alt", withExtension: "mp4")! as NSURL
+        let videoURL: NSURL = Bundle.main.url(forResource: "videobg", withExtension: "mp4")! as NSURL
         
         player = AVPlayer(url: videoURL as URL)
         player?.actionAtItemEnd = .none
@@ -88,6 +88,19 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
         //loop video
         NotificationCenter.default.addObserver(self, selector: #selector(CreateAccountOrLoginViewController.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        player?.pause()
+        videoPaused = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if videoPaused {
+            player?.play()
+            videoPaused = false
+        }
+    }
+    
     
     func loopVideo() {
         player?.seek(to: kCMTimeZero)

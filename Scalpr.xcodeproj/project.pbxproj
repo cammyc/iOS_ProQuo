@@ -82,6 +82,7 @@
 		E339BC381E3940CC0040FBE3 /* GTMSessionFetcher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E339BC321E3940C50040FBE3 /* GTMSessionFetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E339BC3A1E3941A10040FBE3 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */; };
 		E339BC3E1E3968100040FBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */; };
+		E34601DE1EBAA06C0037DE9D /* videobg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E34601DD1EBAA0540037DE9D /* videobg.mp4 */; };
 		E348A3B81E6A0827007CDE51 /* DLRadioButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */; };
 		E348A3B91E6A082E007CDE51 /* DLRadioButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */; };
 		E348A3BA1E6A082E007CDE51 /* DLRadioButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -122,7 +123,6 @@
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
-		E395B2391EB3D67C00C7D407 /* videobg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E395B2381EB3D5E300C7D407 /* videobg.mp4 */; };
 		E395B23B1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */; };
 		E3BDD27E1EAEC4A500714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
 		E3BDD27F1EAEC4AB00714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
@@ -140,10 +140,9 @@
 		E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */; };
 		E3DDBD361E8ACE66006F3121 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */; };
 		E3DDBD381E91B4DA006F3121 /* FourthTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */; };
-		E3E06ABA1EB409E10003F218 /* videobg_alt.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */; };
-		E3E06ABC1EB40B130003F218 /* videobg_alt2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */; };
 		E3E69B871E1B471E001908DF /* cdMessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E69B861E1B471E001908DF /* cdMessageMO.swift */; };
 		E3EF417E1EB5562D0090550D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EF417D1EB5562D0090550D /* CreateAccountViewController.swift */; };
+		E3EF41811EB692DE0090550D /* Audiowide.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3EF41801EB68F6C0090550D /* Audiowide.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +292,7 @@
 		E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3422F651E1C66470000E1D2 /* Whisper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Whisper.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Whisper/Whisper.framework"; sourceTree = "<group>"; };
+		E34601DD1EBAA0540037DE9D /* videobg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg.mp4; sourceTree = "<group>"; };
 		E348A3B31E6A07C8007CDE51 /* DLRadioButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DLRadioButton.framework; path = "Pods/../build/Debug-iphoneos/DLRadioButton/DLRadioButton.framework"; sourceTree = "<group>"; };
 		E348A3B71E6A0827007CDE51 /* DLRadioButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DLRadioButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/DLRadioButton/DLRadioButton.framework"; sourceTree = "<group>"; };
 		E357EAF01E709FA0003EB4F1 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
@@ -305,7 +305,6 @@
 		E37C644A1E393F5E00476271 /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E37C644B1E393F5E00476271 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		E395B2381EB3D5E300C7D407 /* videobg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg.mp4; sourceTree = "<group>"; };
 		E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountOrLoginViewController.swift; sourceTree = "<group>"; };
 		E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZMSwiftRangeSlider.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ZMSwiftRangeSlider/ZMSwiftRangeSlider.framework"; sourceTree = "<group>"; };
 		E3BDD27D1EAEC4A500714929 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Stripe/Stripe.framework"; sourceTree = "<group>"; };
@@ -323,8 +322,6 @@
 		E3DDBD331E89EAC1006F3121 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD351E8ACE66006F3121 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD371E91B4DA006F3121 /* FourthTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTutorialViewController.swift; sourceTree = "<group>"; };
-		E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg_alt.mp4; sourceTree = "<group>"; };
-		E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videobg_alt2.mp4; sourceTree = "<group>"; };
 		E3E69B861E1B471E001908DF /* cdMessageMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cdMessageMO.swift; sourceTree = "<group>"; };
 		E3E8AA101E1300EA0074D6FF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		E3E8AA111E1300EA0074D6FF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
@@ -353,6 +350,7 @@
 		E3E8AA721E13F26F0074D6FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		E3E8AA731E13F26F0074D6FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/FBSDKLoginKit/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		E3EF417D1EB5562D0090550D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		E3EF41801EB68F6C0090550D /* Audiowide.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Audiowide.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,9 +435,8 @@
 				E339BC391E3941A10040FBE3 /* GoogleMaps.bundle */,
 				E38609A31E12ECDF004E4B3C /* Podfile */,
 				E339BC3D1E3968100040FBE3 /* GoogleService-Info.plist */,
-				E395B2381EB3D5E300C7D407 /* videobg.mp4 */,
-				E3E06AB91EB409D50003F218 /* videobg_alt.mp4 */,
-				E3E06ABB1EB40B070003F218 /* videobg_alt2.mp4 */,
+				E34601DD1EBAA0540037DE9D /* videobg.mp4 */,
+				E3EF41801EB68F6C0090550D /* Audiowide.ttf */,
 				D20637411D9B31DB00EAFF0F /* Scalpr */,
 				D20637561D9B31DC00EAFF0F /* ScalprTests */,
 				D20637401D9B31DB00EAFF0F /* Products */,
@@ -779,9 +776,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3E06ABC1EB40B130003F218 /* videobg_alt2.mp4 in Resources */,
-				E3E06ABA1EB409E10003F218 /* videobg_alt.mp4 in Resources */,
-				E395B2391EB3D67C00C7D407 /* videobg.mp4 in Resources */,
+				E34601DE1EBAA06C0037DE9D /* videobg.mp4 in Resources */,
+				E3EF41811EB692DE0090550D /* Audiowide.ttf in Resources */,
 				E38609A41E12ECDF004E4B3C /* Podfile in Resources */,
 				D206374D1D9B31DB00EAFF0F /* LaunchScreen.storyboard in Resources */,
 				D2F413A21DAB2E1B0047A3C6 /* InfoWindow.xib in Resources */,
