@@ -87,6 +87,11 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
         
         //loop video
         NotificationCenter.default.addObserver(self, selector: #selector(CreateAccountOrLoginViewController.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        
+//        let bgView = UIView(frame: self.view.bounds)
+//        bgView.backgroundColor = UIColor.red
+//        
+//        self.view.insertSubview(bgView, belowSubview: self.tfEmailPhone)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

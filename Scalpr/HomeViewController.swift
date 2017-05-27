@@ -473,7 +473,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
             }
             
-            
         }
         searchBar.resignFirstResponder()
     }
@@ -747,6 +746,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     // MARK: map functions
+    
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         if currentDataRequest != nil{
@@ -1058,8 +1058,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             mapView.isMyLocationEnabled = true
             
             locationManager.delegate = self
-            //locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestLocation()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            //locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
             
             if userLocation == nil{
                 attemptedInitialTickets = true //so that when location updates new tickets appear
@@ -1087,17 +1088,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         if let location = locations.first {
             
-            if userLocation == nil{
+            if location.horizontalAccuracy < 20{
+                
+                let animate = (userLocation == nil) ? false : true
+                
                 let _ = locationHelper.updateLastLocation(location: location)
-                refreshMapAndGetNewTickets(location: location, withAnimation: false, center: firstLocationUpdate)//center if first time called, if not leave map
+                refreshMapAndGetNewTickets(location: location, withAnimation: animate, center: firstLocationUpdate)
                 firstLocationUpdate = false
-            }else{
-                let distance = location.distance(from: userLocation!)
-                if distance >= 10 {
-                    let _ = locationHelper.updateLastLocation(location: location)
-                    refreshMapAndGetNewTickets(location: location, withAnimation: true, center: firstLocationUpdate)
-                    firstLocationUpdate = false
-                }
+        
+                locationManager.stopUpdatingLocation()
+                
+                print("location stop")
+
             }
             
         }else{

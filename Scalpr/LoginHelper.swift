@@ -254,6 +254,10 @@ class LoginHelper{
                 u.accessToken = accessToken
             }
             
+            if let profPicURL = parsedData["displayPicURL"] as? String{
+                u.profPicURL = profPicURL
+            }
+            
         } catch let error as NSError {
             print(error)
             return nil
