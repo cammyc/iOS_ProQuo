@@ -17,6 +17,8 @@ class User {
     var password: String
     var accessToken: String
     var profPicURL: String
+    var facebookID: String
+    var googleID: String
     
     init(){
         ID = 0
@@ -27,5 +29,7 @@ class User {
         password = ""
         accessToken = ""
         profPicURL = ""
+        facebookID = ""
+        googleID = ""
     }
 }

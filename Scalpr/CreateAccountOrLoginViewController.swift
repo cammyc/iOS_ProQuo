@@ -268,7 +268,7 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
             self.googleUser.firstName = user.profile.givenName!
             self.googleUser.lastName = user.profile.familyName!
             self.googleUser.email = user.profile.email!
-            self.googleDisplayPicURL = user.profile.imageURL(withDimension: 200).absoluteString
+            self.googleDisplayPicURL = user.profile.imageURL(withDimension: 400).absoluteString
             
             
             let notification = MBProgressHUD.showAdded(to: self.view, animated: true)

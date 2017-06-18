@@ -222,6 +222,24 @@ class LoginHelper{
             
         }
     }
+    
+    func connectGoogleAccount(userID: Int64, googleID: String, displayPicURL: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["userID": userID, "googleID": googleID, "displayPicURL": displayPicURL]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/google_connect_account.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
 
     
     func getUserDetailsFromJson(json: String)->Any?{
@@ -256,6 +274,14 @@ class LoginHelper{
             
             if let profPicURL = parsedData["displayPicURL"] as? String{
                 u.profPicURL = profPicURL
+            }
+            
+            if let facebookID = parsedData["facebookID"] as? String{
+                u.facebookID = facebookID
+            }
+            
+            if let googleID = parsedData["googleID"] as? String{
+                u.googleID = googleID
             }
             
         } catch let error as NSError {
