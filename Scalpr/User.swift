@@ -19,6 +19,7 @@ class User {
     var profPicURL: String
     var facebookID: String
     var googleID: String
+    var stripeAccount: StripeAccount
     
     init(){
         ID = 0
@@ -31,5 +32,6 @@ class User {
         profPicURL = ""
         facebookID = ""
         googleID = ""
+        stripeAccount = StripeAccount()
     }
 }

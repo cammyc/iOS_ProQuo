@@ -53,6 +53,9 @@ class ModalViewController: UIViewController, TTRangeSliderDelegate, KCFloatingAc
         fabBackToMap.fabDelegate = self
         fabClearFilters.fabDelegate = self
         
+        fabBackToMap.sticky = true
+        fabClearFilters.sticky = true
+        
         radioRequest.isMultipleSelectionEnabled = true
         radioSell.isMultipleSelectionEnabled = true
         

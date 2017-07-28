@@ -126,6 +126,8 @@
 		E38004441ED4C46D000EFEA6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38004431ED4C46D000EFEA6 /* ProfileViewController.swift */; };
 		E38609A41E12ECDF004E4B3C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E38609A31E12ECDF004E4B3C /* Podfile */; };
 		E395B23B1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */; };
+		E3A1F7D01F15D59200E04DE7 /* StripeAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A1F7CF1F15D59200E04DE7 /* StripeAPIHelper.swift */; };
+		E3A1F7D21F2BA17900E04DE7 /* StripeAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A1F7D11F2BA17900E04DE7 /* StripeAccount.swift */; };
 		E3BDD27E1EAEC4A500714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
 		E3BDD27F1EAEC4AB00714929 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; };
 		E3BDD2801EAEC4AB00714929 /* Stripe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BDD27D1EAEC4A500714929 /* Stripe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -310,6 +312,8 @@
 		E38004431ED4C46D000EFEA6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E38609A31E12ECDF004E4B3C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E395B23A1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountOrLoginViewController.swift; sourceTree = "<group>"; };
+		E3A1F7CF1F15D59200E04DE7 /* StripeAPIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIHelper.swift; sourceTree = "<group>"; };
+		E3A1F7D11F2BA17900E04DE7 /* StripeAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAccount.swift; sourceTree = "<group>"; };
 		E3AFFE711E7340E1001E8389 /* ZMSwiftRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZMSwiftRangeSlider.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphoneos/ZMSwiftRangeSlider/ZMSwiftRangeSlider.framework"; sourceTree = "<group>"; };
 		E3BDD27D1EAEC4A500714929 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Stripe/Stripe.framework"; sourceTree = "<group>"; };
 		E3BDD2811EAEDA5B00714929 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				D20ECC951DF7D296008B315F /* Conversation.swift */,
 				D20ECC971DF7D2A4008B315F /* Message.swift */,
 				E301A8A81E85BDB3009B8E7F /* Filters.swift */,
+				E3A1F7D11F2BA17900E04DE7 /* StripeAccount.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				D2D0BD131DA9679E00E7A456 /* CoreDataHelper.swift */,
 				D29D7A4A1DC82AE700F937FF /* FlagHelper.swift */,
 				D20ECC991DF87BB9008B315F /* ConversationHelper.swift */,
+				E3A1F7CF1F15D59200E04DE7 /* StripeAPIHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -876,6 +882,7 @@
 				D2F413A01DA9BF7A0047A3C6 /* cdAttractionMO.swift in Sources */,
 				D21135351DAD680E0064EACF /* Toast.swift in Sources */,
 				E3BDD2821EAEDA5B00714929 /* StripeAPIClient.swift in Sources */,
+				E3A1F7D01F15D59200E04DE7 /* StripeAPIHelper.swift in Sources */,
 				D20637451D9B31DB00EAFF0F /* HomeViewController.swift in Sources */,
 				D2F4139E1DA9BAE80047A3C6 /* CoreDataModels.xcdatamodeld in Sources */,
 				D228D5381E02150B009200E6 /* MessagingPaddingLabel.swift in Sources */,
@@ -897,6 +904,7 @@
 				D23C15431E085E6600A4BCAC /* SelectedConversationMessagesViewController.swift in Sources */,
 				D20ECC9A1DF87BB9008B315F /* ConversationHelper.swift in Sources */,
 				D2A09D171DAF47E700F4012A /* UpdateAccountViewController.swift in Sources */,
+				E3A1F7D21F2BA17900E04DE7 /* StripeAccount.swift in Sources */,
 				E38004441ED4C46D000EFEA6 /* ProfileViewController.swift in Sources */,
 				E395B23B1EB3D7D500C7D407 /* CreateAccountOrLoginViewController.swift in Sources */,
 				D228D5331DF9314C009200E6 /* MyMessageTableViewCell.swift in Sources */,

@@ -137,7 +137,7 @@ class LoginHelper{
         
         let parameters: Parameters = ["userID": userID]
         
-        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/get_user_details.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/get_user_details_stripe.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
             
             let x = response.error as NSError?
             if x == nil{
@@ -223,11 +223,29 @@ class LoginHelper{
         }
     }
     
-    func connectGoogleAccount(userID: Int64, googleID: String, displayPicURL: String, completionHandler: @escaping (String?, NSError?) -> ()){
+    func connectGoogleAccount(googleID: String, displayPicURL: String, completionHandler: @escaping (String?, NSError?) -> ()){
         
-        let parameters: Parameters = ["userID": userID, "googleID": googleID, "displayPicURL": displayPicURL]
+        let parameters: Parameters = ["googleID": googleID, "displayPicURL": displayPicURL]
         
         Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/google_connect_account.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
+            
+            let x = response.error as NSError?
+            if x == nil{
+                let data = response.data
+                let utf8Text = String(data: data!, encoding: .utf8)
+                completionHandler(utf8Text, nil)
+            }else{
+                completionHandler(nil, response.error as NSError?)
+            }
+            
+        }
+    }
+    
+    func connectFacebookAccount(facebookID: String, completionHandler: @escaping (String?, NSError?) -> ()){
+        
+        let parameters: Parameters = ["facebookID": facebookID]
+        
+        Alamofire.request("https://scalpr-143904.appspot.com/scalpr_ws/facebook_connect_account.php", method: .post, parameters: parameters, headers: MiscHelper.getSecurityHeader()).response { response in
             
             let x = response.error as NSError?
             if x == nil{
@@ -282,6 +300,22 @@ class LoginHelper{
             
             if let googleID = parsedData["googleID"] as? String{
                 u.googleID = googleID
+            }
+            
+            if let stripeDetails = parsedData["stripeAccount"] as? [String: Any]{
+                var stripeAccount = StripeAccount()
+                
+                stripeAccount.connectID = stripeDetails["connectID"] as! String
+                stripeAccount.customerID = stripeDetails["customerID"] as! String
+                stripeAccount.sourceID = stripeDetails["sourceID"] as! String
+                stripeAccount.paymentID = stripeDetails["paymentID"] as! String
+                stripeAccount.paymentType = stripeDetails["paymentType"] as! String
+                stripeAccount.receivalType = stripeDetails["receivalType"] as! String
+                stripeAccount.paymentPreview = stripeDetails["paymentPreview"] as! String
+                stripeAccount.receivalPreview = stripeDetails["receivalPreview"] as! String
+                stripeAccount.isInitialized = true
+                
+                u.stripeAccount = stripeAccount
             }
             
         } catch let error as NSError {

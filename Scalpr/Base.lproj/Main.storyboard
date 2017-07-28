@@ -982,11 +982,11 @@
                                     <constraint firstAttribute="height" constant="40" id="nL5-k4-pEY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <state key="normal" title="Add Credit Card" image="ic_manage_payment">
+                                <state key="normal" title="Add Payment Option" image="ic_manage_payment">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="bAddCreditCardAction:" destination="68Y-wo-GPj" eventType="touchUpInside" id="MPw-xf-yG6"/>
+                                    <action selector="bAddPaymentAction:" destination="68Y-wo-GPj" eventType="touchUpInside" id="OJF-2g-5qJ"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U89-0S-inp" customClass="KCFloatingActionButton" customModule="KCFloatingActionButton">
@@ -1006,7 +1006,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-ah-4eS">
-                                <rect key="frame" x="183" y="418" width="135" height="54"/>
+                                <rect key="frame" x="183" y="466" width="135" height="54"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_google" translatesAutoresizingMaskIntoConstraints="NO" id="w7I-TB-otA">
                                         <rect key="frame" x="50" y="0.0" width="35" height="35"/>
@@ -1042,7 +1042,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XR-pw-Lcy">
-                                <rect key="frame" x="32" y="418" width="135" height="54"/>
+                                <rect key="frame" x="32" y="466" width="135" height="54"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="B9p-dH-gwa">
                                         <rect key="frame" x="50" y="0.0" width="35" height="35"/>
@@ -1077,20 +1077,36 @@
                                     <constraint firstItem="B9p-dH-gwa" firstAttribute="top" secondItem="2XR-pw-Lcy" secondAttribute="top" id="yiE-om-jpf"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYU-P1-V9v">
+                                <rect key="frame" x="16" y="410" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1vD-ld-fxx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="Add Receival Option" image="ic_manage_payment">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="bAddReceivalAction:" destination="68Y-wo-GPj" eventType="touchUpInside" id="0pY-Zn-WhZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vbU-db-Bcx" firstAttribute="top" secondItem="U89-0S-inp" secondAttribute="bottom" constant="8" id="6ST-YQ-bkL"/>
                             <constraint firstItem="ZAD-ah-4eS" firstAttribute="leading" secondItem="2XR-pw-Lcy" secondAttribute="trailing" constant="16" id="7BJ-44-gzM"/>
                             <constraint firstItem="U89-0S-inp" firstAttribute="centerX" secondItem="oaq-sG-7Ea" secondAttribute="centerX" id="8UG-2X-zEW"/>
-                            <constraint firstItem="ZAD-ah-4eS" firstAttribute="top" secondItem="W5x-k3-S5i" secondAttribute="bottom" constant="16" id="8Xn-V3-Nbu"/>
+                            <constraint firstItem="QYU-P1-V9v" firstAttribute="top" secondItem="W5x-k3-S5i" secondAttribute="bottom" constant="8" id="IQY-B2-fL7"/>
                             <constraint firstItem="W5x-k3-S5i" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leadingMargin" id="K4c-gg-gka"/>
                             <constraint firstItem="ZAD-ah-4eS" firstAttribute="width" secondItem="2XR-pw-Lcy" secondAttribute="width" id="Kam-A9-Lh2"/>
                             <constraint firstItem="Pm9-wX-r5N" firstAttribute="top" secondItem="oNB-ye-uqH" secondAttribute="bottom" constant="-20" id="MzC-OA-JUg"/>
                             <constraint firstItem="Pm9-wX-r5N" firstAttribute="centerX" secondItem="oaq-sG-7Ea" secondAttribute="centerX" id="NS2-E9-1QF"/>
                             <constraint firstItem="I45-c1-12X" firstAttribute="top" secondItem="Pm9-wX-r5N" secondAttribute="bottom" constant="16" id="VnM-9b-1k8"/>
+                            <constraint firstItem="QYU-P1-V9v" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leadingMargin" id="WhS-3Y-DyL"/>
                             <constraint firstItem="W5x-k3-S5i" firstAttribute="top" secondItem="dY0-Hn-AT4" secondAttribute="bottom" constant="8" id="WzW-65-qLy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZAD-ah-4eS" secondAttribute="trailing" constant="16" id="XmD-qj-M2P"/>
+                            <constraint firstItem="2XR-pw-Lcy" firstAttribute="top" secondItem="QYU-P1-V9v" secondAttribute="bottom" constant="16" id="Y31-bv-ozg"/>
+                            <constraint firstItem="ZAD-ah-4eS" firstAttribute="top" secondItem="QYU-P1-V9v" secondAttribute="bottom" constant="16" id="aGm-oi-pXW"/>
                             <constraint firstItem="oNB-ye-uqH" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leading" id="b2M-oh-HDi"/>
                             <constraint firstItem="I45-c1-12X" firstAttribute="trailing" secondItem="oaq-sG-7Ea" secondAttribute="trailingMargin" id="cww-ab-yga"/>
                             <constraint firstItem="dY0-Hn-AT4" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leadingMargin" id="evt-IS-dP1"/>
@@ -1098,8 +1114,8 @@
                             <constraint firstItem="dY0-Hn-AT4" firstAttribute="trailing" secondItem="oaq-sG-7Ea" secondAttribute="trailingMargin" id="kFn-08-YxJ"/>
                             <constraint firstItem="oNB-ye-uqH" firstAttribute="top" secondItem="kbV-8d-vnc" secondAttribute="bottom" id="lct-q4-Qka"/>
                             <constraint firstItem="W5x-k3-S5i" firstAttribute="trailing" secondItem="oaq-sG-7Ea" secondAttribute="trailingMargin" id="rPE-xS-9l9"/>
-                            <constraint firstItem="2XR-pw-Lcy" firstAttribute="top" secondItem="W5x-k3-S5i" secondAttribute="bottom" constant="16" id="tUo-1R-Qrt"/>
                             <constraint firstItem="dY0-Hn-AT4" firstAttribute="top" secondItem="I45-c1-12X" secondAttribute="bottom" constant="8" id="vKL-4Q-ZNe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QYU-P1-V9v" secondAttribute="trailing" id="vsq-IK-wKc"/>
                             <constraint firstItem="I45-c1-12X" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leadingMargin" id="w4C-aZ-oHO"/>
                             <constraint firstItem="2XR-pw-Lcy" firstAttribute="leading" secondItem="oaq-sG-7Ea" secondAttribute="leadingMargin" constant="16" id="xHa-MK-r4M"/>
                         </constraints>
@@ -1113,12 +1129,14 @@
                         <barButtonItem key="rightBarButtonItem" image="Edit" id="UY0-Vp-45f"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bAddPaymentOption" destination="W5x-k3-S5i" id="lQ5-mc-Kch"/>
+                        <outlet property="bAddReceivalOption" destination="QYU-P1-V9v" id="Fbp-cL-geN"/>
                         <outlet property="bConnectFB" destination="y9e-bK-uAW" id="0Jt-Bh-eya"/>
                         <outlet property="bConnectGoogle" destination="Qqc-oX-PHf" id="VMC-AA-EO8"/>
-                        <outlet property="bCreditCard" destination="W5x-k3-S5i" id="UnF-PC-fvq"/>
                         <outlet property="bEditProfile" destination="Pm9-wX-r5N" id="ci6-6E-N0y"/>
                         <outlet property="dtfEmail" destination="I45-c1-12X" id="XlA-RZ-xVM"/>
                         <outlet property="dtfPhone" destination="dY0-Hn-AT4" id="0Bf-BU-2DU"/>
+                        <outlet property="fabSave" destination="U89-0S-inp" id="Umd-A8-CIe"/>
                         <outlet property="gradientContainer" destination="oNB-ye-uqH" id="yGG-Dh-ewa"/>
                         <outlet property="profilePic" destination="p5h-L3-5k4" id="D6V-ZX-sWq"/>
                         <outlet property="tfFirstName" destination="t6C-9R-gUm" id="s3e-Xa-GrA"/>

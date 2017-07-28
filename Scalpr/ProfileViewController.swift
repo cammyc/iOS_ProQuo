@@ -9,8 +9,14 @@
 import UIKit
 import MBProgressHUD
 import Kingfisher
+import FacebookCore
+import FBSDKLoginKit
+import FacebookLogin
+import Stripe
+import IQKeyboardManagerSwift
+import KCFloatingActionButton
 
-class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, STPAddCardViewControllerDelegate{
     
     
     // MARK: UI Fields
@@ -23,9 +29,18 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
     @IBOutlet weak var tfLastName: UITextField!
     @IBOutlet weak var dtfEmail: DesignableUITextField!
     @IBOutlet weak var dtfPhone: DesignableUITextField!
-    @IBOutlet weak var bCreditCard: UIButton!
+
+    @IBOutlet weak var bAddPaymentOption: UIButton!
+    @IBOutlet weak var bAddReceivalOption: UIButton!
+    
     @IBOutlet weak var bConnectFB: UIButton!
     @IBOutlet weak var bConnectGoogle: UIButton!
+    let settingsVC = SettingsViewController()
+    
+    @IBOutlet weak var fabSave: KCFloatingActionButton!
+    
+    var ADD_CARD_CODE = 0
+
     
     // MARK: Variables
     let loginHelper:LoginHelper = LoginHelper()!
@@ -36,6 +51,7 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fabSave.sticky = true
         
         makeFieldsLookPretty()
         loadData()
@@ -101,6 +117,21 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
             bConnectGoogle.setTitle("Connected", for: .normal)
         }
 
+        if u.stripeAccount.isInitialized {
+            if !u.stripeAccount.paymentPreview.isEmpty{
+                if u.stripeAccount.paymentType == "card"{
+                    bAddPaymentOption.setTitle("Payment: xxxx xxxx xxxx " + u.stripeAccount.paymentPreview, for: .normal)
+                }else{
+                    
+                }
+            }
+            
+            if !u.stripeAccount.receivalPreview.isEmpty{
+                if u.stripeAccount.receivalType == "card"{
+                    bAddReceivalOption.setTitle("Receival: xxxx xxxx xxxx " + u.stripeAccount.receivalPreview, for: .normal)
+                }
+            }
+        }
     }
     
     
@@ -134,7 +165,8 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
         updateDesignTextFields(textField: dtfPhone)
         
         //make card a button
-        updateButtons(button: bCreditCard)
+        updateButtons(button: bAddPaymentOption)
+        updateButtons(button: bAddReceivalOption)
         
         bConnectGoogle.titleLabel?.textAlignment = .center
         bConnectFB.titleLabel?.textAlignment = .center
@@ -198,19 +230,213 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
     // MARK: Button Click functions
     
     @IBAction func bUploadProfilePicAction(_ sender: Any) {
+        
     }
     
-    @IBAction func bAddCreditCardAction(_ sender: Any) {
+    
+    @IBAction func bAddReceivalAction(_ sender: Any) {
+        if user.email.isEmpty {
+            //require email - haven't coded it to updated email yet
+            //add dob field to profile?
+        }
+        
+        ADD_CARD_CODE = 2;
+        
+        let locale = Locale.current
+        
+        if locale.regionCode == "US" {
+            
+            let bankOrCardAlert = UIAlertController(title: "Card or Account", message: "Would you like to add a debit card or bank account?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            bankOrCardAlert.addAction(UIAlertAction(title: "Debit Card", style: .default, handler: { (action: UIAlertAction!) in
+                self.addDebitCreditCard()
+            }))
+            
+            bankOrCardAlert.addAction(UIAlertAction(title: "Bank Account", style: .default, handler: { (action: UIAlertAction!) in
+                
+            }))
+            
+            bankOrCardAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                
+            }))
+            
+            
+            self.present(bankOrCardAlert,animated: true,completion: nil)
+            
+            
+        }else{
+            //            STPAPIClient.shared().createToken(withBankAccount: <#T##STPBankAccountParams#>, completion: <#T##STPTokenCompletionBlock?##STPTokenCompletionBlock?##(STPToken?, Error?) -> Void#>)
+        }
+
+    }
+  
+    
+    @IBAction func bAddPaymentAction(_ sender: Any) {
+        
+        if user.email.isEmpty {
+            //require email - haven't coded it to updated email yet
+            //add dob field to profile?
+        }
+        
+        ADD_CARD_CODE = 1
+        self.addDebitCreditCard()
     }
     
+    func addDebitCreditCard(){
+        let paymentConfig = STPPaymentConfiguration.init();
+        paymentConfig.requiredBillingAddressFields = STPBillingAddressFields.full;
+        paymentConfig.publishableKey = "pk_test_EUXTG75yVL1mFS57Q7b0Svkz"
+        //        let theme = STPTheme.defaultTheme();
+        
+        let addCardViewController = STPAddCardViewController(configuration: paymentConfig, theme: STPTheme.default())
+        addCardViewController.delegate = self
+        
+        addCardViewController.managedAccountCurrency = "usd"
+        
+        // STPAddCardViewController must be shown inside a UINavigationController.
+        let navigationController = UINavigationController(rootViewController: addCardViewController)
+        self.present(navigationController, animated: true, completion: nil)
+        IQKeyboardManager.sharedManager().enable = false
+        
+        /*
+         NEED TO EITHER CREATE OWN FIELDS AND GENERATE TWO TOKENS OR HAVE TWO FIELDS ON PROFILE AND HAVE PAYMENTA ACCOUNT AND RECEIVING ACCOUNT
+ 
+        */
+        
+    }
+    
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        IQKeyboardManager.sharedManager().enable = true
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        //ACCEPT TERMS OF SERVICE HERE FIRST
+
+        
+        IQKeyboardManager.sharedManager().enable = true
+        let tokenID: String = token.tokenId
+        let country:String = (token.card?.addressCountry!)!
+        let city:String = (token.card?.addressCity!)!
+        let addressLine:String = (token.card?.addressLine1!)!
+        let postalCode:String = (token.card?.addressZip!)!
+        let provinceState:String = (token.card?.addressState!)!
+        
+        let stripeHelper = StripeAPIHelper()
+
+        
+        if ADD_CARD_CODE == 1 {
+        
+            let cardID:String = (token.card?.cardId!)!
+            stripeHelper?.createStripeAccountWithPaymentMethod(tokenID: tokenID, country: country, city: city, addressLine: addressLine, postalCode: postalCode, provinceState: provinceState, cardID: cardID){ responseObject, error in
+                
+                if responseObject != nil {
+                    print(responseObject)
+                  
+                }else{
+                    print(error.debugDescription)
+                }
+                
+                return
+            }
+        } else if ADD_CARD_CODE == 2 {
+            stripeHelper?.createStripeAccountWithReceivalMethod(tokenID: tokenID, country: country, city: city, addressLine: addressLine, postalCode: postalCode, provinceState: provinceState, receivalType: "card"){ responseObject, error in
+                
+                if responseObject != nil {
+                    print(responseObject)
+                    
+                }else{
+                    print(error.debugDescription)
+                }
+                
+                return
+            }
+        }
+        
+        /* Send Details to server */
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+//    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: STPErrorBlock) {
+//        print(token.tokenId)
+////        self.submitTokenToBackend(token, completion: { (error: Error?) in
+////            if let error = error {
+////                completion(error)
+////            } else {
+////                self.dismiss(animated: true, completion: {
+////                    self.showReceiptPage()
+////                    completion(nil)
+////                })
+////            }
+////        })
+//    }
+//  
     
     @IBAction func bConnectFacebookAction(_ sender: Any) {
         
         //if profile page isn't loaded it exits so user cant be nil so no need to check
         if user.facebookID.isEmpty{
+            let login:FBSDKLoginManager = FBSDKLoginManager()
+            login.logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, error) -> Void in
+                if (error != nil){
+                    // Process error
+                    self.fbSignInErrorAlert()
+                }else{
+                    
+                    let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                    
+                    if fbloginresult.isCancelled {
+                        return
+                    }
+                    
+                    if((FBSDKAccessToken.current()) != nil){
+                        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email"]).start(completionHandler: { (connection, result, error) -> Void in
+                            if (error == nil){
+                                
+                                //everything works
+                                
+                                let notification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                notification.mode = MBProgressHUDMode.indeterminate
+                                notification.label.text = "Connecting Facebook Account"
+                                
+                                let fbDetails = result as! NSDictionary
+                                
+                                let fbID = fbDetails["id"] as? String
+
+
+                                self.loginHelper.connectFacebookAccount(facebookID: fbID!){ responseObject, error in
+                                    
+                                    notification.hide(animated: true)
+                                    
+                                    if let response = Int64(responseObject!){
+                                        
+                                        if response == 1 {
+                                            self.user.facebookID = fbID!
+                                            self.bConnectFB.setTitle("Connected", for: .normal)
+                                        }else if response == -1{
+                                            self.showCustomAlert(customTitle: "Already Connected", customMessage: "This Facebook account is already connected to another account. To use it logout then log in with your Facebook account.")
+                                            
+                                            FBSDKLoginManager().logOut()
+                                        }else{
+                                            self.networkErrorAlert()                                        }
+                                        
+                                    }else{
+                                        self.networkErrorAlert()
+                                    }
+                                    
+                                    return
+                                }
+
+                            }else{
+                                self.fbSignInErrorAlert()
+                            }
+                        })
+                    }
+                }
+            }
         }
-        
-        
         
     }
     
@@ -230,7 +456,7 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
             notification.mode = MBProgressHUDMode.indeterminate
             notification.label.text = "Connecting Google Account"
 
-            loginHelper.connectGoogleAccount(userID: self.user.ID, googleID: user.userID, displayPicURL: user.profile.imageURL(withDimension: 400).absoluteString){ responseObject, error in
+            loginHelper.connectGoogleAccount(googleID: user.userID, displayPicURL: user.profile.imageURL(withDimension: 400).absoluteString){ responseObject, error in
                 
                 notification.hide(animated: true)
                 
@@ -244,11 +470,11 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
                         
                         GIDSignIn.sharedInstance().signOut()
                     }else{
-                        self.showCustomAlert(customTitle: "Network Error", customMessage: "Unable to connect account. Please try again.")
+                        self.networkErrorAlert()
                     }
                     
                 }else{
-                    self.showCustomAlert(customTitle: "Network Error", customMessage: "Unable to connect account. Please try again.")
+                    self.networkErrorAlert()
                 }
                 
                 return
@@ -289,5 +515,13 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
         }))
         
         self.present(refreshAlert,animated: true,completion: nil)
+    }
+    
+    func fbSignInErrorAlert(){
+        self.showCustomAlert(customTitle: "Facebook Sign In Error", customMessage: "Unable to sign in with Facebook. Please try again.")
+    }
+    
+    func networkErrorAlert(){
+        self.showCustomAlert(customTitle: "Network Error", customMessage: "Unable to connect account. Please try again.")
     }
 }
