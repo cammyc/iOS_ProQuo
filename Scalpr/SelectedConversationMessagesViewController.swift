@@ -384,7 +384,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
                 let paragraph = NSMutableParagraphStyle()
                 paragraph.alignment = .center
 //                paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
-                let attributes = [NSParagraphStyleAttributeName: paragraph]
+                let attributes = [NSAttributedStringKey.paragraphStyle: paragraph]
                 
                 return NSAttributedString(string: MiscHelper.formatMessageTimeBreakDate(date: message.date), attributes: attributes)
             }else{
@@ -395,7 +395,7 @@ class SelectedConversationMessagesViewController: JSQMessagesViewController, Pus
             let paragraph = NSMutableParagraphStyle()
             paragraph.alignment = .center
 //            paragraph.firstLineHeadIndent = collectionView.collectionViewLayout.messageBubbleLeftRightMargin
-            let attributes = [NSParagraphStyleAttributeName: paragraph]
+            let attributes = [NSAttributedStringKey.paragraphStyle: paragraph]
             
             return NSAttributedString(string: "Conversation created: " + MiscHelper.formatMessageTimeBreakDate(date: self.conversation.creationTimeStamp), attributes: attributes)
         }

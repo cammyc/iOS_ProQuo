@@ -78,10 +78,10 @@ class StripePaymentViewController: UIViewController, STPPaymentContextDelegate {
         config.appleMerchantIdentifier = self.appleMerchantID
         config.companyName = self.companyName
         config.requiredBillingAddressFields = settings.requiredBillingAddressFields
-        config.requiredShippingAddressFields = settings.requiredShippingAddressFields
+       // config.requiredShippingAddressFields = settings.requiredShippingAddressFields
         config.shippingType = settings.shippingType
         config.additionalPaymentMethods = settings.additionalPaymentMethods
-        config.smsAutofillDisabled = !settings.smsAutofillEnabled
+        //config.smsAutofillDisabled = !settings.smsAutofillEnabled
         
         let paymentContext = STPPaymentContext(apiAdapter: StripeAPIClient.sharedClient,
                                                configuration: config,
@@ -95,7 +95,7 @@ class StripePaymentViewController: UIViewController, STPPaymentContextDelegate {
         self.paymentRow = CheckoutRowView(title: "Payment", detail: "Select Payment",
                                           theme: settings.theme)
         var shippingString = "Contact"
-        if config.requiredShippingAddressFields.contains(.postalAddress) {
+        if (config.requiredShippingAddressFields?.contains(.postalAddress))! {
             shippingString = config.shippingType == .shipping ? "Shipping" : "Delivery"
         }
         self.shippingString = shippingString
@@ -142,11 +142,11 @@ class StripePaymentViewController: UIViewController, STPPaymentContextDelegate {
         self.activityIndicator.alpha = 0
         self.buyButton.addTarget(self, action: #selector(didTapBuy), for: .touchUpInside)
         self.totalRow.detail = self.numberFormatter.string(from: NSNumber(value: Float(self.paymentContext.paymentAmount)/100))!
-        self.paymentRow.onTap = { [weak self] _ in
-            self?.paymentContext.pushPaymentMethodsViewController()
+        self.paymentRow.onTap = {
+            self.paymentContext.pushPaymentMethodsViewController()
         }
-        self.shippingRow.onTap = { [weak self] _ in
-            self?.paymentContext.pushShippingViewController()
+        self.shippingRow.onTap = {
+            self.paymentContext.pushShippingViewController()
         }
     }
     

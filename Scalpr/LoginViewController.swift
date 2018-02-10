@@ -12,6 +12,7 @@ import FacebookLogin
 import FacebookCore
 import FBSDKLoginKit
 import SafariServices
+import GoogleSignIn
 
 class LoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     

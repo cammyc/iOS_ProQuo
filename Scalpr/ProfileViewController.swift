@@ -15,6 +15,7 @@ import FacebookLogin
 import Stripe
 import IQKeyboardManagerSwift
 import KCFloatingActionButton
+import GoogleSignIn
 
 class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, STPAddCardViewControllerDelegate{
     
@@ -40,6 +41,10 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
     @IBOutlet weak var fabSave: KCFloatingActionButton!
     
     var ADD_CARD_CODE = 0
+    let ADD_PAYMENT_METHOD = 1
+    let ADD_RECEIVAL_METHOD = 2
+    let UPDATE_PAYMENT_METHOD = 3
+    let UPDATE_RECEIVAL_METHOD = 4
 
     
     // MARK: Variables
@@ -190,16 +195,16 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
     }
     
     func updateDesignTextFields(textField: DesignableUITextField){
-        textField.layer.cornerRadius = 7.5
-        textField.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: 0xCCCCCC).withAlphaComponent(0.5)
+//        textField.layer.cornerRadius = 7.5
+//        textField.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: 0xCCCCCC).withAlphaComponent(0.5)
 //        textField.layer.sublayerTransform = CATransform3DMakeTranslation(8,0,0)
 //        textField.layer.borderColor = UIColor.white.cgColor
 //        textField.layer.borderWidth = 2.0
     }
     
     func updateButtons(button: UIButton){
-        button.layer.cornerRadius = 7.5
-        button.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: 0xCCCCCC).withAlphaComponent(0.5)
+//        button.layer.cornerRadius = 7.5
+//        button.backgroundColor = MiscHelper.UIColorFromRGB(rgbValue: 0xCCCCCC).withAlphaComponent(0.5)
 //        if let size = button.imageView?.image?.size {
 //            button.imageView?.frame = CGRect(x: 0.0, y: 0.0, width: size.width + 10.0, height: size.height)
 //        }
@@ -240,7 +245,32 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
             //add dob field to profile?
         }
         
-        ADD_CARD_CODE = 2;
+        if user.stripeAccount.isInitialized {
+            if !user.stripeAccount.paymentPreview.isEmpty{
+                let updateOrDelete = UIAlertController(title: "Update or Delete", message: "Would you like to update or delete your receival method?", preferredStyle: UIAlertControllerStyle.alert)
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Update", style: .default, handler: { (action: UIAlertAction!) in
+                    //                    ADD_CARD_CODE = UPDATE_PAYMENT_METHOD
+                    //                    self.updateDebitCreditCard()
+                }))
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (action: UIAlertAction!) in
+                    
+                }))
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                    
+                }))
+                
+                self.present(updateOrDelete,animated: true,completion: nil)
+                
+                
+                return
+            }
+        }
+
+        
+        ADD_CARD_CODE = ADD_RECEIVAL_METHOD;
         
         let locale = Locale.current
         
@@ -278,7 +308,41 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
             //add dob field to profile?
         }
         
-        ADD_CARD_CODE = 1
+        if user.stripeAccount.isInitialized {
+            if !user.stripeAccount.paymentPreview.isEmpty{
+                let updateOrDelete = UIAlertController(title: "Update or Delete", message: "Would you like to update or delete your payment method?", preferredStyle: UIAlertControllerStyle.alert)
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Update", style: .default, handler: { (action: UIAlertAction!) in
+//                    ADD_CARD_CODE = UPDATE_PAYMENT_METHOD
+//                    self.updateDebitCreditCard()
+                }))
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (action: UIAlertAction!) in
+                    
+                    let confirmDialog = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this payment method?", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    confirmDialog.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                        
+                    }))
+                    
+                    confirmDialog.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    
+                    self.present(confirmDialog, animated: true, completion: nil)
+                    
+                }))
+                
+                updateOrDelete.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                    
+                }))
+                
+                self.present(updateOrDelete,animated: true,completion: nil)
+
+
+                return
+            }
+        }
+        
+        ADD_CARD_CODE = ADD_PAYMENT_METHOD
         self.addDebitCreditCard()
     }
     
@@ -326,9 +390,9 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
         let stripeHelper = StripeAPIHelper()
 
         
-        if ADD_CARD_CODE == 1 {
+        if ADD_CARD_CODE == ADD_PAYMENT_METHOD {
         
-            let cardID:String = (token.card?.cardId!)!
+            let cardID:String = (token.card?.cardId)!
             stripeHelper?.createStripeAccountWithPaymentMethod(tokenID: tokenID, country: country, city: city, addressLine: addressLine, postalCode: postalCode, provinceState: provinceState, cardID: cardID){ responseObject, error in
                 
                 if responseObject != nil {
@@ -340,7 +404,7 @@ class ProfileViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDel
                 
                 return
             }
-        } else if ADD_CARD_CODE == 2 {
+        } else if ADD_CARD_CODE == ADD_RECEIVAL_METHOD {
             stripeHelper?.createStripeAccountWithReceivalMethod(tokenID: tokenID, country: country, city: city, addressLine: addressLine, postalCode: postalCode, provinceState: provinceState, receivalType: "card"){ responseObject, error in
                 
                 if responseObject != nil {

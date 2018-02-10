@@ -16,7 +16,7 @@ import KCFloatingActionButton
 import Whisper
 import UserNotifications
 import DLRadioButton
-import ARNTransitionAnimator
+//import ARNTransitionAnimator
 import Presentr
 
 
@@ -71,15 +71,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     var blurView: UIVisualEffectView? = nil
     
     var postFilters = Filters()
+    var geekMarkers = [GMSMarker]()
     
-    // MARK: Music Player
-    @IBOutlet weak var optionsButton: UIButton!
-    @IBOutlet weak var optionsView: UIView!
-    private var animator : ARNTransitionAnimator?
-    private var tempAnimator : ARNTransitionAnimator?
-
-    fileprivate var modalVC : ModalViewController!
-
+//    // MARK: Music Player
+//    private var animator : ARNTransitionAnimator?
+//    private var tempAnimator : ARNTransitionAnimator?
+//
+//    fileprivate var modalVC : ModalViewController!
+    
+    @IBOutlet weak var menuFilterButton: UIBarButtonItem!
     
 //    let myNotification = Notification.Name(rawValue:"MyNotification"
 
@@ -165,7 +165,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabPostTicket.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0x2ecc71)
         fabPostTicket.fabDelegate = self
         fabPostTicket.friendlyTap = false
-        fabPostTicket.paddingY =  fabPostTicket.paddingY + 50
+        fabPostTicket.paddingY =  fabPostTicket.paddingY
         self.view.addSubview(fabPostTicket)
         
         let icon2 = UIImage(named: "list_icon_green")
@@ -173,7 +173,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         fabAttractionList.buttonColor = MiscHelper.UIColorFromRGB(rgbValue: 0xFFFFFF)
         fabAttractionList.fabDelegate = self
         fabAttractionList.friendlyTap = false
-        fabAttractionList.paddingY = fabAttractionList.frame.height + 25 + 50
+        fabAttractionList.paddingY = fabAttractionList.frame.height + 25
         self.view.addSubview(fabAttractionList)
 
         
@@ -188,64 +188,66 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
 
     
-    func setupAnimator() {
-        
-
-            let animation = MusicPlayerTransitionAnimation(rootVC: self, modalVC: self.modalVC)
-            animation.completion = { [weak self] isPresenting in
-                if isPresenting {
-                    guard let _self = self else { return }
-                    let modalGestureHandler = TransitionGestureHandler(targetVC: _self, direction: .bottom)
-                    modalGestureHandler.registerGesture(_self.modalVC.view)
-                    modalGestureHandler.panCompletionThreshold = 15.0
-                    _self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
-                    //self?.animator?.unregisgterInteractiveTransitioning()
-                } else {
-                    self?.setupAnimator()
-                }
-            }
-            
-            let gestureHandler = TransitionGestureHandler(targetVC: self, direction: .top)
-            gestureHandler.registerGesture(self.optionsView)
-            gestureHandler.panCompletionThreshold = 15.0
-            
-            self.animator = ARNTransitionAnimator(duration: 0.5, animation: animation)
-            self.animator?.registerInteractiveTransitioning(.present, gestureHandler: gestureHandler)
-            
-            self.modalVC.transitioningDelegate = self.animator
-            self.modalVC.delegate = self
-
-        
-        
-    }
+//    func setupAnimator() {
+//
+//
+//            let animation = MusicPlayerTransitionAnimation(rootVC: self, modalVC: self.modalVC)
+//            animation.completion = { [weak self] isPresenting in
+//                if isPresenting {
+//                    guard let _self = self else { return }
+//                    let modalGestureHandler = TransitionGestureHandler(targetVC: _self, direction: .bottom)
+//                    modalGestureHandler.registerGesture(_self.modalVC.view)
+//                    modalGestureHandler.panCompletionThreshold = 15.0
+//                    _self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
+//                    //self?.animator?.unregisgterInteractiveTransitioning()
+//                } else {
+//                    self?.setupAnimator()
+//                }
+//            }
+//
+////            let gestureHandler = TransitionGestureHandler(targetVC: self, direction: .top)
+////            gestureHandler.registerGesture(self.optionsView)
+////            gestureHandler.panCompletionThreshold = 15.0
+////
+////            self.animator = ARNTransitionAnimator(duration: 0.5, animation: animation)
+////            self.animator?.registerInteractiveTransitioning(.present, gestureHandler: gestureHandler)
+//
+//            self.modalVC.transitioningDelegate = self.animator
+//            self.modalVC.delegate = self
+//
+//
+//
+//    }
     
-    func registerAnimator(){
-        let modalGestureHandler = TransitionGestureHandler(targetVC: self, direction: .bottom)
-        modalGestureHandler.registerGesture(modalVC.view)
-        modalGestureHandler.panCompletionThreshold = 15.0
-        self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
-    }
- 
-    func unRegisterAnimator(){
-        animator?.unregisgterInteractiveTransitioning()
-    }
+//    func registerAnimator(){
+//        let modalGestureHandler = TransitionGestureHandler(targetVC: self, direction: .bottom)
+//        modalGestureHandler.registerGesture(modalVC.view)
+//        modalGestureHandler.panCompletionThreshold = 15.0
+//        self.animator?.registerInteractiveTransitioning(.dismiss, gestureHandler: modalGestureHandler)
+//    }
+//
+//    func unRegisterAnimator(){
+//        animator?.unregisgterInteractiveTransitioning()
+//    }
 
     
     @IBAction func tappedOptions(_ sender: Any) {
-        self.present(self.modalVC, animated: true, completion: nil)
+//        self.present(self.modalVC, animated: true, completion: nil)
     }
     
+    @IBAction func tappedFiltersAction(_ sender: Any) {
+//        self.present(self.modalVC, animated: true, completion: nil)
+    }
     
     func initiateOptions(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.modalVC = storyboard.instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController
-        self.modalVC.modalPresentationStyle = .overFullScreen
-        
-        let color = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.3)
-       // self.miniPlayerButton.setBackgroundImage(self.generateImageWithColor(color), for: .highlighted)
-        
-        self.setupAnimator()
-    
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        self.modalVC = storyboard.instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController
+//        self.modalVC.modalPresentationStyle = .overFullScreen
+//
+//        let color = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.3)
+//       // self.miniPlayerButton.setBackgroundImage(self.generateImageWithColor(color), for: .highlighted)
+//
+//        self.setupAnimator()
     }
     
 //    func setSwitchButton () {
@@ -469,8 +471,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 }
                 searchActive = true
                 
-                let count = attractions.count
-                self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//                let count = attractions.count
+//                self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
             }
             
         }
@@ -494,7 +496,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             searchActive = false
             
             let count = attractions.count
-            self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//            self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
         }
     }
     
@@ -548,6 +550,109 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 //        searchActive = false
 //    }
     
+    // MARK: Seat Feek Functions
+    
+    func getSeatGeekVenues(){
+    
+        let seatGeekHelper:SeatGeekHelper = SeatGeekHelper()!
+        let lat = Double(self.mapView.camera.target.latitude)
+        let lon = Double(self.mapView.camera.target.longitude)
+        let bounds = GMSCoordinateBounds(region:self.mapView.projection.visibleRegion())
+        let center = self.mapView.camera.target
+        let ne = bounds.northEast
+        let range = round(Double(GMSGeometryDistance(ne, center)) * 0.000621371)
+        
+        seatGeekHelper.getLocalVenues(lat: lat, lon: lon, range: range){ responseObject, error in
+            if error == nil {
+                for marker in self.geekMarkers {
+                    marker.map = nil
+                }
+                
+                self.geekMarkers.removeAll()
+                let x = responseObject as! NSDictionary
+                //                print(x)
+                if let venues = x["venues"] as? NSArray{
+                    for i in 0 ..< venues.count{
+                        
+                        let venue:NSDictionary = venues[i] as! NSDictionary
+                        let numEvents = venue["num_upcoming_events"] as! Int
+                        if numEvents > 0 {
+                            let loc = venue["location"] as! NSDictionary
+                            let lat = loc["lat"] as? Double
+                            let lon = loc["lon"] as? Double
+                            
+                            let marker = GMSMarker()
+                            marker.tracksInfoWindowChanges = true
+                            marker.position = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
+                            marker.title = venue["title"] as? String
+                            marker.userData = venue
+                            marker.icon = self.textToImage(drawText: venue["name"] as! NSString, inImage: UIImage(named: "ic_seatgeek_venue")!, atPoint: CGPoint(x: 0, y: 0))
+                            marker.map = self.mapView
+                            self.geekMarkers.append(marker)
+                            //create object for easier reuse then make new infowindow
+                        }
+                    }
+                }
+                
+            }else{
+                
+            }
+            return
+        }
+    }
+    
+    func showVenueModal(venue: NSDictionary){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let controller = storyboard.instantiateViewController(withIdentifier: "selectedVenue") as? SelectedVenueViewController
+        controller?.venue = venue
+        let presenter = Presentr(presentationType: .popup)
+        
+        customPresentViewController(presenter, viewController: controller!, animated: true, completion: nil)
+    }
+    
+    func textToImage(drawText: NSString, inImage: UIImage, atPoint: CGPoint) -> UIImage{
+        
+        // Setup the font specific variables
+        var textColor = UIColor.black
+        var textFont = UIFont(name: "Helvetica Bold", size: 10)!
+        
+        // Setup the image context using the passed image
+        let scale = UIScreen.main.scale
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor
+            ] as [NSAttributedStringKey : Any]
+        
+        let textSize = drawText.size(withAttributes: textFontAttributes)
+        
+        let frameWidth = textSize.width
+        let frameHeight =  inImage.size.height + textSize.height + 10
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: frameWidth, height: frameHeight), false, scale)
+        
+        // Setup the font attributes that will be later used to dictate how the text should be drawn
+       
+
+        // Put the image into a rectangle as large as the original image
+        inImage.draw(in: CGRect(x: (frameWidth/2) - (inImage.size.width/2), y: 0, width: inImage.size.width, height: inImage.size.height))
+        
+        // Create a point within the space that is as bit as the image
+        var rect = CGRect(x: 0, y: inImage.size.height, width: frameWidth, height: frameHeight)
+        // Draw the text into an image
+        drawText.draw(in: rect, withAttributes: textFontAttributes)
+        
+        // Create a new image out of the images we have created
+        var newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //Pass the image back up to the caller
+        return newImage!
+        
+    }
+    
     // MARK: Get Ticket Functions
     func getInitialTickets(){
         self.coreDataHelper.wipeAttractionsFromDB()
@@ -561,6 +666,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingNotification?.mode = MBProgressHUDMode.indeterminate
         loadingNotification?.label.text = "Retrieving Tickets"
+        
+        getSeatGeekVenues()
 
         attractionHelper.getInitialAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude) { responseObject, error in
             
@@ -581,10 +688,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                     }
                     
-                    if attractions.count > 0 {
-                        let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
-                    }
+//                    if attractions.count > 0 {
+//                        let count = self.coreDataHelper.getAttractions().count
+//                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//                    }
+                    
                 }
             }else if error != nil {
 
@@ -614,6 +722,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let northEast = bound.northEast
         let southWest = bound.southWest
         
+        getSeatGeekVenues()
+        
         currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
             
             
@@ -632,10 +742,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                     }
                     
-                    if attractions.count > 0 {
-                        let count = self.coreDataHelper.getAttractions().count
-                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
-                    }
+//                    if attractions.count > 0 {
+//                        let count = self.coreDataHelper.getAttractions().count
+//                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//                    }
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
@@ -664,6 +774,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         self.loadingNotification?.mode = MBProgressHUDMode.indeterminate
         self.loadingNotification?.label.text = "Retrieving Tickets"
         
+        getSeatGeekVenues()
         
         currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: searchBar.text!){ responseObject, error in
             
@@ -683,9 +794,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                         
                     }
                     
-                    let count = self.coreDataHelper.getAttractions().count
-                    self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
-                
+//                    let count = self.coreDataHelper.getAttractions().count
+//                    self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//
                 }
             } else if error != nil {
                 if error?.code == -1009 || (error?.code)! == NSURLErrorTimedOut{//error that appears if no connection, not sure what NSURLError to use for -1009
@@ -709,6 +820,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         let query = searchBar.text!
         
+        getSeatGeekVenues()
+        
         currentDataRequest = attractionHelper.getNewAttractions(filters: postFilters, northLat: northEast.latitude, southLat: southWest.latitude, eastLon: northEast.longitude, westLon: southWest.longitude, commaString: oldIDs, searchQuery: query){ responseObject, error in
             
             
@@ -726,8 +839,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     
                     if attractions.count > 0{
                         self.centerMapOnLocation(location: CLLocation(latitude: attractions[0].lat, longitude: attractions[0].lon), withAnimation: true)
-                        let count = self.coreDataHelper.getAttractions(query: query).count
-                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
+//                        let count = self.coreDataHelper.getAttractions(query: query).count
+//                        self.optionsButton.setTitle(String(count) + " Posts Found • Filters", for: UIControlState.normal)
                     }else{
                         self.view.makeToast("No tickets found. Try another area.", duration: 3.0, position: .bottom)
                     }
@@ -788,9 +901,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
 
-        centerInfoWindow(mapView: mapView, marker: marker)
+        if let venue =  marker.userData as? NSDictionary{
+            showVenueModal(venue: venue)
+            return false
+        }else{
+            centerInfoWindow(mapView: mapView, marker: marker)
+            return true
+        }
         
-        return true
     }
     
     func centerInfoWindow(mapView: GMSMapView, marker: GMSMarker){
@@ -807,7 +925,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         idleFromTap = true
         selectedMarker = marker
     }
-    
     
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -891,7 +1008,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
         }
         
-        return infoWindow
+        if let venue =  marker.userData as? NSDictionary{
+            return nil
+        }else{
+            return infoWindow
+        }
+        
+        
     }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
@@ -1450,11 +1573,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
 extension HomeViewController : FilterDelegate {
     internal func sliderFocused() {
-        unRegisterAnimator()
+//        unRegisterAnimator()
     }
 
     internal func sliderUnfocused() {
-        registerAnimator()
+//        registerAnimator()
     }
     
     internal func updateFilters(updatedFilter: Filters){

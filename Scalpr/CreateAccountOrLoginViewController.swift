@@ -14,6 +14,7 @@ import FacebookCore
 import FBSDKLoginKit
 import SafariServices
 import MBProgressHUD
+import GoogleSignIn
 
 class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
@@ -76,7 +77,7 @@ class CreateAccountOrLoginViewController: UIViewController, LoginButtonDelegate,
         player?.isMuted = true
         
         let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        playerLayer.videoGravity = .resizeAspectFill
         playerLayer.zPosition = -1
         
         playerLayer.frame = view.frame

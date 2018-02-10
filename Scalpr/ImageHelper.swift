@@ -90,11 +90,11 @@ class ImageHelper {
         
         // Setup the font attributes that will be later used to dictate how the text should be drawn
         let textFontAttributes = [
-            NSFontAttributeName: textFont,
-            NSForegroundColorAttributeName: textColor,
-            ] as [String : Any]
+            NSAttributedStringKey.font.rawValue: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as! [NSAttributedStringKey : Any]
         
-        let textSize = drawText.size(attributes: textFontAttributes)
+        let textSize = drawText.size(withAttributes: textFontAttributes)
 
         
         // Put the image into a rectangle as large as the original image

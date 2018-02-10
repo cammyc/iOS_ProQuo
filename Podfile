@@ -13,16 +13,16 @@ pod 'KCFloatingActionButton', '~> 2.1.0'
 pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'Whisper'
-pod 'Google/SignIn'
+pod 'GoogleSignIn'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SwiftKeychainWrapper'
 pod 'DLRadioButton', '~> 1.4'
-pod 'ARNTransitionAnimator'
 pod 'TTRangeSlider'
 pod 'MMSegmentSlider'
 pod 'Presentr'
 pod 'Stripe'
+pod 'Cards'
 
 
 end

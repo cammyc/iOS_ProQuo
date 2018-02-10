@@ -15,7 +15,7 @@ import UserNotifications
 import Whisper
 import Kingfisher
 import Stripe
-
+import GoogleSignIn
 
 protocol PushNotificationDelegate : class {
     var pushNotificationDelegateID: Int {get set}
@@ -23,7 +23,8 @@ protocol PushNotificationDelegate : class {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+    
 
     var window: UIWindow?
     let loginHelper = LoginHelper()
@@ -47,14 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+//        var configureError: NSError?
+//        GGLContext.sharedInstance().configureWithError(&configureError)
+//        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        GIDSignIn.sharedInstance().clientID = "649639042384-pl3spa976ml4q1utm3791rkhhn745pda.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().delegate = self
         
         STPPaymentConfiguration.shared().publishableKey = "pk_test_EUXTG75yVL1mFS57Q7b0Svkz"
         
                         
         return true
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {

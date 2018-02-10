@@ -8,7 +8,6 @@
 
 import UIKit
 import DLRadioButton
-import ARNTransitionAnimator
 import TTRangeSlider
 import KCFloatingActionButton
 import MMSegmentSlider

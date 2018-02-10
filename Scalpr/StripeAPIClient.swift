@@ -11,6 +11,7 @@ import Stripe
 import Alamofire
 
 class StripeAPIClient: NSObject, STPBackendAPIAdapter {
+
     
     static let sharedClient = StripeAPIClient()
     let session: URLSession
@@ -34,6 +35,7 @@ class StripeAPIClient: NSObject, STPBackendAPIAdapter {
         }
         return error
     }
+
     
     func completeCharge(_ result: STPPaymentResult, amount: Int, completion: @escaping STPErrorBlock) {
         guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
@@ -63,19 +65,19 @@ class StripeAPIClient: NSObject, STPBackendAPIAdapter {
 //        task.resume()
     }
     
-    @objc func retrieveCustomer(_ completion: @escaping STPCustomerCompletionBlock) {
+    @objc func retrieveCustomer(_ completion: STPCustomerCompletionBlock? = nil) {
         guard let key = Stripe.defaultPublishableKey() , !key.contains("#") else {
             let error = NSError(domain: StripeDomain, code: 50, userInfo: [
                 NSLocalizedDescriptionKey: "Please set stripePublishableKey to your account's test publishable key in CheckoutViewController.swift"
                 ])
-            completion(nil, error)
+            completion!(nil, error)
             return
         }
         
         guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
             // This code is just for demo purposes - in this case, if the example app isn't properly configured, we'll return a fake customer just so the app works.
             let customer = STPCustomer(stripeID: "cus_test", defaultSource: self.defaultSource, sources: self.sources)
-            completion(customer, nil)
+            completion!(customer, nil)
             return
         }
         
@@ -91,17 +93,17 @@ class StripeAPIClient: NSObject, STPBackendAPIAdapter {
             let deserializer = STPCustomerDeserializer(data: response.data, urlResponse: URLresp, error: response.result.error)
             
             if let error = deserializer.error {
-                completion(nil, error)
+                completion!(nil, error)
                 return
             } else if let customer = deserializer.customer {
-                completion(customer, nil)
+                completion!(customer, nil)
             }
             
         }
 
     }
     
-    @objc func selectDefaultCustomerSource(_ source: STPSource, completion: @escaping STPErrorBlock) {
+    @objc func selectDefaultCustomerSource(_ source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
             if let token = source as? STPToken {
                 self.defaultSource = token.card
@@ -127,7 +129,15 @@ class StripeAPIClient: NSObject, STPBackendAPIAdapter {
 //        task.resume()
     }
     
-    @objc func attachSource(toCustomer source: STPSource, completion: @escaping STPErrorBlock) {
+    @objc func detachSource(fromCustomer source: STPSourceProtocol, completion: STPErrorBlock? = nil) {
+        
+    }
+    
+    @objc func updateCustomer(withShippingAddress shipping: STPAddress, completion: STPErrorBlock? = nil) {
+        
+    }
+    
+    func attachSource(toCustomer source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
             if let token = source as? STPToken, let card = token.card {
                 self.sources.append(card)
@@ -141,17 +151,17 @@ class StripeAPIClient: NSObject, STPBackendAPIAdapter {
         let params = [
             "source": source.stripeID,
             ]
-//        let request = URLRequest.request(url, method: .POST, params: params as [String : AnyObject])
-//        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
-//            DispatchQueue.main.async {
-//                if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
-//                    completion(error)
-//                    return
-//                }
-//                completion(nil)
-//            }
-//        }
-//        task.resume()
+        //        let request = URLRequest.request(url, method: .POST, params: params as [String : AnyObject])
+        //        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
+        //            DispatchQueue.main.async {
+        //                if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
+        //                    completion(error)
+        //                    return
+        //                }
+        //                completion(nil)
+        //            }
+        //        }
+        //        task.resume()
     }
     
 }

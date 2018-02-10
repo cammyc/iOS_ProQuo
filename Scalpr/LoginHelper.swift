@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import FacebookCore
 import FacebookLogin
 import SwiftKeychainWrapper
+import GoogleSignIn
 
 
 class LoginHelper{

@@ -54,7 +54,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         player?.isMuted = true
         
         let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         playerLayer.zPosition = -1
         
         playerLayer.frame = view.frame
