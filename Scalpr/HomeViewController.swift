@@ -41,7 +41,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     let locationManager = CLLocationManager()
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar!  {
+        didSet {
+            searchBar.change(textFont: UIFont.init(name: "Avenir", size: 16))
+        }
+    }
     var userLocation: CLLocation? = nil
     var loggedInViewController: LoggedInMenuController?
     var loggedOutViewController: LoggedOutMenuController?
@@ -81,6 +85,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     @IBOutlet weak var menuFilterButton: UIBarButtonItem!
     
+    @IBOutlet weak var searchBarView: UIView!
+    
+    
 //    let myNotification = Notification.Name(rawValue:"MyNotification"
 
     
@@ -109,8 +116,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
 
         
         searchBar.delegate = self
-        searchBar.layer.borderWidth = 0
-                
+        searchBar.setSearchFieldBackgroundImage(MiscHelper.getImageWithColor(color: UIColor.white, size: searchBar.frame.size), for: .normal)
+        
+        searchBarView.layer.shadowColor = UIColor.black.cgColor
+        searchBarView.layer.shadowOpacity = 0.3
+        searchBarView.layer.shadowOffset = CGSize.zero
+        searchBarView.layer.shadowRadius = 5
+        searchBarView.layer.cornerRadius = 3
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap))
         tapGesture.cancelsTouchesInView = false
@@ -119,8 +132,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             self.revealViewController().draggableBorderWidth = self.view.frame.size.width/5
             
             self.revealViewController().delegate = self
@@ -186,7 +198,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         self.view.addSubview(fabGoToMyLocation)
         
     }
-
+    
+    @IBAction func altMenuButton(_ sender: Any) {
+        if self.revealViewController() != nil {
+            self.revealViewController().revealToggle(animated: true)
+        }
+    }
+    
     
 //    func setupAnimator() {
 //
@@ -303,7 +321,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
             getInitialTickets()
             CoreDataHelper.attractionChanged = false
         }
+        self.navigationController?.isNavigationBarHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    
 
     
 //
@@ -1612,6 +1637,18 @@ extension HomeViewController : TutorialDelegate {
 
     }
 }
+
+extension UISearchBar {
+    
+    func change(textFont : UIFont?) {
+        
+        for view : UIView in (self.subviews[0]).subviews {
+            
+            if let textField = view as? UITextField {
+                textField.font = textFont
+            }
+        }
+    } }
 
 
 

@@ -66,8 +66,14 @@ class SelectedVenueViewController: UIViewController, UICollectionViewDelegate, U
         }else{
             cell.priceLabel.text = "NaN"
         }
+        let dateString = event["datetime_local"] as! String
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss"
+        let date:Date = dateFormatter.date(from: dateString)!
+        cell.dateLabel.text = MiscHelper.dateToString(date: date, format: "MMM dd, YYYY")
         
-        cell.dateLabel.text = event["datetime_local"] as? String
+        //add start time after adding object for seatgeek data
         
         return cell
     }

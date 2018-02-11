@@ -77,6 +77,17 @@ class MiscHelper {
         }
     }
     
+    static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x:0, y:0, width: size.width, height: size.height)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 5.0)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        path.fill()
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
 //    static func utcToLocal(date: String, format: String)-> String{
 //        
 //        let formatter = DateFormatter()

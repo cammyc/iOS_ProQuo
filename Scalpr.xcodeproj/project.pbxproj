@@ -114,7 +114,7 @@
 		E37C64401E393F0C00476271 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA131E1300EA0074D6FF /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64411E393F0C00476271 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; };
 		E37C64421E393F0C00476271 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E37C64451E393F0C00476271 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E37C64451E393F0C00476271 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38004441ED4C46D000EFEA6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38004431ED4C46D000EFEA6 /* ProfileViewController.swift */; };
@@ -175,7 +175,7 @@
 				E37C642B1E393F0C00476271 /* FBSDKCoreKit.framework in Embed Frameworks */,
 				E36AB12C1E8306520028E683 /* MMSegmentSlider.framework in Embed Frameworks */,
 				E339BC361E3940CC0040FBE3 /* GoogleToolboxForMac.framework in Embed Frameworks */,
-				E37C64451E393F0C00476271 /* (null) in Embed Frameworks */,
+				E37C64451E393F0C00476271 /* BuildFile in Embed Frameworks */,
 				E37C64271E393F0C00476271 /* FacebookCore.framework in Embed Frameworks */,
 				E339BC381E3940CC0040FBE3 /* GTMSessionFetcher.framework in Embed Frameworks */,
 				E37C64421E393F0C00476271 /* MBProgressHUD.framework in Embed Frameworks */,

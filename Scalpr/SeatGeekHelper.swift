@@ -15,11 +15,14 @@ class SeatGeekHelper{
     
     func getLocalVenues(lat: Double, lon: Double, range: Double, completionHandler: @escaping (AnyObject?, NSError?) -> ())->DataRequest{
         var numResults = 50
+        var updatedRange = range
         if range > 30 {
             numResults = 10
+        }else if updatedRange < 10 {
+            updatedRange = 10
         }
         
-        let url:String = "https://api.seatgeek.com/2/venues?lat="+String(lat)+"&lon="+String(lon)+"&range="+String(range)+"mi&per_page="+String(numResults)+"&client_id="+clientID
+        let url:String = "https://api.seatgeek.com/2/venues?lat="+String(lat)+"&lon="+String(lon)+"&range="+String(updatedRange)+"mi&per_page="+String(numResults)+"&client_id="+clientID
         
         let request = Alamofire.request(url, method: .get)
         request.responseJSON { response in
