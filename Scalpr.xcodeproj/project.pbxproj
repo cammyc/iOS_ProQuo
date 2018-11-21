@@ -114,7 +114,7 @@
 		E37C64401E393F0C00476271 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA131E1300EA0074D6FF /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64411E393F0C00476271 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; };
 		E37C64421E393F0C00476271 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E8AA141E1300EA0074D6FF /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E37C64451E393F0C00476271 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E37C64451E393F0C00476271 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E37C64461E393F0C00476271 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; };
 		E37C64471E393F0C00476271 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3422F651E1C66470000E1D2 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E38004441ED4C46D000EFEA6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38004431ED4C46D000EFEA6 /* ProfileViewController.swift */; };
@@ -131,6 +131,8 @@
 		E3BDD28D1EB1355A00714929 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BDD28C1EB1355A00714929 /* SettingsViewController.swift */; };
 		E3D39AFA202EB12800A8860A /* SelectedVenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D39AF9202EB12800A8860A /* SelectedVenueViewController.swift */; };
 		E3D39AFC202EB6BB00A8860A /* VenueEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D39AFB202EB6BB00A8860A /* VenueEventCollectionViewCell.swift */; };
+		E3D39AFE2030C29200A8860A /* SGVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D39AFD2030C29200A8860A /* SGVenue.swift */; };
+		E3D39B002030C2A600A8860A /* SGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D39AFF2030C2A600A8860A /* SGEvent.swift */; };
 		E3DDBD2C1E898B57006F3121 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; };
 		E3DDBD2E1E898B5F006F3121 /* Presentr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3DDBD2B1E898B57006F3121 /* Presentr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3DDBD301E89B076006F3121 /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */; };
@@ -175,7 +177,7 @@
 				E37C642B1E393F0C00476271 /* FBSDKCoreKit.framework in Embed Frameworks */,
 				E36AB12C1E8306520028E683 /* MMSegmentSlider.framework in Embed Frameworks */,
 				E339BC361E3940CC0040FBE3 /* GoogleToolboxForMac.framework in Embed Frameworks */,
-				E37C64451E393F0C00476271 /* BuildFile in Embed Frameworks */,
+				E37C64451E393F0C00476271 /* (null) in Embed Frameworks */,
 				E37C64271E393F0C00476271 /* FacebookCore.framework in Embed Frameworks */,
 				E339BC381E3940CC0040FBE3 /* GTMSessionFetcher.framework in Embed Frameworks */,
 				E37C64421E393F0C00476271 /* MBProgressHUD.framework in Embed Frameworks */,
@@ -323,6 +325,8 @@
 		E3C525991E393DCA00D83F18 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		E3D39AF9202EB12800A8860A /* SelectedVenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedVenueViewController.swift; sourceTree = "<group>"; };
 		E3D39AFB202EB6BB00A8860A /* VenueEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueEventCollectionViewCell.swift; sourceTree = "<group>"; };
+		E3D39AFD2030C29200A8860A /* SGVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGVenue.swift; sourceTree = "<group>"; };
+		E3D39AFF2030C2A600A8860A /* SGEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGEvent.swift; sourceTree = "<group>"; };
 		E3DDBD2B1E898B57006F3121 /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Presentr.framework; path = "../../Library/Developer/Xcode/DerivedData/Scalpr-gxxssmnvaqcahcgrpbqrnkceivaj/Build/Products/Debug-iphonesimulator/Presentr/Presentr.framework"; sourceTree = "<group>"; };
 		E3DDBD2F1E89B076006F3121 /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
 		E3DDBD311E89D634006F3121 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
@@ -524,6 +528,8 @@
 				D20ECC971DF7D2A4008B315F /* Message.swift */,
 				E301A8A81E85BDB3009B8E7F /* Filters.swift */,
 				E3A1F7D11F2BA17900E04DE7 /* StripeAccount.swift */,
+				E3D39AFD2030C29200A8860A /* SGVenue.swift */,
+				E3D39AFF2030C2A600A8860A /* SGEvent.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -923,6 +929,7 @@
 			files = (
 				D2FB896C1DA178BE005DB173 /* LoginViewController.swift in Sources */,
 				E301A8A91E85BDB3009B8E7F /* Filters.swift in Sources */,
+				E3D39AFE2030C29200A8860A /* SGVenue.swift in Sources */,
 				E3DDBD321E89D634006F3121 /* TutorialPageViewController.swift in Sources */,
 				D20637681D9B39A400EAFF0F /* LoggedInMenuController.swift in Sources */,
 				E3DDBD381E91B4DA006F3121 /* FourthTutorialViewController.swift in Sources */,
@@ -964,6 +971,7 @@
 				E3BDD28D1EB1355A00714929 /* SettingsViewController.swift in Sources */,
 				E357EAF11E709FA0003EB4F1 /* ModalViewController.swift in Sources */,
 				E3DDBD341E89EAC1006F3121 /* SecondTutorialViewController.swift in Sources */,
+				E3D39B002030C2A600A8860A /* SGEvent.swift in Sources */,
 				D20637431D9B31DB00EAFF0F /* AppDelegate.swift in Sources */,
 				D20637661D9B324700EAFF0F /* SWRevealViewController.m in Sources */,
 				D29D7A4B1DC82AE700F937FF /* FlagHelper.swift in Sources */,

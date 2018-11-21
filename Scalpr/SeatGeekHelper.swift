@@ -51,4 +51,41 @@ class SeatGeekHelper{
         }
         return request
     }
+    
+    func getSGVenuesFromNSArray(array: NSArray!) -> [SGVenue]{
+        var venues = [SGVenue]()
+        
+        if array != nil{
+            for i in 0 ..< array.count{
+                
+                let venue:NSDictionary = array[i] as! NSDictionary
+                
+                let v:SGVenue = SGVenue()
+//                let id = attraction["attractionID"] as! NSNumber
+//                a.ID = id.int64Value
+//                a.creatorID = (attraction["creatorID"] as! NSNumber).int64Value
+//                a.venueName = attraction["venueName"] as! String
+//                a.name = attraction["name"] as! String
+//                a.ticketPrice = attraction["ticketPrice"] as! Double
+//                a.numTickets = attraction["numTickets"] as! Int
+//                a.description = attraction["description"] as! String
+//                a.postType = (attraction["postType"] as! NSNumber).int64Value
+//
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "yyyy-MM-dd"
+//                let dateObj = dateFormatter.date(from: attraction["date"] as! String)
+//
+//                a.date = dateObj!
+//                a.imageURL = attraction["imageURL"] as! String
+//                a.lat = Double(attraction["lat"] as! String)!
+//                a.lon = Double(attraction["lon"] as! String)!
+                
+                venues.append(v)
+                
+            }
+            
+        }
+        return venues
+        
+    }
 }
